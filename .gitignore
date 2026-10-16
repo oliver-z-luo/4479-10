@@ -1,0 +1,7 @@
+# Listing images: show the unit number and the realtor's/photographer's
+# branding. Kept locally as the transcription reference, never published.
+source/
+floorplan/source/
+
+.claude/
+.DS_Store

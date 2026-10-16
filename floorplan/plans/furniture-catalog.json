@@ -1,0 +1,22 @@
+{
+  "name": "Furniture catalog",
+  "catalog": true,
+  "units": "in",
+  "note": "Shared sizes for every furniture piece in every plan. A piece in a plan references a kind and must use these dimensions, either as w x d or swapped; it is never shrunk to fit. w is the long face, d the depth.",
+  "kinds": {
+    "sofa":         { "label": "Sofa",         "w": 72, "d": 34, "seats": 3, "note": "Apartment 3-seater. Larger crowds a 143\" wide living room." },
+    "armchair":     { "label": "Armchair",     "w": 28, "d": 30, "seats": 1, "note": "Compact, so a pair fits without eating the floor." },
+    "dining-table": { "label": "Dining table", "w": 72, "d": 36,             "note": "Largest that clears the 76\" dining room depth. Nominally 8 places, but the room cannot pull out end chairs, so 5-6 in practice." },
+    "dining-chair": { "label": "Chair",        "w": 17, "d": 19, "seats": 1 },
+    "bench":        { "label": "Bench",        "w": 48, "d": 14, "seats": 2, "note": "Backless; tucks fully under the table when not in use." },
+    "twin-bed":     { "label": "Bed",          "w": 38, "d": 75,             "note": "Standard twin mattress. Yuna's bed; sized to last past the second child." },
+    "queen-bed":    { "label": "Bed",          "w": 60, "d": 80,             "note": "Standard queen mattress. Primary bedroom." },
+    "futon":        { "label": "Futon",        "w": 75, "d": 35, "seats": 2, "note": "Footprint folded as a sofa. Opens to 75 x 54 for a guest." },
+    "desk":         { "label": "Desk",         "w": 48, "d": 24,             "note": "Fits the 77 x 54 storage room on the short wall, clear of the inward door swing." },
+    "desk-chair":   { "label": "Chair",        "w": 20, "d": 20, "seats": 1 },
+    "low-shelf":    { "label": "Low shelf",    "w": 36, "d": 12,             "note": "Child height, open front, everything visible and reachable." },
+    "storage-cabinet": { "label": "Cabinet", "w": 36, "d": 20,           "note": "Yuna's room has no closet; this holds what a closet would." },
+    "bookshelf":    { "label": "Books",        "w": 30, "d": 12,             "note": "Small, front-facing, at her height." },
+    "play-mat":     { "label": "Play mat",     "w": 60, "d": 60,             "note": "5' square = 25 sq ft exactly. Counts as play floor, not as furniture covering it." }
+  }
+}

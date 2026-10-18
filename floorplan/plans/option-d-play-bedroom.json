@@ -1101,7 +1101,8 @@
       "x": 125,
       "y": 101,
       "w": 19,
-      "h": 52
+      "h": 52,
+      "note": "Electric fireplace insert with a mantel, in a wallpapered panel (listing photo)."
     },
     {
       "id": "chase",
@@ -1153,14 +1154,15 @@
       "r": 9
     },
     {
-      "id": "vanity-2",
+      "id": "pedestal-sink",
       "room": "bath-second",
-      "kind": "vanity",
+      "kind": "pedestal-sink",
       "shape": "rect",
       "x": 365,
       "y": 307,
       "w": 18,
-      "h": 28
+      "h": 28,
+      "note": "Pedestal sink (listing photo), not a vanity."
     },
     {
       "id": "toilet-2",
@@ -1304,6 +1306,36 @@
       "y": 436,
       "w": 26,
       "h": 21
+    },
+    {
+      "id": "upper-w",
+      "room": "kitchen",
+      "kind": "upper-cabinet",
+      "shape": "rect",
+      "x": 91,
+      "y": 384,
+      "w": 13,
+      "h": 63
+    },
+    {
+      "id": "upper-s",
+      "room": "kitchen",
+      "kind": "upper-cabinet",
+      "shape": "rect",
+      "x": 91,
+      "y": 447,
+      "w": 99,
+      "h": 13
+    },
+    {
+      "id": "upper-e",
+      "room": "kitchen",
+      "kind": "upper-cabinet",
+      "shape": "rect",
+      "x": 177,
+      "y": 372,
+      "w": 13,
+      "h": 75
     }
   ],
   "furnitureCatalog": "furniture-catalog.json",

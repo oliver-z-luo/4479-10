@@ -5,7 +5,10 @@
     "floor": "Main Floor",
     "source": "floorplan/source/original.jpg",
     "sourceCredit": "REV Studio Photography / Tammy Jin, RE/MAX Crest Realty",
-    "printedArea": { "livingSqFt": 1098, "balconySqFt": 53 },
+    "printedArea": {
+      "livingSqFt": 1098,
+      "balconySqFt": 53
+    },
     "ceilingHeight": 106,
     "northIsUp": true,
     "origin": "Outside face of the NW corner of the exterior walls; +x east, +y south.",
@@ -14,127 +17,1320 @@
   "units": "in",
   "unitLabel": "inches",
   "wallTypes": {
-    "exterior": { "thickness": 7 },
-    "interior": { "thickness": 7 },
-    "railing":  { "thickness": 2 }
+    "exterior": {
+      "thickness": 7
+    },
+    "interior": {
+      "thickness": 7
+    },
+    "railing": {
+      "thickness": 2
+    }
   },
   "envelope": {
-    "livingArea": [[0,0],[125,0],[125,53],[268,53],[268,0],[390,0],[390,403],[197,403],[197,467],[84,467],[84,449],[0,449]],
-    "balcony": [[125,0],[268,0],[268,53],[125,53]],
+    "livingArea": [
+      [
+        0,
+        0
+      ],
+      [
+        125,
+        0
+      ],
+      [
+        125,
+        53
+      ],
+      [
+        268,
+        53
+      ],
+      [
+        268,
+        0
+      ],
+      [
+        390,
+        0
+      ],
+      [
+        390,
+        403
+      ],
+      [
+        197,
+        403
+      ],
+      [
+        197,
+        467
+      ],
+      [
+        84,
+        467
+      ],
+      [
+        84,
+        449
+      ],
+      [
+        0,
+        449
+      ]
+    ],
+    "balcony": [
+      [
+        125,
+        0
+      ],
+      [
+        268,
+        0
+      ],
+      [
+        268,
+        53
+      ],
+      [
+        125,
+        53
+      ]
+    ],
     "note": "Outside face of the exterior walls, balcony recess excluded. Used for the printed-area check."
   },
   "walls": [
-    { "id": "w-ext-w",          "type": "exterior", "start": [3.5, 3.5],     "end": [3.5, 445.5] },
-    { "id": "w-ext-n-w",        "type": "exterior", "start": [3.5, 3.5],     "end": [121.5, 3.5] },
-    { "id": "w-balcony-rail",   "type": "railing",  "start": [121.5, 3.5],   "end": [271.5, 3.5] },
-    { "id": "w-ext-n-e",        "type": "exterior", "start": [271.5, 3.5],   "end": [386.5, 3.5] },
-    { "id": "w-ext-e",          "type": "exterior", "start": [386.5, 3.5],   "end": [386.5, 399.5] },
-    { "id": "w-ext-s-e",        "type": "exterior", "start": [386.5, 399.5], "end": [193.5, 399.5] },
-    { "id": "w-ext-kit-e",      "type": "exterior", "start": [193.5, 369],   "end": [193.5, 463.5], "freeEndStart": true },
-    { "id": "w-ext-kit-s",      "type": "exterior", "start": [87.5, 463.5],  "end": [193.5, 463.5] },
-    { "id": "w-ext-kit-w",      "type": "exterior", "start": [87.5, 445.5],  "end": [87.5, 463.5] },
-    { "id": "w-ext-s-storage",  "type": "exterior", "start": [3.5, 445.5],   "end": [87.5, 445.5] },
-    { "id": "w-ext-balc-w",     "type": "exterior", "start": [121.5, 3.5],   "end": [121.5, 56.5] },
-    { "id": "w-ext-balc-e",     "type": "exterior", "start": [271.5, 3.5],   "end": [271.5, 56.5] },
-    { "id": "w-balc-s",         "type": "exterior", "start": [121.5, 56.5],  "end": [271.5, 56.5] },
-
-    { "id": "w-int-pbr-e",      "type": "interior", "start": [121.5, 56.5],  "end": [121.5, 305.5] },
-    { "id": "w-int-lr-e",       "type": "interior", "start": [271.5, 56.5],  "end": [271.5, 299.5] },
-    { "id": "w-int-partition",  "type": "interior", "start": [271.5, 135.5], "end": [386.5, 135.5], "note": "Almost entirely glazed — drawn as an interior window wall between Office/Bedroom and Bedroom." },
-    { "id": "w-int-bed-s",      "type": "interior", "start": [271.5, 299.5], "end": [386.5, 299.5] },
-    { "id": "w-int-closet-n",   "type": "interior", "start": [317.5, 271.5], "end": [386.5, 271.5] },
-    { "id": "w-int-bath2-w",    "type": "interior", "start": [317.5, 271.5], "end": [317.5, 399.5] },
-    { "id": "w-int-pantry-n",   "type": "interior", "start": [284.5, 347.5], "end": [317.5, 347.5] },
-    { "id": "w-int-pantry-w",   "type": "interior", "start": [284.5, 347.5], "end": [284.5, 399.5] },
-    { "id": "w-int-wic-s",      "type": "interior", "start": [3.5, 162.5],   "end": [74.5, 162.5] },
-    { "id": "w-int-wic-e",      "type": "interior", "start": [74.5, 162.5],  "end": [74.5, 228.5] },
-    { "id": "w-int-bath1-n",    "type": "interior", "start": [3.5, 228.5],   "end": [121.5, 228.5] },
-    { "id": "w-int-bath1-s",    "type": "interior", "start": [3.5, 305.5],   "end": [121.5, 305.5] },
-    { "id": "w-int-laundry-e",  "type": "interior", "start": [87.5, 305.5],  "end": [87.5, 342.5] },
-    { "id": "w-int-laundry-s",  "type": "interior", "start": [3.5, 342.5],   "end": [87.5, 342.5] },
-    { "id": "w-int-hall-s",     "type": "interior", "start": [3.5, 384.5],   "end": [87.5, 384.5] },
-    { "id": "w-int-storage-e",  "type": "interior", "start": [87.5, 384.5],  "end": [87.5, 445.5] }
+    {
+      "id": "w-ext-w",
+      "type": "exterior",
+      "start": [
+        3.5,
+        3.5
+      ],
+      "end": [
+        3.5,
+        445.5
+      ]
+    },
+    {
+      "id": "w-ext-n-w",
+      "type": "exterior",
+      "start": [
+        3.5,
+        3.5
+      ],
+      "end": [
+        121.5,
+        3.5
+      ]
+    },
+    {
+      "id": "w-balcony-rail",
+      "type": "railing",
+      "start": [
+        121.5,
+        3.5
+      ],
+      "end": [
+        271.5,
+        3.5
+      ]
+    },
+    {
+      "id": "w-ext-n-e",
+      "type": "exterior",
+      "start": [
+        271.5,
+        3.5
+      ],
+      "end": [
+        386.5,
+        3.5
+      ]
+    },
+    {
+      "id": "w-ext-e",
+      "type": "exterior",
+      "start": [
+        386.5,
+        3.5
+      ],
+      "end": [
+        386.5,
+        399.5
+      ]
+    },
+    {
+      "id": "w-ext-s-e",
+      "type": "exterior",
+      "start": [
+        386.5,
+        399.5
+      ],
+      "end": [
+        193.5,
+        399.5
+      ]
+    },
+    {
+      "id": "w-ext-kit-e",
+      "type": "exterior",
+      "start": [
+        193.5,
+        369
+      ],
+      "end": [
+        193.5,
+        463.5
+      ],
+      "freeEndStart": true
+    },
+    {
+      "id": "w-ext-kit-s",
+      "type": "exterior",
+      "start": [
+        87.5,
+        463.5
+      ],
+      "end": [
+        193.5,
+        463.5
+      ]
+    },
+    {
+      "id": "w-ext-kit-w",
+      "type": "exterior",
+      "start": [
+        87.5,
+        445.5
+      ],
+      "end": [
+        87.5,
+        463.5
+      ]
+    },
+    {
+      "id": "w-ext-s-storage",
+      "type": "exterior",
+      "start": [
+        3.5,
+        445.5
+      ],
+      "end": [
+        87.5,
+        445.5
+      ]
+    },
+    {
+      "id": "w-ext-balc-w",
+      "type": "exterior",
+      "start": [
+        121.5,
+        3.5
+      ],
+      "end": [
+        121.5,
+        56.5
+      ]
+    },
+    {
+      "id": "w-ext-balc-e",
+      "type": "exterior",
+      "start": [
+        271.5,
+        3.5
+      ],
+      "end": [
+        271.5,
+        56.5
+      ]
+    },
+    {
+      "id": "w-balc-s",
+      "type": "exterior",
+      "start": [
+        121.5,
+        56.5
+      ],
+      "end": [
+        271.5,
+        56.5
+      ]
+    },
+    {
+      "id": "w-int-pbr-e",
+      "type": "interior",
+      "start": [
+        121.5,
+        56.5
+      ],
+      "end": [
+        121.5,
+        305.5
+      ]
+    },
+    {
+      "id": "w-int-lr-e",
+      "type": "interior",
+      "start": [
+        271.5,
+        56.5
+      ],
+      "end": [
+        271.5,
+        299.5
+      ]
+    },
+    {
+      "id": "w-int-partition",
+      "type": "interior",
+      "start": [
+        271.5,
+        135.5
+      ],
+      "end": [
+        386.5,
+        135.5
+      ],
+      "note": "Almost entirely glazed — drawn as an interior window wall between Office/Bedroom and Bedroom."
+    },
+    {
+      "id": "w-int-bed-s",
+      "type": "interior",
+      "start": [
+        271.5,
+        299.5
+      ],
+      "end": [
+        386.5,
+        299.5
+      ]
+    },
+    {
+      "id": "w-int-closet-n",
+      "type": "interior",
+      "start": [
+        317.5,
+        271.5
+      ],
+      "end": [
+        386.5,
+        271.5
+      ]
+    },
+    {
+      "id": "w-int-bath2-w",
+      "type": "interior",
+      "start": [
+        317.5,
+        271.5
+      ],
+      "end": [
+        317.5,
+        399.5
+      ]
+    },
+    {
+      "id": "w-int-pantry-n",
+      "type": "interior",
+      "start": [
+        284.5,
+        347.5
+      ],
+      "end": [
+        317.5,
+        347.5
+      ]
+    },
+    {
+      "id": "w-int-pantry-w",
+      "type": "interior",
+      "start": [
+        284.5,
+        347.5
+      ],
+      "end": [
+        284.5,
+        399.5
+      ]
+    },
+    {
+      "id": "w-int-wic-s",
+      "type": "interior",
+      "start": [
+        3.5,
+        162.5
+      ],
+      "end": [
+        74.5,
+        162.5
+      ]
+    },
+    {
+      "id": "w-int-wic-e",
+      "type": "interior",
+      "start": [
+        74.5,
+        162.5
+      ],
+      "end": [
+        74.5,
+        228.5
+      ]
+    },
+    {
+      "id": "w-int-bath1-n",
+      "type": "interior",
+      "start": [
+        3.5,
+        228.5
+      ],
+      "end": [
+        121.5,
+        228.5
+      ]
+    },
+    {
+      "id": "w-int-bath1-s",
+      "type": "interior",
+      "start": [
+        3.5,
+        305.5
+      ],
+      "end": [
+        121.5,
+        305.5
+      ]
+    },
+    {
+      "id": "w-int-laundry-e",
+      "type": "interior",
+      "start": [
+        87.5,
+        305.5
+      ],
+      "end": [
+        87.5,
+        342.5
+      ]
+    },
+    {
+      "id": "w-int-laundry-s",
+      "type": "interior",
+      "start": [
+        3.5,
+        342.5
+      ],
+      "end": [
+        87.5,
+        342.5
+      ]
+    },
+    {
+      "id": "w-int-hall-s",
+      "type": "interior",
+      "start": [
+        3.5,
+        384.5
+      ],
+      "end": [
+        87.5,
+        384.5
+      ]
+    },
+    {
+      "id": "w-int-storage-e",
+      "type": "interior",
+      "start": [
+        87.5,
+        384.5
+      ],
+      "end": [
+        87.5,
+        445.5
+      ]
+    }
   ],
   "openings": [
-    { "id": "win-primary",   "wall": "w-ext-n-w",       "offset": 14.5,  "width": 88, "type": "window" },
-    { "id": "win-office",    "wall": "w-ext-n-e",       "offset": 12.5,  "width": 89, "type": "window" },
-    { "id": "win-balc-w",    "wall": "w-balc-s",        "offset": 18.5,  "width": 20, "type": "window" },
-    { "id": "win-balc-e",    "wall": "w-balc-s",        "offset": 104.5, "width": 20, "type": "window" },
-    { "id": "win-partition", "wall": "w-int-partition", "offset": 8.5,   "width": 97, "type": "window" },
-
-    { "id": "dr-balcony", "wall": "w-balc-s",       "offset": 38.5,  "width": 66, "type": "door", "style": "hinged", "leaves": 2, "hinge": "both",  "swingTo": "north" },
-    { "id": "dr-office",  "wall": "w-int-lr-e",     "offset": 8.5,   "width": 30, "type": "door", "style": "pocket", "slideTo": "start" },
-    { "id": "dr-hall",    "wall": "w-int-pbr-e",    "offset": 132.5, "width": 30, "type": "door", "style": "hinged", "leaves": 1, "hinge": "end",   "swingTo": "west" },
-    { "id": "dr-wic",     "wall": "w-int-wic-e",    "offset": 27.5,  "width": 28, "type": "door", "style": "hinged", "leaves": 1, "hinge": "end",   "swingTo": "west" },
-    { "id": "dr-bath1",   "wall": "w-int-bath1-n",  "offset": 78,    "width": 30, "type": "door", "style": "pocket", "slideTo": "start" },
-    { "id": "dr-laundry", "wall": "w-int-laundry-s","offset": 12.5,  "width": 60, "type": "door", "style": "bifold", "leaves": 2, "swingTo": "south" },
-    { "id": "dr-storage", "wall": "w-int-hall-s",   "offset": 45.5,  "width": 30, "type": "door", "style": "hinged", "leaves": 1, "hinge": "end",   "swingTo": "south" },
-    { "id": "dr-bedroom", "wall": "w-int-bed-s",    "offset": 9.5,   "width": 30, "type": "door", "style": "hinged", "leaves": 1, "hinge": "start", "swingTo": "north" },
-    { "id": "dr-closet",  "wall": "w-int-closet-n", "offset": 9.5,   "width": 50, "type": "door", "style": "bifold", "leaves": 2, "swingTo": "north" },
-    { "id": "dr-bath2",   "wall": "w-int-bath2-w",  "offset": 37.5,  "width": 30, "type": "door", "style": "hinged", "leaves": 1, "hinge": "start", "swingTo": "west" },
-    { "id": "dr-pantry",  "wall": "w-int-pantry-w", "offset": 6.5,   "width": 30, "type": "door", "style": "bifold", "leaves": 2, "swingTo": "west" },
-    { "id": "dr-entry",   "wall": "w-ext-s-e",      "offset": 112.5, "width": 30, "type": "door", "style": "hinged", "leaves": 1, "hinge": "start", "swingTo": "north", "isEntry": true }
+    {
+      "id": "win-primary",
+      "wall": "w-ext-n-w",
+      "offset": 14.5,
+      "width": 88,
+      "type": "window"
+    },
+    {
+      "id": "win-office",
+      "wall": "w-ext-n-e",
+      "offset": 12.5,
+      "width": 89,
+      "type": "window"
+    },
+    {
+      "id": "win-balc-w",
+      "wall": "w-balc-s",
+      "offset": 18.5,
+      "width": 20,
+      "type": "window"
+    },
+    {
+      "id": "win-balc-e",
+      "wall": "w-balc-s",
+      "offset": 104.5,
+      "width": 20,
+      "type": "window"
+    },
+    {
+      "id": "win-partition",
+      "wall": "w-int-partition",
+      "offset": 8.5,
+      "width": 97,
+      "type": "window"
+    },
+    {
+      "id": "dr-balcony",
+      "wall": "w-balc-s",
+      "offset": 38.5,
+      "width": 66,
+      "type": "door",
+      "style": "hinged",
+      "leaves": 2,
+      "hinge": "both",
+      "swingTo": "north"
+    },
+    {
+      "id": "dr-office",
+      "wall": "w-int-lr-e",
+      "offset": 8.5,
+      "width": 30,
+      "type": "door",
+      "style": "pocket",
+      "slideTo": "start"
+    },
+    {
+      "id": "dr-hall",
+      "wall": "w-int-pbr-e",
+      "offset": 132.5,
+      "width": 30,
+      "type": "door",
+      "style": "hinged",
+      "leaves": 1,
+      "hinge": "end",
+      "swingTo": "west"
+    },
+    {
+      "id": "dr-wic",
+      "wall": "w-int-wic-e",
+      "offset": 27.5,
+      "width": 28,
+      "type": "door",
+      "style": "hinged",
+      "leaves": 1,
+      "hinge": "end",
+      "swingTo": "west"
+    },
+    {
+      "id": "dr-bath1",
+      "wall": "w-int-bath1-n",
+      "offset": 78,
+      "width": 30,
+      "type": "door",
+      "style": "pocket",
+      "slideTo": "start"
+    },
+    {
+      "id": "dr-laundry",
+      "wall": "w-int-laundry-s",
+      "offset": 12.5,
+      "width": 60,
+      "type": "door",
+      "style": "bifold",
+      "leaves": 2,
+      "swingTo": "south"
+    },
+    {
+      "id": "dr-storage",
+      "wall": "w-int-hall-s",
+      "offset": 45.5,
+      "width": 30,
+      "type": "door",
+      "style": "hinged",
+      "leaves": 1,
+      "hinge": "end",
+      "swingTo": "south"
+    },
+    {
+      "id": "dr-bedroom",
+      "wall": "w-int-bed-s",
+      "offset": 9.5,
+      "width": 30,
+      "type": "door",
+      "style": "hinged",
+      "leaves": 1,
+      "hinge": "start",
+      "swingTo": "north"
+    },
+    {
+      "id": "dr-closet",
+      "wall": "w-int-closet-n",
+      "offset": 9.5,
+      "width": 50,
+      "type": "door",
+      "style": "bifold",
+      "leaves": 2,
+      "swingTo": "north"
+    },
+    {
+      "id": "dr-bath2",
+      "wall": "w-int-bath2-w",
+      "offset": 37.5,
+      "width": 30,
+      "type": "door",
+      "style": "hinged",
+      "leaves": 1,
+      "hinge": "start",
+      "swingTo": "west"
+    },
+    {
+      "id": "dr-pantry",
+      "wall": "w-int-pantry-w",
+      "offset": 6.5,
+      "width": 30,
+      "type": "door",
+      "style": "bifold",
+      "leaves": 2,
+      "swingTo": "west"
+    },
+    {
+      "id": "dr-entry",
+      "wall": "w-ext-s-e",
+      "offset": 112.5,
+      "width": 30,
+      "type": "door",
+      "style": "hinged",
+      "leaves": 1,
+      "hinge": "start",
+      "swingTo": "north",
+      "isEntry": true
+    }
   ],
   "rooms": [
-    { "id": "primary-bedroom", "name": "PRIMARY BEDROOM", "boundary": [[7,7],[118,7],[118,159],[7,159]],
-      "labelled": { "text": "9'3\" x 12'8\"", "a": 111, "b": 152 } },
-    { "id": "balcony", "name": "BALCONY", "outdoor": true, "boundary": [[125,7],[268,7],[268,53],[125,53]],
-      "labelled": { "text": "11'11\" x 3'10\"", "a": 143, "b": 46 } },
-    { "id": "living-room", "name": "LIVING ROOM", "open": true, "boundary": [[125,60],[268,60],[268,224],[125,224]],
-      "labelled": { "text": "11'11\" x 13'8\"", "a": 143, "b": 164 } },
-    { "id": "dining-room", "name": "DINING ROOM", "open": true, "boundary": [[125,224],[268,224],[268,300],[125,300]],
-      "labelled": { "text": "11'11\" x 6'4\"", "a": 143, "b": 76 } },
-    { "id": "office-bedroom", "name": "OFFICE BEDROOM", "boundary": [[275,7],[383,7],[383,132],[275,132]],
-      "labelled": { "text": "9'0\" x 10'4\"", "a": 108, "b": 124 } },
-    { "id": "bedroom", "name": "BEDROOM", "boundary": [[275,139],[383,139],[383,275],[321,275],[321,296],[275,296]],
-      "labelled": { "text": "9'0\" x 13'0\"", "a": 108, "b": 156 } },
-    { "id": "closet", "name": "CLOSET", "boundary": [[321,275],[383,275],[383,296],[321,296]] },
-    { "id": "wic", "name": "W.I.C", "boundary": [[7,166],[71,166],[71,225],[7,225]],
-      "labelled": { "text": "5'4\" x 4'11\"", "a": 64, "b": 59 } },
-    { "id": "hall-upper", "name": "HALL", "open": true, "boundary": [[78,160],[118,160],[118,225],[78,225]],
-      "labelled": { "text": "3'4\" x 5'5\"", "a": 40, "b": 65 } },
-    { "id": "bath-main", "name": "BATH", "boundary": [[7,232],[118,232],[118,302],[7,302]],
-      "labelled": { "text": "9'3\" x 5'10\"", "a": 111, "b": 70 } },
-    { "id": "laundry", "name": "", "boundary": [[7,309],[84,309],[84,339],[7,339]] },
-    { "id": "hall-lower", "name": "HALL", "boundary": [[7,346],[84,346],[84,381],[7,381]],
-      "labelled": { "text": "6'11\" x 2'11\"", "a": 83, "b": 35 },
-      "labelledSpan": { "x": [7, 91], "note": "Width is taken across the open east side to the far face of the wall at x=87.5." } },
-    { "id": "storage", "name": "STORAGE", "boundary": [[7,388],[84,388],[84,442],[7,442]],
-      "labelled": { "text": "6'5\" x 4'6\"", "a": 77, "b": 54 } },
-    { "id": "kitchen", "name": "KITCHEN", "boundary": [[91,303],[197,303],[197,369],[190,369],[190,460],[91,460]],
-      "labelled": { "text": "8'9\" x 13'1\"", "a": 105, "b": 157 } },
-    { "id": "foyer", "name": "FOYER", "open": true, "boundary": [[197,303],[281,303],[281,396],[197,396]],
-      "labelled": { "text": "7'0\" x 7'9\"", "a": 84, "b": 93 } },
-    { "id": "pantry", "name": "PANTRY", "boundary": [[288,351],[314,351],[314,396],[288,396]] },
-    { "id": "bath-second", "name": "BATH", "boundary": [[321,303],[383,303],[383,396],[321,396]],
-      "labelled": { "text": "5'2\" x 7'9\"", "a": 62, "b": 93 } }
+    {
+      "id": "primary-bedroom",
+      "name": "PRIMARY BEDROOM",
+      "boundary": [
+        [
+          7,
+          7
+        ],
+        [
+          118,
+          7
+        ],
+        [
+          118,
+          159
+        ],
+        [
+          7,
+          159
+        ]
+      ],
+      "labelled": {
+        "text": "9'3\" x 12'8\"",
+        "a": 111,
+        "b": 152
+      }
+    },
+    {
+      "id": "balcony",
+      "name": "BALCONY",
+      "outdoor": true,
+      "boundary": [
+        [
+          125,
+          7
+        ],
+        [
+          268,
+          7
+        ],
+        [
+          268,
+          53
+        ],
+        [
+          125,
+          53
+        ]
+      ],
+      "labelled": {
+        "text": "11'11\" x 3'10\"",
+        "a": 143,
+        "b": 46
+      }
+    },
+    {
+      "id": "living-room",
+      "name": "LIVING ROOM",
+      "open": true,
+      "boundary": [
+        [
+          125,
+          60
+        ],
+        [
+          268,
+          60
+        ],
+        [
+          268,
+          224
+        ],
+        [
+          125,
+          224
+        ]
+      ],
+      "labelled": {
+        "text": "11'11\" x 13'8\"",
+        "a": 143,
+        "b": 164
+      }
+    },
+    {
+      "id": "dining-room",
+      "name": "DINING ROOM",
+      "open": true,
+      "boundary": [
+        [
+          125,
+          224
+        ],
+        [
+          268,
+          224
+        ],
+        [
+          268,
+          300
+        ],
+        [
+          125,
+          300
+        ]
+      ],
+      "labelled": {
+        "text": "11'11\" x 6'4\"",
+        "a": 143,
+        "b": 76
+      }
+    },
+    {
+      "id": "office-bedroom",
+      "name": "OFFICE BEDROOM",
+      "boundary": [
+        [
+          275,
+          7
+        ],
+        [
+          383,
+          7
+        ],
+        [
+          383,
+          132
+        ],
+        [
+          275,
+          132
+        ]
+      ],
+      "labelled": {
+        "text": "9'0\" x 10'4\"",
+        "a": 108,
+        "b": 124
+      }
+    },
+    {
+      "id": "bedroom",
+      "name": "BEDROOM",
+      "boundary": [
+        [
+          275,
+          139
+        ],
+        [
+          383,
+          139
+        ],
+        [
+          383,
+          275
+        ],
+        [
+          321,
+          275
+        ],
+        [
+          321,
+          296
+        ],
+        [
+          275,
+          296
+        ]
+      ],
+      "labelled": {
+        "text": "9'0\" x 13'0\"",
+        "a": 108,
+        "b": 156
+      }
+    },
+    {
+      "id": "closet",
+      "name": "CLOSET",
+      "boundary": [
+        [
+          321,
+          275
+        ],
+        [
+          383,
+          275
+        ],
+        [
+          383,
+          296
+        ],
+        [
+          321,
+          296
+        ]
+      ]
+    },
+    {
+      "id": "wic",
+      "name": "W.I.C",
+      "boundary": [
+        [
+          7,
+          166
+        ],
+        [
+          71,
+          166
+        ],
+        [
+          71,
+          225
+        ],
+        [
+          7,
+          225
+        ]
+      ],
+      "labelled": {
+        "text": "5'4\" x 4'11\"",
+        "a": 64,
+        "b": 59
+      }
+    },
+    {
+      "id": "hall-upper",
+      "name": "HALL",
+      "open": true,
+      "boundary": [
+        [
+          78,
+          160
+        ],
+        [
+          118,
+          160
+        ],
+        [
+          118,
+          225
+        ],
+        [
+          78,
+          225
+        ]
+      ],
+      "labelled": {
+        "text": "3'4\" x 5'5\"",
+        "a": 40,
+        "b": 65
+      }
+    },
+    {
+      "id": "bath-main",
+      "name": "BATH",
+      "boundary": [
+        [
+          7,
+          232
+        ],
+        [
+          118,
+          232
+        ],
+        [
+          118,
+          302
+        ],
+        [
+          7,
+          302
+        ]
+      ],
+      "labelled": {
+        "text": "9'3\" x 5'10\"",
+        "a": 111,
+        "b": 70
+      }
+    },
+    {
+      "id": "laundry",
+      "name": "",
+      "boundary": [
+        [
+          7,
+          309
+        ],
+        [
+          84,
+          309
+        ],
+        [
+          84,
+          339
+        ],
+        [
+          7,
+          339
+        ]
+      ]
+    },
+    {
+      "id": "hall-lower",
+      "name": "HALL",
+      "boundary": [
+        [
+          7,
+          346
+        ],
+        [
+          84,
+          346
+        ],
+        [
+          84,
+          381
+        ],
+        [
+          7,
+          381
+        ]
+      ],
+      "labelled": {
+        "text": "6'11\" x 2'11\"",
+        "a": 83,
+        "b": 35
+      },
+      "labelledSpan": {
+        "x": [
+          7,
+          91
+        ],
+        "note": "Width is taken across the open east side to the far face of the wall at x=87.5."
+      }
+    },
+    {
+      "id": "storage",
+      "name": "STORAGE",
+      "boundary": [
+        [
+          7,
+          388
+        ],
+        [
+          84,
+          388
+        ],
+        [
+          84,
+          442
+        ],
+        [
+          7,
+          442
+        ]
+      ],
+      "labelled": {
+        "text": "6'5\" x 4'6\"",
+        "a": 77,
+        "b": 54
+      }
+    },
+    {
+      "id": "kitchen",
+      "name": "KITCHEN",
+      "boundary": [
+        [
+          91,
+          303
+        ],
+        [
+          197,
+          303
+        ],
+        [
+          197,
+          369
+        ],
+        [
+          190,
+          369
+        ],
+        [
+          190,
+          460
+        ],
+        [
+          91,
+          460
+        ]
+      ],
+      "labelled": {
+        "text": "8'9\" x 13'1\"",
+        "a": 105,
+        "b": 157
+      }
+    },
+    {
+      "id": "foyer",
+      "name": "FOYER",
+      "open": true,
+      "boundary": [
+        [
+          197,
+          303
+        ],
+        [
+          281,
+          303
+        ],
+        [
+          281,
+          396
+        ],
+        [
+          197,
+          396
+        ]
+      ],
+      "labelled": {
+        "text": "7'0\" x 7'9\"",
+        "a": 84,
+        "b": 93
+      }
+    },
+    {
+      "id": "pantry",
+      "name": "PANTRY",
+      "boundary": [
+        [
+          288,
+          351
+        ],
+        [
+          314,
+          351
+        ],
+        [
+          314,
+          396
+        ],
+        [
+          288,
+          396
+        ]
+      ]
+    },
+    {
+      "id": "bath-second",
+      "name": "BATH",
+      "boundary": [
+        [
+          321,
+          303
+        ],
+        [
+          383,
+          303
+        ],
+        [
+          383,
+          396
+        ],
+        [
+          321,
+          396
+        ]
+      ],
+      "labelled": {
+        "text": "5'2\" x 7'9\"",
+        "a": 62,
+        "b": 93
+      }
+    }
   ],
   "fixtures": [
-    { "id": "fireplace",  "room": "living-room", "kind": "fireplace", "shape": "rect", "x": 125, "y": 101, "w": 19, "h": 52 },
-
-    { "id": "chase",      "room": "bath-main", "kind": "chase",  "shape": "rect", "x": 7,   "y": 232, "w": 32, "h": 12 },
-    { "id": "tub",        "room": "bath-main", "kind": "tub",    "shape": "rect", "x": 7,   "y": 244, "w": 30, "h": 58 },
-    { "id": "toilet-1",   "room": "bath-main", "kind": "toilet", "shape": "rect", "x": 43,  "y": 273, "w": 16, "h": 29 },
-    { "id": "vanity-1",   "room": "bath-main", "kind": "vanity", "shape": "rect", "x": 68,  "y": 280, "w": 50, "h": 22 },
-    { "id": "sink-1",     "room": "bath-main", "kind": "sink",   "shape": "circle", "cx": 97, "cy": 291, "r": 9 },
-
-    { "id": "vanity-2",   "room": "bath-second", "kind": "vanity", "shape": "rect", "x": 365, "y": 307, "w": 18, "h": 28 },
-    { "id": "toilet-2",   "room": "bath-second", "kind": "toilet", "shape": "rect", "x": 356, "y": 340, "w": 27, "h": 20 },
-    { "id": "shower",     "room": "bath-second", "kind": "shower", "shape": "rect", "x": 322, "y": 368, "w": 61, "h": 28 },
-
-    { "id": "wic-shelf-w","room": "wic", "kind": "shelf", "shape": "rect", "x": 7,  "y": 167, "w": 11, "h": 58 },
-    { "id": "wic-shelf-n","room": "wic", "kind": "shelf", "shape": "rect", "x": 31, "y": 167, "w": 40, "h": 10 },
-
-    { "id": "water-heater", "room": "laundry", "kind": "water-heater", "shape": "circle", "cx": 20.5, "cy": 320.5, "r": 10, "label": "WH" },
-    { "id": "washer-dryer", "room": "laundry", "kind": "washer-dryer", "shape": "rect", "x": 60, "y": 309, "w": 24, "h": 24, "label": "W/D" },
-
-    { "id": "fridge",     "room": "kitchen", "kind": "fridge",     "shape": "rect", "x": 91,  "y": 309, "w": 34, "h": 34, "label": "FR" },
-    { "id": "counter-n",  "room": "kitchen", "kind": "counter",    "shape": "rect", "x": 125, "y": 309, "w": 72, "h": 25 },
-    { "id": "sink-k",     "room": "kitchen", "kind": "sink",       "shape": "rect", "x": 139, "y": 312, "w": 33, "h": 20 },
-    { "id": "dishwasher", "room": "kitchen", "kind": "dishwasher", "shape": "rect", "x": 172, "y": 309, "w": 25, "h": 25, "label": "DW" },
-    { "id": "counter-w",  "room": "kitchen", "kind": "counter",    "shape": "rect", "x": 91,  "y": 384, "w": 26, "h": 76 },
-    { "id": "counter-s",  "room": "kitchen", "kind": "counter",    "shape": "rect", "x": 117, "y": 434, "w": 48, "h": 26 },
-    { "id": "counter-e",  "room": "kitchen", "kind": "counter",    "shape": "rect", "x": 165, "y": 372, "w": 25, "h": 88 },
-    { "id": "range",      "room": "kitchen", "kind": "range",      "shape": "rect", "x": 129, "y": 436, "w": 26, "h": 21 }
+    {
+      "id": "fireplace",
+      "room": "living-room",
+      "kind": "fireplace",
+      "shape": "rect",
+      "x": 125,
+      "y": 101,
+      "w": 19,
+      "h": 52,
+      "note": "Electric fireplace insert with a mantel, in a wallpapered panel (listing photo)."
+    },
+    {
+      "id": "chase",
+      "room": "bath-main",
+      "kind": "chase",
+      "shape": "rect",
+      "x": 7,
+      "y": 232,
+      "w": 32,
+      "h": 12
+    },
+    {
+      "id": "tub",
+      "room": "bath-main",
+      "kind": "tub",
+      "shape": "rect",
+      "x": 7,
+      "y": 244,
+      "w": 30,
+      "h": 58
+    },
+    {
+      "id": "toilet-1",
+      "room": "bath-main",
+      "kind": "toilet",
+      "shape": "rect",
+      "x": 43,
+      "y": 273,
+      "w": 16,
+      "h": 29
+    },
+    {
+      "id": "vanity-1",
+      "room": "bath-main",
+      "kind": "vanity",
+      "shape": "rect",
+      "x": 68,
+      "y": 280,
+      "w": 50,
+      "h": 22
+    },
+    {
+      "id": "sink-1",
+      "room": "bath-main",
+      "kind": "sink",
+      "shape": "circle",
+      "cx": 97,
+      "cy": 291,
+      "r": 9
+    },
+    {
+      "id": "pedestal-sink",
+      "room": "bath-second",
+      "kind": "pedestal-sink",
+      "shape": "rect",
+      "x": 365,
+      "y": 307,
+      "w": 18,
+      "h": 28,
+      "note": "Pedestal sink (listing photo), not a vanity."
+    },
+    {
+      "id": "toilet-2",
+      "room": "bath-second",
+      "kind": "toilet",
+      "shape": "rect",
+      "x": 356,
+      "y": 340,
+      "w": 27,
+      "h": 20
+    },
+    {
+      "id": "shower",
+      "room": "bath-second",
+      "kind": "shower",
+      "shape": "rect",
+      "x": 322,
+      "y": 368,
+      "w": 61,
+      "h": 28
+    },
+    {
+      "id": "wic-shelf-w",
+      "room": "wic",
+      "kind": "shelf",
+      "shape": "rect",
+      "x": 7,
+      "y": 167,
+      "w": 11,
+      "h": 58
+    },
+    {
+      "id": "wic-shelf-n",
+      "room": "wic",
+      "kind": "shelf",
+      "shape": "rect",
+      "x": 31,
+      "y": 167,
+      "w": 40,
+      "h": 10
+    },
+    {
+      "id": "water-heater",
+      "room": "laundry",
+      "kind": "water-heater",
+      "shape": "circle",
+      "cx": 20.5,
+      "cy": 320.5,
+      "r": 10,
+      "label": "WH"
+    },
+    {
+      "id": "washer-dryer",
+      "room": "laundry",
+      "kind": "washer-dryer",
+      "shape": "rect",
+      "x": 60,
+      "y": 309,
+      "w": 24,
+      "h": 24,
+      "label": "W/D"
+    },
+    {
+      "id": "fridge",
+      "room": "kitchen",
+      "kind": "fridge",
+      "shape": "rect",
+      "x": 91,
+      "y": 309,
+      "w": 34,
+      "h": 34,
+      "label": "FR"
+    },
+    {
+      "id": "counter-n",
+      "room": "kitchen",
+      "kind": "counter",
+      "shape": "rect",
+      "x": 125,
+      "y": 309,
+      "w": 72,
+      "h": 25
+    },
+    {
+      "id": "sink-k",
+      "room": "kitchen",
+      "kind": "sink",
+      "shape": "rect",
+      "x": 139,
+      "y": 312,
+      "w": 33,
+      "h": 20
+    },
+    {
+      "id": "dishwasher",
+      "room": "kitchen",
+      "kind": "dishwasher",
+      "shape": "rect",
+      "x": 172,
+      "y": 309,
+      "w": 25,
+      "h": 25,
+      "label": "DW"
+    },
+    {
+      "id": "counter-w",
+      "room": "kitchen",
+      "kind": "counter",
+      "shape": "rect",
+      "x": 91,
+      "y": 384,
+      "w": 26,
+      "h": 76
+    },
+    {
+      "id": "counter-s",
+      "room": "kitchen",
+      "kind": "counter",
+      "shape": "rect",
+      "x": 117,
+      "y": 434,
+      "w": 48,
+      "h": 26
+    },
+    {
+      "id": "counter-e",
+      "room": "kitchen",
+      "kind": "counter",
+      "shape": "rect",
+      "x": 165,
+      "y": 372,
+      "w": 25,
+      "h": 88
+    },
+    {
+      "id": "range",
+      "room": "kitchen",
+      "kind": "range",
+      "shape": "rect",
+      "x": 129,
+      "y": 436,
+      "w": 26,
+      "h": 21
+    },
+    {
+      "id": "upper-w",
+      "room": "kitchen",
+      "kind": "upper-cabinet",
+      "shape": "rect",
+      "x": 91,
+      "y": 384,
+      "w": 13,
+      "h": 63
+    },
+    {
+      "id": "upper-s",
+      "room": "kitchen",
+      "kind": "upper-cabinet",
+      "shape": "rect",
+      "x": 91,
+      "y": 447,
+      "w": 99,
+      "h": 13
+    },
+    {
+      "id": "upper-e",
+      "room": "kitchen",
+      "kind": "upper-cabinet",
+      "shape": "rect",
+      "x": 177,
+      "y": 372,
+      "w": 13,
+      "h": 75
+    }
   ]
 }

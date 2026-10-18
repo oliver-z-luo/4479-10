@@ -1,0 +1,36 @@
+{
+  "about": "Finishes for the Fusion model. 'appearances' defines named finishes from Fusion's appearance library (optionally re-coloured, RGB 0-255); 'assign' says which finish each body gets, by body id (room id for floors), fixture kind, or group. Change a finish here, regenerate and re-run, or change it in Fusion directly. Starts as the unit is today, per the listing photos.",
+
+  "appearances": {
+    "wall-paint":   { "from": "Paint - Enamel Glossy (White)", "color": [201, 182, 155], "note": "tan walls" },
+    "wood-dark":    { "from": "Walnut", "note": "wood-look floor in the living areas and halls" },
+    "wood-light":   { "from": "Oak", "note": "plank floor in the bedrooms" },
+    "tile-light":   { "from": "Paint - Enamel Glossy (White)", "color": [190, 190, 186], "note": "light grey floor tile" },
+    "tile-dark":    { "from": "Paint - Enamel Glossy (Dark Grey)", "note": "dark grey floor tile, primary bath" },
+    "concrete":     { "from": "Paint - Enamel Glossy (Grey)", "color": [150, 150, 146] },
+    "granite":      { "from": "Granite - Black and White", "note": "kitchen counters" },
+    "cabinet-dark": { "from": "Walnut", "note": "dark wood cabinets and vanities" },
+    "stainless":    { "from": "Stainless Steel - Satin" },
+    "white":        { "from": "Paint - Enamel Glossy (White)" },
+    "glass":        { "from": "Glass - Window" },
+    "frosted":      { "from": "Glass - Frosted" },
+    "railing":      { "from": "Paint - Metallic (Black)" }
+  },
+
+  "assign": {
+    "Walls": "wall-paint", "Railing": "railing", "Slab": "concrete",
+    "glass": "glass", "glass-win-partition": "frosted",
+
+    "living-room": "wood-dark", "dining-room": "wood-dark", "hall-upper": "wood-dark", "hall-lower": "wood-dark", "laundry": "wood-dark",
+    "primary-bedroom": "wood-light", "office-bedroom": "wood-light", "bedroom": "wood-light", "closet": "wood-light", "wic": "wood-light", "storage": "wood-light",
+    "kitchen": "tile-light", "foyer": "tile-light", "pantry": "tile-light", "bath-second": "tile-light",
+    "bath-main": "tile-dark",
+    "balcony": "concrete",
+
+    "counter": "granite", "upper-cabinet": "cabinet-dark", "vanity": "cabinet-dark",
+    "fridge": "stainless", "range": "stainless", "dishwasher": "stainless",
+    "tub": "white", "toilet": "white", "pedestal-sink": "white", "shower": "white", "fireplace": "white",
+    "water-heater": "white", "washer-dryer": "white", "shelf": "white", "hanging": "white",
+    "chase": "wall-paint"
+  }
+}

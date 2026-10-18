@@ -13,6 +13,9 @@ import {
   zoneClearArea,
 } from './geom.mjs';
 import { combinations } from './toggles.mjs';
+import { loadDims, resolvePlan, checkDims, isEdited } from './dims.mjs';
+
+const DIMS = loadDims();
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PLANS = join(HERE, 'plans');
@@ -342,7 +345,8 @@ function validate(plan, label) {
     const off = Math.abs(sqft - printed) / printed;
     const msg = `living area computes to ${sqft.toFixed(0)} sq ft against the printed ${printed} sq ft `
       + `(${(off * 100).toFixed(1)}% off, tolerance ${(AREA_TOL * 100).toFixed(0)}%)`;
-    if (off > AREA_TOL) F(msg); else W(msg);
+    // measured sizes are allowed to disagree with the listing's printed total
+    if (off > AREA_TOL && !isEdited(DIMS)) F(msg); else W(msg);
   } else if (printed) {
     W(`printedArea.livingSqFt is ${printed} but there is no envelope.livingArea polygon to check it against`);
   }
@@ -369,11 +373,17 @@ const files = args.length
 if (!files.length) { console.error('no plan files found'); process.exit(1); }
 
 let bad = 0;
+const dimFail = checkDims(DIMS);
+if (dimFail.length) {
+  bad++;
+  console.error(`\x1b[31mFAIL\x1b[0m dimensions.json — ${dimFail.length} problem${dimFail.length > 1 ? 's' : ''}`);
+  for (const m of dimFail) console.error(`  \x1b[31mx\x1b[0m ${m}`);
+} else console.log(`\x1b[32mPASS\x1b[0m dimensions.json`);
 const results = [];
 for (const file of files) {
   const label = basename(file);
   let plan;
-  try { plan = JSON.parse(readFileSync(file, 'utf8')); }
+  try { plan = resolvePlan(JSON.parse(readFileSync(file, 'utf8')), DIMS); }
   catch (e) { console.error(`\x1b[31mFAIL\x1b[0m ${label}\n  not valid JSON: ${e.message}`); bad++; continue; }
 
   // a plan with toggles is checked once per combination of them

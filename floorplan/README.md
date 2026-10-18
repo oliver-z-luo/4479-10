@@ -7,16 +7,21 @@ drawn by hand.
 floorplan/
   plans/baseline.json   the plan as surveyed — the single source of truth
   plans/*.json          alternative layouts (options)
+  dimensions.json       master sizes: rooms, walls, ceiling, openings, fixtures
+  finishes.json         colours and materials for the Fusion model
   validate.mjs          checks the geometry, fails loudly
   render.mjs            plans/*.json -> dist/index.html
+  fusion.mjs            baseline + dimensions -> dist/fusion-build.py (3D)
   dist/index.html       the drawing: one self-contained file, opens offline
+  dist/fusion-build.py  the Fusion script: builds the floor in 3D
   source/original.jpg   the scanned plan everything was transcribed from
                         (kept locally only; not in the repository)
 ```
 
 ## The one rule
 
-**`plans/*.json` is the only thing you edit.** Never edit `dist/index.html`, and
+**`plans/*.json`, `dimensions.json` and `finishes.json` are the only things you
+edit.** Never edit `dist/index.html`, and
 never hand-tweak the SVG — the next `render.mjs` run overwrites it. If the
 drawing is wrong, the JSON is wrong.
 
@@ -32,6 +37,69 @@ open floorplan/dist/index.html
 
 Always validate before you render. `dist/index.html` is self-contained — email
 it, drop it in a message, open it with no network.
+
+## Dimensions: correcting sizes once you measure
+
+The listing plan is a good guess, not a survey. Every size you might correct
+lives in **`dimensions.json`**: room widths and depths, wall thickness, ceiling
+height, door and window heights, counter and fixture heights. Each entry says
+where its value came from: `printed` (on the listing plan), `drawn` (measured
+off it), `estimated` (judged from the listing photos or a standard size) or
+`measured`.
+
+When you measure something, change its `value`, set `status` to `measured`,
+then validate and render. The website and the Fusion model both follow.
+
+How it works: every wall sits on a named grid line (`X_PBR` is the Primary
+Bedroom's east wall, `Y_S` the south wall, and so on), and each grid line is
+defined from room sizes in order, west to east and north to south:
+
+```
+X_PBR = X_W + wallT + primaryW      (west wall + 9'3" bedroom)
+X_LR  = X_PBR + wallT + livingW     (+ 11'11" living room)
+X_E   = X_LR + wallT + officeW      (+ 9'0" office)
+```
+
+Change `livingW` and everything east of the living room moves with it. Every
+wall end, room corner, fixture and piece of furniture in `plans/*.json` is
+pinned to its nearest grid line, so a counter against a wall stays against it
+and keeps its size, and room labels update to the new size. At the default
+values the output is exactly the drawing as transcribed.
+
+Two sizes are derived rather than set: the Primary Bedroom hall (it's what is
+left between the walk-in closet and the bedroom's east wall) and the Dining
+Room depth (what's left of the living/dining space below `livingD`). A room
+whose size doesn't come out right once measured usually means a neighbouring
+value needs correcting.
+
+## The Fusion model
+
+`node floorplan/fusion.mjs` writes `dist/fusion-build.py`, which builds the
+baseline in Autodesk Fusion: walls to the ceiling with doors and windows cut
+at their heights, glass (frosted in the Office/Bedroom wall), a floor body per
+room, kitchen counters and upper cabinets, bath fixtures, laundry and closet
+shelving. No furniture.
+
+Every edge is bound to a Fusion user parameter with the same name as in
+`dimensions.json`, so you can also resize directly in Fusion
+(Modify > Change Parameters). Two parameters exist only in Fusion:
+
+- `wallTop`: how high the walls are drawn. Set it to `48 in` for a cut-away
+  view into every room; it defaults to the ceiling.
+- `pad`: keeps the model off the sketch origin. Leave it.
+
+Components: **Shell** (walls, railing), **Glazing**, **Floors**, **Kitchen**,
+**Baths**, **Living**, **Storage**. Hide any of them to see past it.
+
+Finishes come from **`finishes.json`**: named appearances from Fusion's library
+(re-coloured where needed) assigned to rooms, fixture kinds and walls. It
+starts as the unit is today, per the listing photos.
+
+To rebuild after changing `dimensions.json` or `finishes.json`: regenerate,
+then run `dist/fusion-build.py` in Fusion (Utilities > Scripts and Add-ins, or
+through the Fusion MCP). It updates the parameters in place and rebuilds the
+generated components; anything you add in other components is left alone.
+Renovation options will go on top of this as separate components.
 
 ## Units
 
@@ -206,8 +274,9 @@ itself:
   exterior walls, party walls and partitions alike.
 - **The wall between Office Bedroom and Bedroom** is drawn as 97" of glazing in a
   108" wall. Transcribed as an interior window wall, which is what it looks like.
-- **The hatched box on the living room's west wall** is unlabelled. Transcribed
-  as a fireplace; it could be a duct chase.
+- **The hatched box on the living room's west wall** is unlabelled on the plan.
+  The listing photos show an electric fireplace with a mantel, in a
+  wallpapered panel.
 
 Dimensions come from a marketing floor plan, not a survey. Don't order cabinets
 off it.

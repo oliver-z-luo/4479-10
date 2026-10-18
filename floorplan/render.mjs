@@ -7,6 +7,9 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { boxOf, bbox, overlapArea, pointInPoly, sightline, zoneClearArea } from './geom.mjs';
 import { combinations, isLayer } from './toggles.mjs';
+import { loadDims, resolvePlan } from './dims.mjs';
+
+const DIMS = loadDims();
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PLANS = join(HERE, 'plans');
@@ -203,6 +206,8 @@ function fixtureSym(f, cls = '') {
     if (f.kind === 'shower')
       out += `<line class="fxthin" x1="${n(f.x)}" y1="${n(f.y)}" x2="${n(f.x + f.w)}" y2="${n(f.y + f.h)}"/>`
         + `<line class="fxthin" x1="${n(f.x + f.w)}" y1="${n(f.y)}" x2="${n(f.x)}" y2="${n(f.y + f.h)}"/>`;
+    if (f.kind === 'pedestal-sink')
+      out += `<ellipse class="fxthin" cx="${n(f.x + f.w / 2)}" cy="${n(f.y + f.h / 2)}" rx="${n(f.w * 0.36)}" ry="${n(f.h * 0.36)}"/>`;
     if (f.kind === 'hanging') // the rod, along the long side
       out += f.w > f.h
         ? `<line class="fxrod" x1="${n(f.x + 2)}" y1="${n(f.y + f.h / 2)}" x2="${n(f.x + f.w - 2)}" y2="${n(f.y + f.h / 2)}"/>`
@@ -480,8 +485,8 @@ const archivedFiles = existsSync(ARCHIVED)
 
 if (!files.length && !archivedFiles.length) { console.error('no plans/*.json found'); process.exit(1); }
 
-const plans = files.map((f) => ({ file: f, id: f.replace(/\.json$/, ''), archived: false, data: JSON.parse(readFileSync(join(PLANS, f), 'utf8')) }));
-const archivedPlans = archivedFiles.map((f) => ({ file: f, id: 'archived/' + f.replace(/\.json$/, ''), archived: true, data: JSON.parse(readFileSync(join(ARCHIVED, f), 'utf8')) }));
+const plans = files.map((f) => ({ file: f, id: f.replace(/\.json$/, ''), archived: false, data: resolvePlan(JSON.parse(readFileSync(join(PLANS, f), 'utf8')), DIMS) }));
+const archivedPlans = archivedFiles.map((f) => ({ file: f, id: 'archived/' + f.replace(/\.json$/, ''), archived: true, data: resolvePlan(JSON.parse(readFileSync(join(ARCHIVED, f), 'utf8')), DIMS) }));
 // baseline first, then plans with toggles (the live decisions), then the rest
 const rank = (p) => (p.id === 'baseline' ? 0 : p.data.toggles ? 1 : 2);
 plans.sort((a, b) => rank(a) - rank(b));
@@ -616,6 +621,7 @@ footer code{font-size:10px}
 .fx{fill:#fff;stroke:${C.fixture};stroke-width:1.3}
 .fx-shelf,.fx-hanging{fill:#fafafa;stroke:#999;stroke-width:1}
 .fxrod{stroke:#888;stroke-width:1;stroke-dasharray:3 2}
+.fx.fx-upper-cabinet{fill:none;stroke:#888;stroke-width:1;stroke-dasharray:3 2}
 .fx.fx-shelf-above{fill:none;stroke:#888;stroke-width:1;stroke-dasharray:3 2}
 .fx-chase{fill:#d8d8d8;stroke:#777;stroke-width:1}
 .fx-counter{fill:#fafafa}
@@ -735,8 +741,8 @@ const legend = `<div class="legend" id="legend">`
   + `<span><i style="border-color:${C.door}"></i>doors</span>`
   + `<span><i style="border-color:${C.window}"></i>windows</span>`
   + (allPlans.some((p) => (p.data.furniture ?? []).length) ? `<span><i style="border-color:${C.furn}"></i>furniture</span>` : '')
-  + (JSON.stringify(allPlans.map((p) => p.data.toggles ?? [])).match(/"kind":"(hanging|shelf-above)"/)
-    ? `<span><i style="border-color:#888;border-top-style:dashed;border-top-width:2px"></i>hanging rod / shelf above</span>` : '')
+  + (JSON.stringify(allPlans.map((p) => [p.data.fixtures, p.data.toggles])).match(/"kind":"(hanging|shelf-above|upper-cabinet)"/)
+    ? `<span><i style="border-color:#888;border-top-style:dashed;border-top-width:2px"></i>overhead: upper cabinets, shelves, rods</span>` : '')
   + `</div>`;
 
 const diffCounts = Object.fromEntries(sheets.map((s) => [s.id, { any: s.any, c: s.changedCount, r: s.removedCount }]));

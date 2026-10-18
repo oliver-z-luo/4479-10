@@ -2,14 +2,18 @@
 
 ## The rule
 
-`plans/*.json` is the only thing that gets edited. The drawing is always
-generated from it.
+`plans/*.json`, `dimensions.json` and `finishes.json` are the only things that
+get edited. The drawing and the Fusion script are always generated from them.
 
 - Never edit `dist/index.html`. Never hand-tweak the generated SVG. `render.mjs`
   overwrites the whole file on every run.
 - If the drawing is wrong, the JSON is wrong. Fix the JSON.
-- After any change to a plan: `node floorplan/validate.mjs && node floorplan/render.mjs`.
+- After any change to a plan or to dimensions.json:
+  `node floorplan/validate.mjs && node floorplan/render.mjs && node floorplan/fusion.mjs`.
   Validate first; a plan that doesn't validate doesn't get rendered.
+- Sizes that may be corrected later belong in `dimensions.json`, not as new
+  raw numbers in a plan. Plans stay in the drawn coordinates; dims.mjs moves
+  them onto the current dimensions.
 - Zero runtime dependencies, and it stays that way. Plain Node scripts, one
   self-contained HTML file that opens offline.
 

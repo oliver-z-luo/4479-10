@@ -1,6 +1,7 @@
-# Listing images: show the unit number and the realtor's/photographer's
-# branding. Kept locally as the transcription reference, never published.
-source/
+# Listing floor plan: shows the unit number and the realtor's branding.
+# Kept locally as the transcription reference, never published.
+source/*
+!source/4479-photos/
 floorplan/source/
 
 .claude/

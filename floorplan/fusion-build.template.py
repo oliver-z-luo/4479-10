@@ -146,6 +146,37 @@ def apply_finishes(design, comps):
                 body.appearance = finish(design, key)
 
 
+def cut_view(design):
+    """A section at cutH that slices off everything above it, plus a named view.
+    Both live in the root component, so rebuilding the generated components
+    keeps them. Toggle the cut with the eye on Analysis > Wall cut."""
+    app = adsk.core.Application.get()
+    root = design.rootComponent
+    planes = root.constructionPlanes
+    plane = next((planes.item(i) for i in range(planes.count) if planes.item(i).name == 'Cut plane'), None)
+    if not plane:
+        inp = planes.createInput()
+        inp.setByOffset(ground(root), adsk.core.ValueInput.createByString('cutH'))
+        plane = planes.add(inp)
+        plane.name = 'Cut plane'
+        plane.isLightBulbOn = False
+    sections = design.analyses.sectionAnalyses
+    if 'Wall cut' not in [sections.item(i).name for i in range(sections.count)]:
+        inp = sections.createInput(plane, 0)
+        inp.isHatchShown = False
+        inp.sectionColor = adsk.core.Color.create(64, 64, 64, 255)
+        sec = sections.add(inp)
+        sec.name = 'Wall cut'
+    vp = app.activeViewport
+    cam = vp.camera
+    cam.viewOrientation = adsk.core.ViewOrientations.IsoTopRightViewOrientation
+    cam.isFitView = True
+    vp.camera = cam
+    vp.fit()
+    if 'Cut iso' not in [design.namedViews.item(i).name for i in range(design.namedViews.count)]:
+        design.namedViews.add(vp.camera, 'Cut iso')
+
+
 def run(_context):
     app = adsk.core.Application.get()
     design = adsk.fusion.Design.cast(app.activeProduct)
@@ -193,6 +224,12 @@ def run(_context):
             extrude(comp, sketch(comp, s), s, CUT, [walls])
 
     apply_finishes(design, comps)
+
+    # sketches only clutter the model view
+    for comp in comps.values():
+        for i in range(comp.sketches.count):
+            comp.sketches.item(i).isLightBulbOn = False
+    cut_view(design)
 
     bad = []
     for i in range(design.timeline.count):

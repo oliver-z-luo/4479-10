@@ -153,7 +153,8 @@ for (const f of plan.fixtures) {
 // sits on the origin; shift the model off it with a Fusion-only parameter.
 const PAD = 12;
 params.unshift(['pad', `${PAD} in`, 'Fusion only: keeps every edge off the sketch origin.']);
-params.push(['wallTop', 'ceilingH', 'Fusion only: wall height drawn. Set lower (e.g. 48 in) to cut the walls away and see into every room.']);
+params.push(['wallTop', 'ceilingH', 'Fusion only: wall height drawn. Leave at ceilingH; use the Wall cut section to see in.']);
+params.push(['cutH', '48 in', 'Fusion only: height of the Wall cut section (Analysis > Wall cut in the browser).']);
 for (const g of grids) if (g[0] === 'X_W' || g[0] === 'Y_N') g[1] = `pad + ${g[1]}`;
 for (const s of solids) {
   if (s.xv) s.xv = s.xv.map((v) => v + PAD);

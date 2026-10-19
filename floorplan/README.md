@@ -82,10 +82,18 @@ shelving. No furniture.
 
 Every edge is bound to a Fusion user parameter with the same name as in
 `dimensions.json`, so you can also resize directly in Fusion
-(Modify > Change Parameters). Two parameters exist only in Fusion:
+(Modify > Change Parameters).
 
-- `wallTop`: how high the walls are drawn. Set it to `48 in` for a cut-away
-  view into every room; it defaults to the ceiling.
+**Cut-away view:** a section called **Wall cut** (browser > Analysis) slices off
+everything above `cutH` (48" by default), so you can look down into every
+room; click its eye to turn it on or off. The **Cut iso** named view (browser >
+Named Views) brings back the matching camera. Named views only store the
+camera, so the cut itself is the section's eye.
+
+Parameters that exist only in Fusion:
+
+- `cutH`: height of the Wall cut section.
+- `wallTop`: how high the walls are modelled; leave it at `ceilingH`.
 - `pad`: keeps the model off the sketch origin. Leave it.
 
 Components: **Shell** (walls, railing), **Glazing**, **Floors**, **Kitchen**,

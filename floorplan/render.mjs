@@ -595,17 +595,20 @@ svg{display:block;width:100%;height:100%}
 /* plan tabs: folder tabs sitting on the drawing; Archive is the last one */
 .plans{grid-column:2;grid-row:1;align-self:end;display:flex;align-items:flex-end;gap:2px;padding:14px 14px 0;position:relative;z-index:2;min-width:0}
 .tabs{display:flex;gap:2px;min-width:0}
-.tab,.archive summary{display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.2;padding:10px 16px;border:1px solid transparent;border-bottom:0;
+.tab{display:flex;align-items:center;font-size:14px;line-height:1.2;padding:10px 16px;border:1px solid transparent;border-bottom:0;
   border-radius:9px 9px 0 0;margin-bottom:-1px;background:none;color:#555;cursor:pointer;white-space:nowrap;transition:background .12s,color .12s}
-.tab:hover,.archive summary:hover{background:#e9e9e5;color:#111}
-.tab[aria-selected=true],.archive.active summary{background:#fff;border-color:#e0e0dc;color:#111;font-weight:600}
-.archive{position:relative;flex:none}
-.archive summary{list-style:none;user-select:none}
+.tab:hover{background:#e9e9e5;color:#111}
+.tab[aria-selected=true]{background:#fff;border-color:#e0e0dc;color:#111;font-weight:600}
+.archive{position:relative;flex:none;margin-left:auto;align-self:center}
+.archive summary{display:flex;align-items:center;gap:5px;font-size:12.5px;color:#767676;padding:5px 8px;border-radius:6px;cursor:pointer;list-style:none;user-select:none;white-space:nowrap}
+.archive summary:hover{background:#e9e9e5;color:#111}
+.archive.active summary{color:#111;font-weight:600}
+.archname:not(:empty)::before{content:' · '}
 .archive summary::-webkit-details-marker{display:none}
-.archive .count{font-size:11px;min-width:18px;padding:1px 5px;border-radius:9px;background:#dcdcd7;color:#444;text-align:center;font-weight:500}
+.archive .count{font-size:11px;color:#8a8a85;font-weight:400}
 .archive svg{width:12px;height:12px;transition:transform .15s}
 .archive[open] summary svg{transform:rotate(180deg)}
-.menu{position:absolute;top:calc(100% + 6px);left:0;z-index:10;width:300px;padding:5px;background:#fff;border:1px solid #e0e0dc;border-radius:10px;
+.menu{position:absolute;top:calc(100% + 6px);right:0;z-index:10;width:300px;padding:5px;background:#fff;border:1px solid #e0e0dc;border-radius:10px;
   box-shadow:0 10px 28px rgba(0,0,0,.13),0 1px 3px rgba(0,0,0,.08)}
 .menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:8px 10px;border-radius:7px;cursor:pointer}
 .menu button:hover{background:#f1f1ee}
@@ -615,9 +618,8 @@ svg{display:block;width:100%;height:100%}
 
 /* this plan */
 .ctx{display:flex;flex-direction:column;gap:12px}
+.ctx:empty{display:none}
 .ctx[hidden]{display:none}
-.desc{margin:0;font-size:12.5px;color:#444;line-height:1.5}
-.badge{display:inline-block;font-size:11px;font-weight:600;color:#7a5a00;background:#fbf0cc;border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
 .controls{display:flex;flex-direction:column;gap:12px}
 .controls{gap:2px}
 .opt{position:relative;display:flex;align-items:center;gap:6px;border-radius:7px}
@@ -698,13 +700,13 @@ footer code{font-size:10px}
   .app{display:block;height:auto}
   .head{border-right:0;padding:14px 16px 0}
   aside{border-right:0;padding:14px 16px 4px;gap:14px;overflow:visible}
-  .plans{padding:12px 16px 0;align-items:center;gap:4px;align-self:stretch}
-  .tabs{flex:1;overflow-x:auto;scrollbar-width:none;gap:4px;padding-right:24px;
-    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
-  .tabs::-webkit-scrollbar{display:none}
-  .tab,.archive summary{flex:none;font-size:13.5px;padding:7px 12px;border:1px solid transparent;border-radius:8px;margin:0}
-  .tab[aria-selected=true],.archive.active summary{box-shadow:0 1px 2px rgba(0,0,0,.08)}
-  .menu{left:auto;right:0;width:min(300px,calc(100vw - 32px))}
+  .plans{padding:12px 16px 0;flex-wrap:wrap;gap:6px;align-self:stretch}
+  .tabs{flex:1 0 100%;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:2px;padding:3px;border-radius:10px;background:#e4e4df}
+  .tab{justify-content:center;text-align:center;white-space:normal;font-size:14px;padding:9px 4px;border:0;border-radius:8px;margin:0;color:#555}
+  .tab:hover{background:rgba(255,255,255,.5)}
+  .tab[aria-selected=true]{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.14)}
+  .archive summary{padding:4px 2px 4px 8px}
+  .menu{width:min(300px,calc(100vw - 32px))}
   .stage{padding:4px 10px 10px}
   .sheet{padding:4px;border-radius:10px}
   svg{height:auto}
@@ -714,7 +716,7 @@ footer code{font-size:10px}
   .app:has(.ctx:not([hidden]) .scope){display:flex;flex-direction:column}
   .app:has(.ctx:not([hidden]) .scope) aside,.ctx:not([hidden]):has(.scope),.scope{display:contents}
   .app:has(.ctx:not([hidden]) .scope) aside>*,.ctx:not([hidden]):has(.scope)>*,.scope>*{margin-inline:16px}
-  .app:has(.ctx:not([hidden]) .scope) aside>*,.ctx:not([hidden]):has(.scope)>.desc{margin-top:12px}
+  .app:has(.ctx:not([hidden]) .scope) aside>*{margin-top:12px}
   .app:has(.ctx:not([hidden]) .scope) aside>:first-child{margin-top:14px}
   .scope .filters{margin-top:12px}
   .app:has(.ctx:not([hidden]) .scope) .stage{order:5;margin:0}
@@ -800,7 +802,7 @@ const tabs = `<nav class="plans" aria-label="Plans"><div class="tabs" role="tabl
   + activeSheets.map((p) => `<button type="button" class="tab" role="tab" data-plan="${esc(p.id)}" aria-selected="false">${esc(planName(p))}</button>`).join('')
   + `</div>`
   + (archivedSheets.length
-    ? `<details class="archive"><summary>Archive <span class="count">${archivedSheets.length}</span>`
+    ? `<details class="archive"><summary>Archive<span class="archname"></span> <span class="count">${archivedSheets.length}</span>`
       + `<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>`
       + `<div class="menu">`
       + archivedSheets.map((p) => `<button type="button" data-plan="${esc(p.id)}" aria-current="false"><b>${esc(planName(p))}</b>`
@@ -858,13 +860,8 @@ const scopePanel = (p) => {
 };
 
 const hasPlay = (p) => (p.data.zones ?? []).some((z) => z.kind === 'play');
-const descOf = (p) => p.data.meta?.optionNote
-  ?? (p.data.scope ? 'Every planned change, by room. Pins count each room\u2019s items; hover or tap a room to focus it. Changes are drawn in magenta.'
-    : p.data.toggles ? 'Tick a change to show it on the plan. Changes are drawn in magenta.'
-    : p.id === 'baseline' ? 'The plan as surveyed. Every other plan is compared against this one.' : '');
 
 const contexts = allPlans.map((p) => `<div class="ctx" data-group="${esc(p.id)}" hidden>`
-  + `<p class="desc">${p.archived ? '<span class="badge">Archived</span>' : ''}${esc(descOf(p))}</p>`
   + (p.data.scope ? scopePanel(p) : p.data.toggles ? `<div class="controls" role="group" aria-label="Changes">`
     + p.data.toggles.map((t) => opt(`data-toggle="${esc(t.id)}"`, t.label, t.note, t.default !== false)).join('') + `</div>` : '')
   + (hasPlay(p) ? `<div class="controls">${opt('data-sight', 'Sightlines', 'A line from every seat to the centre of the play area.', false)}</div>`
@@ -938,7 +935,8 @@ function show(g){
     if(on){var t=b.parentNode;t.scrollLeft=Math.max(0,b.offsetLeft-t.offsetLeft-t.clientWidth/2+b.offsetWidth/2)}});
   $$('.menu button').forEach(function(b){b.setAttribute('aria-current',String(b.dataset.plan===g))});
   $$('.ctx').forEach(function(c){c.hidden=c.dataset.group!==g});
-  if(arch){arch.classList.toggle('active',g.indexOf('archived/')===0);arch.open=false}
+  if(arch){var a=g.indexOf('archived/')===0;arch.classList.toggle('active',a);arch.open=false;
+    var m=a&&document.querySelector('.menu button[data-plan="'+g+'"] b');arch.querySelector('.archname').textContent=m?m.textContent:''}
   var t=TOG[g], lay=false;
   layerIds.forEach(function(k){var on=!!(t&&t.layers.indexOf(k)>=0&&t.on[k]);document.body.classList.toggle('tg-'+k,on);lay=lay||on});
   document.getElementById('legend').classList.toggle('on',!!(DIFF[id]||{}).any||lay);

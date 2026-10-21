@@ -1563,6 +1563,18 @@
         "priority": "tbd"
       },
       {
+        "id": "LR2",
+        "title": "Limestone fireplace surround",
+        "note": "Floor-to-ceiling honed limestone panels, stone hearth.",
+        "detail": "Clad the fireplace wall floor to ceiling in large honed limestone panels, laid in a staggered pattern, with a raised limestone hearth slab in front, as in the reference photo. Thin stone veneer on cement board keeps the weight down. Keep the fireplace maker's clearances to combustibles. LR1's heat pump head is on this wall: run its line set before the stone goes on.",
+        "ref": "refs/limestone-fireplace.jpg",
+        "trades": [
+          "tile",
+          "framing"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "OB1",
         "change": "double",
         "title": "Double French door, office side",

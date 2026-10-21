@@ -376,6 +376,35 @@ function scopeLayer(plan, scope) {
   return `<g class="scope-hits">${hits}</g><g class="scope-pins">${pins}</g>`;
 }
 
+// --- listing photos: rooms that have them are clickable, marked with a camera
+const ROOM_TITLES = { 'bath-main': 'Primary Bath', 'bath-second': 'Shared Bath', wic: 'Walk-in Closet', 'hall-lower': 'Hall' };
+const roomTitle = (r) => ROOM_TITLES[r.id] ?? (r.name || r.id.replace(/-/g, ' ')).trim().replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\B\w+/g, (w) => w.toLowerCase());
+function photoLayer(plan) {
+  let hits = '', marks = '';
+  for (const r of plan.rooms) {
+    const files = plan.roomPhotos[r.id];
+    if (!files?.length) continue;
+    hits += `<polygon class="phit" data-room="${esc(r.id)}" points="${r.boundary.map((p) => `${n(p[0])},${n(p[1])}`).join(' ')}"><title>${esc(roomTitle(r))}: view photo${files.length > 1 ? 's' : ''}</title></polygon>`;
+    const [x, y] = pinAt(r);
+    marks += `<g class="pmark" data-room="${esc(r.id)}" role="button" tabindex="0" aria-label="${esc(roomTitle(r))}: view photos">`
+      + `<circle cx="${n(x)}" cy="${n(y)}" r="${PIN_R}"/>`
+      + `<path transform="translate(${n(x - 4)} ${n(y - 3.2)})" d="M0 1.6h1.9l.8-1.2h2.6l.8 1.2H8v4.8H0z"/>`
+      + `<circle class="lens" cx="${n(x)}" cy="${n(y + 0.2)}" r="1.4"/></g>`;
+  }
+  return `<g class="photo-hits">${hits}</g><g class="photo-marks">${marks}</g>`;
+}
+// what a room's photo pop-up shows; each image is embedded once
+const photoData = (p) => {
+  const rooms = {}, imgs = {};
+  for (const r of p.data.rooms) {
+    const files = p.data.roomPhotos?.[r.id];
+    if (!files?.length) continue;
+    for (const f of files) if (!imgs[f]) imgs[f] = `data:image/jpeg;base64,${readFileSync(join(HERE, f)).toString('base64')}`;
+    rooms[r.id] = { name: roomTitle(r), size: r.labelled?.text ?? '', imgs: files };
+  }
+  return { rooms, imgs, credit: p.data.meta?.sourceCredit ?? '' };
+};
+
 // --- diff against baseline -------------------------------------------------
 const COLLECTIONS = {
   walls: (w) => JSON.stringify([w.start, w.end, w.type, w.thickness ?? null]),
@@ -461,6 +490,7 @@ function sheet(plan, base, catalog, sheetIdx, layers = [], labelFixtures = null,
     s += roomLabel(r, plan.furniture ?? []);
   }
   if (scope) s += scopeLayer(plan, scope);
+  if (plan.roomPhotos) s += photoLayer(plan);
 
   // sightlines from every seat to the centre of the play area, hidden by default
   const play = (plan.zones ?? []).find((z) => z.kind === 'play');
@@ -716,6 +746,19 @@ dialog.pv[open]{animation:pvin .18s cubic-bezier(.2,.8,.2,1)}
 .pvtext{grid-column:1/-1;margin:0;font-size:13.5px;line-height:1.55;color:#333;max-width:65ch}
 .pvtags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 10px}
 @media (max-width:560px){.pvbody{grid-template-columns:1fr}}
+
+.phit{fill:transparent;cursor:pointer;transition:fill .12s}
+.phit.hl{fill:rgba(22,104,204,.08)}
+.pmark{cursor:pointer}
+.pmark circle{fill:#fff;stroke:#9a9a94;stroke-width:1.1;transition:fill .12s,stroke .12s}
+.pmark path{fill:#6b6b66}
+.pmark .lens{fill:#fff;stroke:none}
+.pmark.hl circle:first-child{fill:${C.window};stroke:${C.window}}
+.pmark.hl path{fill:#fff}.pmark.hl .lens{fill:${C.window}}
+.pmark:focus{outline:none}.pmark:focus-visible circle:first-child{stroke:#111;stroke-width:2}
+.pvgal{grid-column:1/-1;display:grid;gap:10px}
+.pvgal img{width:100%;max-height:62dvh;object-fit:contain;border-radius:10px;background:#f4f4f2;display:block}
+.pvgal figcaption{font-size:11.5px;color:#666;margin-top:4px}
 
 /* units + legend */
 .units{align-self:flex-start;display:flex;padding:2px;border-radius:7px;background:#e7e7e3}
@@ -973,6 +1016,7 @@ ${sheets.map((s) => `<section class="sheet" data-plan="${esc(s.id)}" aria-label=
 </div>
 <script>
 var DIFF=${JSON.stringify(diffCounts)};
+var PH=${JSON.stringify(Object.fromEntries(allPlans.filter((p) => p.data.roomPhotos).map((p) => [p.id, photoData(p)])))};
 var PV=${JSON.stringify(Object.fromEntries(allPlans.filter((p) => p.data.scope).map((p) => [p.id, previewData(p)])))};
 var TOG=${JSON.stringify(toggled)};
 var PLANS=${JSON.stringify(allPlans.map((p) => p.id))};
@@ -1060,7 +1104,7 @@ function openPreview(id){
   document.getElementById('pvtitle').innerHTML='';
   var t=document.getElementById('pvtitle'); t.textContent=it.title;
   var sm=document.createElement('small'); sm.textContent=it.areaName; t.appendChild(sm);
-  var body=document.getElementById('pvbody'); body.innerHTML=''; body.classList.toggle('solo',!it.img&&!b);
+  var body=document.getElementById('pvbody'); body.innerHTML=''; body.className='pvbody'; body.classList.toggle('solo',!it.img&&!b);
   var src=document.querySelector('.sheet.on svg');
   if(src&&b){
     var m=14, vw=b[2]-b[0]+2*m, vh=b[3]-b[1]+2*m, svg=src.cloneNode(true);
@@ -1081,6 +1125,25 @@ function openPreview(id){
   if(tg){var c=tg.cloneNode(true);c.className='pvtags';body.appendChild(c)}
   pv.showModal();
 }
+// listing photos: hover a room to light it up, click (or tap) to see its photos
+function openRoom(id){
+  var d=PH[cur]; if(!d||!d.rooms[id])return; var r=d.rooms[id];
+  document.getElementById('pvid').textContent='';
+  var t=document.getElementById('pvtitle'); t.textContent=r.name;
+  var sm=document.createElement('small'); sm.textContent=(r.size?r.size+' \u00b7 ':'')+'listing photo'+(r.imgs.length>1?'s':''); t.appendChild(sm);
+  var body=document.getElementById('pvbody'); body.innerHTML=''; body.className='pvbody solo';
+  var g=document.createElement('div'); g.className='pvgal';
+  r.imgs.forEach(function(k,i){var f=document.createElement('figure');f.style.margin='0';var im=new Image();im.src=d.imgs[k];im.alt=r.name+', listing photo '+(i+1);f.appendChild(im);g.appendChild(f)});
+  if(d.credit){var c=document.createElement('p');c.className='fine';c.textContent='Listing photos: '+d.credit;g.appendChild(c)}
+  body.appendChild(g); pv.showModal();
+}
+function photoHl(id){$$('.phit,.pmark').forEach(function(e){e.classList.toggle('hl',!!id&&e.dataset.room===id)})}
+$$('.phit,.pmark').forEach(function(el){
+  el.addEventListener('click',function(){openRoom(el.dataset.room)});
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openRoom(el.dataset.room)}});
+  el.addEventListener('mouseenter',function(){photoHl(el.dataset.room)});
+  el.addEventListener('mouseleave',function(){photoHl(null)});
+});
 $$('.prev').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();openPreview(b.dataset.item)})});
 pv.querySelector('.pvclose').addEventListener('click',function(){pv.close()});
 pv.addEventListener('click',function(e){if(e.target===pv)pv.close()});

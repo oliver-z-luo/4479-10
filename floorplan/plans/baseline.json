@@ -613,6 +613,47 @@
       "isEntry": true
     }
   ],
+  "roomPhotos": {
+    "about": "Listing photos per room (web-sized copies of source/4479-photos), shown when a room is clicked on the As drawn tab.",
+    "primary-bedroom": [
+      "refs/rooms/primary-bedroom.jpg"
+    ],
+    "wic": [
+      "refs/rooms/wic.jpg"
+    ],
+    "bath-main": [
+      "refs/rooms/primary-bath.jpg"
+    ],
+    "laundry": [
+      "refs/rooms/hall.jpg"
+    ],
+    "hall-lower": [
+      "refs/rooms/hall.jpg"
+    ],
+    "living-room": [
+      "refs/rooms/living-room.jpg"
+    ],
+    "dining-room": [
+      "refs/rooms/dining-room.jpg",
+      "refs/rooms/dining-room-2.jpg"
+    ],
+    "kitchen": [
+      "refs/rooms/kitchen.jpg"
+    ],
+    "foyer": [
+      "refs/rooms/foyer.jpg"
+    ],
+    "office-bedroom": [
+      "refs/rooms/office-bedroom.jpg"
+    ],
+    "bedroom": [
+      "refs/rooms/bedroom.jpg",
+      "refs/rooms/bedroom-2.jpg"
+    ],
+    "bath-second": [
+      "refs/rooms/bath.jpg"
+    ]
+  },
   "rooms": [
     {
       "id": "primary-bedroom",

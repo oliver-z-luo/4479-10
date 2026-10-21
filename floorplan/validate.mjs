@@ -429,6 +429,16 @@ for (const file of files) {
     }
     if (!plan.toggles || c === combos[0]) for (const m of warn) console.log(`  \x1b[33m!\x1b[0m ${m}`);
   }
+  if (plan.roomPhotos) {
+    const rooms = new Set(plan.rooms.map((r) => r.id)), fail = [];
+    for (const [room, files] of Object.entries(plan.roomPhotos)) {
+      if (room === 'about') continue;
+      if (!rooms.has(room)) fail.push(`roomPhotos names room "${room}", which isn't in the plan`);
+      for (const f of files) if (!existsSync(join(HERE, f))) fail.push(`roomPhotos: ${f} not found`);
+    }
+    if (fail.length) { bad++; console.error(`\x1b[31mFAIL\x1b[0m ${label} room photos`); for (const m of fail) console.error(`  \x1b[31mx\x1b[0m ${m}`); }
+    else console.log(`\x1b[32mPASS\x1b[0m ${label} room photos`);
+  }
   if (plan.scope) {
     const fail = checkScope(plan);
     if (fail.length) { bad++; console.error(`\x1b[31mFAIL\x1b[0m ${label} scope`); for (const m of fail) console.error(`  \x1b[31mx\x1b[0m ${m}`); }

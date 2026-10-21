@@ -196,7 +196,7 @@ function fixtureSym(f, cls = '') {
     out = `<circle class="${k}" cx="${n(f.cx)}" cy="${n(f.cy)}" r="${n(f.r)}"/>`;
     cx = f.cx; cy = f.cy; box = [f.r * 2, f.r * 2];
   } else {
-    out = `<rect class="${k}" x="${n(f.x)}" y="${n(f.y)}" width="${n(f.w)}" height="${n(f.h)}" rx="1"/>`;
+    out = `<rect class="${k}" x="${n(f.x)}" y="${n(f.y)}" width="${n(f.w)}" height="${n(f.h)}" rx="${f.kind === 'trough' ? 3 : 1}"/>`;
     if (f.kind === 'fireplace') {
       for (let d = -f.h; d < f.w; d += 5)
         out += `<line class="hatch" x1="${n(f.x + Math.max(d, 0))}" y1="${n(f.y + Math.max(-d, 0))}" `
@@ -212,6 +212,8 @@ function fixtureSym(f, cls = '') {
       out += f.w > f.h
         ? `<line class="fxrod" x1="${n(f.x + 2)}" y1="${n(f.y + f.h / 2)}" x2="${n(f.x + f.w - 2)}" y2="${n(f.y + f.h / 2)}"/>`
         : `<line class="fxrod" x1="${n(f.x + f.w / 2)}" y1="${n(f.y + 2)}" x2="${n(f.x + f.w / 2)}" y2="${n(f.y + f.h - 2)}"/>`;
+    if (f.kind === 'trough')
+      out += `<circle class="fxthin" cx="${n(f.x + f.w / 2)}" cy="${n(f.y + f.h / 2)}" r="1.4"/>`;
     if (f.kind === 'sink' && f.w > f.h)
       out += `<line class="fxthin" x1="${n(f.x + f.w / 2)}" y1="${n(f.y)}" x2="${n(f.x + f.w / 2)}" y2="${n(f.y + f.h)}"/>`;
     cx = f.x + f.w / 2; cy = f.y + f.h / 2; box = [f.w, f.h];

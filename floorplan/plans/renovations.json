@@ -1553,11 +1553,12 @@
       {
         "id": "SB1",
         "change": "shared-bath",
-        "title": "Vanity",
-        "note": "Pedestal sink replaced by a 32\" x 21\" vanity with a sink, keeping 15\" from the toilet's centre.",
+        "title": "32\" floating trough sink",
+        "note": "Pedestal sink replaced by a wall-hung 32\" x 18\" vanity with a long trough basin and one centred faucet, as in the reference photo. Same spot, so supply and drain stay put; needs blocking in the wall to hang it.",
         "trades": [
           "plumbing",
-          "millwork"
+          "millwork",
+          "framing"
         ],
         "priority": "tbd"
       },
@@ -1737,9 +1738,9 @@
     },
     {
       "id": "shared-bath",
-      "label": "Shared bath vanity",
+      "label": "Shared bath trough sink",
       "default": true,
-      "note": "Pedestal sink replaced by a 32\" x 21\" vanity with a sink, the most length the wall allows while keeping 15\" from the toilet's centre.",
+      "note": "Pedestal sink replaced by a 32\" x 18\" floating vanity with a long trough basin and one centred faucet, in the same spot so the plumbing stays put. 32\" is the most the wall allows while keeping 15\" from the toilet's centre.",
       "remove": {
         "fixtures": [
           "pedestal-sink"
@@ -1750,21 +1751,22 @@
           {
             "id": "vanity-2",
             "room": "bath-second",
-            "kind": "vanity",
+            "kind": "floating-vanity",
             "shape": "rect",
-            "x": 362,
+            "x": 365,
             "y": 303,
-            "w": 21,
+            "w": 18,
             "h": 32
           },
           {
-            "id": "sink-3",
+            "id": "trough-2",
             "room": "bath-second",
-            "kind": "sink",
-            "shape": "circle",
-            "cx": 373,
-            "cy": 319,
-            "r": 7
+            "kind": "trough",
+            "shape": "rect",
+            "x": 368,
+            "y": 306,
+            "w": 11,
+            "h": 26
           }
         ]
       }

@@ -1334,7 +1334,7 @@
     }
   ],
   "scope": {
-    "about": "The renovation work, room by room, for quoting. Each item's id is its area code plus a number (BR1 = Bedroom, item 1); ids are written here, never renumbered, so a reference stays valid when items are added or removed. 'change' is the toggle below that draws it. priority: high, medium, low or tbd. approval is a guess at sign-off needed (Strata or Permit), to be confirmed.",
+    "about": "The renovation work, room by room, for quoting. note is the one line shown in the list; detail and ref (a reference photo under floorplan/refs/) show in the item's preview. Each item's id is its area code plus a number (BR1 = Bedroom, item 1); ids are written here, never renumbered, so a reference stays valid when items are added or removed. 'change' is the toggle below that draws it. priority: high, medium, low or tbd. approval is a guess at sign-off needed (Strata or Permit), to be confirmed.",
     "areas": {
       "PB": {
         "name": "Primary Bedroom",
@@ -1417,7 +1417,8 @@
         "id": "PB1",
         "change": "heat-pump",
         "title": "Heat pump head",
-        "note": "Wall-mounted head, high on the east wall; line set from the balcony unit.",
+        "note": "High on the east wall.",
+        "detail": "Wall-mounted head, high on the east wall; line set from the balcony unit.",
         "trades": [
           "hvac",
           "electrical"
@@ -1428,7 +1429,8 @@
         "id": "WIC1",
         "change": "wic",
         "title": "Closet system",
-        "note": "24\" deep hanging along the west wall, 14\" shelves along the north wall, door swing kept clear.",
+        "note": "Hanging on the west wall, shelves on the north.",
+        "detail": "24\" deep hanging along the west wall, 14\" shelves along the north wall, door swing kept clear.",
         "trades": [
           "millwork"
         ],
@@ -1438,7 +1440,8 @@
         "id": "PBA1",
         "change": "bath",
         "title": "Tub to walk-in shower",
-        "note": "Same 30\" x 58\" footprint: new shower pan, valve and wall tile.",
+        "note": "Shower in the tub's 30\" x 58\" footprint.",
+        "detail": "Same 30\" x 58\" footprint: new shower pan, valve and wall tile.",
         "trades": [
           "plumbing",
           "tile"
@@ -1450,7 +1453,8 @@
         "id": "PBA2",
         "change": "bath",
         "title": "Bidet toilet",
-        "note": "Toilet with a bidet seat; needs a GFCI outlet beside it.",
+        "note": "Bidet seat; GFCI outlet beside it.",
+        "detail": "Toilet with a bidet seat; needs a GFCI outlet beside it.",
         "trades": [
           "plumbing",
           "electrical"
@@ -1461,7 +1465,8 @@
         "id": "PBA3",
         "change": "bath",
         "title": "52\" double vanity",
-        "note": "Two sinks replace the single vanity: a second drain and supply.",
+        "note": "Two sinks; second drain and supply.",
+        "detail": "Two sinks replace the single vanity: a second drain and supply.",
         "trades": [
           "plumbing",
           "millwork"
@@ -1473,7 +1478,8 @@
         "id": "LD1",
         "change": "laundry",
         "title": "Unstack washer and dryer",
-        "note": "Side by side as 24\" compact units, the stacked pair's width; dryer vent and outlet moved.",
+        "note": "24\" compact units side by side.",
+        "detail": "Side by side as 24\" compact units, the stacked pair's width; dryer vent and outlet moved.",
         "trades": [
           "plumbing",
           "electrical"
@@ -1484,7 +1490,8 @@
         "id": "LD2",
         "change": "laundry",
         "title": "Shelf above",
-        "note": "12\" deep shelf over both units.",
+        "note": "12\" shelf over both units.",
+        "detail": "12\" deep shelf over both units.",
         "trades": [
           "millwork"
         ],
@@ -1494,7 +1501,8 @@
         "id": "BC1",
         "change": "heat-pump",
         "title": "Heat pump outdoor unit",
-        "note": "Multi-zone unit against the balcony's east wall, feeding three heads; wall penetration for the line sets.",
+        "note": "Balcony east wall; feeds three heads.",
+        "detail": "Multi-zone unit against the balcony's east wall, feeding three heads; wall penetration for the line sets.",
         "trades": [
           "hvac",
           "electrical"
@@ -1506,7 +1514,8 @@
         "id": "LR1",
         "change": "heat-pump",
         "title": "Heat pump head",
-        "note": "On the fireplace wall, north of the fireplace.",
+        "note": "Fireplace wall, north of the fireplace.",
+        "detail": "On the fireplace wall, north of the fireplace.",
         "trades": [
           "hvac",
           "electrical"
@@ -1517,7 +1526,8 @@
         "id": "OB1",
         "change": "double",
         "title": "Double French door, office side",
-        "note": "Same opening as BR1, seen from the Office Bedroom: patch and paint this face.",
+        "note": "Office side of BR1: patch and paint.",
+        "detail": "Same opening as BR1, seen from the Office Bedroom: patch and paint this face.",
         "trades": [
           "framing"
         ],
@@ -1527,7 +1537,8 @@
         "id": "OB2",
         "change": "heat-pump",
         "title": "Heat pump head",
-        "note": "Wall-mounted head on the west wall, next to the balcony.",
+        "note": "West wall, next to the balcony.",
+        "detail": "Wall-mounted head on the west wall, next to the balcony.",
         "trades": [
           "hvac",
           "electrical"
@@ -1538,7 +1549,8 @@
         "id": "BR1",
         "change": "double",
         "title": "Double French door",
-        "note": "Glass partition rebuilt solid with a 5'0\" double door (two 30\" leaves), centred, swinging into the Bedroom.",
+        "note": "5'0\" double door in a rebuilt solid wall.",
+        "detail": "Glass partition rebuilt solid with a 5'0\" double door (two 30\" leaves), centred, swinging into the Bedroom.",
         "trades": [
           "framing",
           "electrical"
@@ -1550,7 +1562,8 @@
         "id": "BR2",
         "change": "closet",
         "title": "Closet shelving",
-        "note": "Hanging rod on the left, 16\" shelves on the right.",
+        "note": "Hanging left, 16\" shelves right.",
+        "detail": "Hanging rod on the left, 16\" shelves on the right.",
         "trades": [
           "millwork"
         ],
@@ -1560,7 +1573,9 @@
         "id": "SB1",
         "change": "shared-bath",
         "title": "32\" floating trough sink",
-        "note": "Pedestal sink replaced by a wall-hung 32\" x 18\" vanity with a long trough basin and one centred faucet, as in the reference photo. Same spot, so supply and drain stay put; needs blocking in the wall to hang it.",
+        "note": "Wall-hung 32\" x 18\" trough vanity, one faucet.",
+        "detail": "Pedestal sink replaced by a wall-hung 32\" x 18\" vanity with a long trough basin and one centred faucet, as in the reference photo. Same spot, so supply and drain stay put; needs blocking in the wall to hang it.",
+        "ref": "refs/sb1-trough-sink.jpg",
         "trades": [
           "plumbing",
           "millwork",
@@ -1572,7 +1587,9 @@
         "id": "FY1",
         "change": "foyer",
         "title": "Entry bench and storage wall",
-        "note": "Built-in on the entry-door wall, west of the door, clear of its swing: a 15\" tall cabinet in the corner, then a 32\" bench with storage under, vertical wood slats with coat hooks above it and a shelf on top. 47\" wide, 16\" deep.",
+        "note": "Cabinet, bench, slats and hooks, shelf; 47\" x 16\".",
+        "detail": "Built-in on the entry-door wall, west of the door, clear of its swing: a 15\" tall cabinet in the corner, then a 32\" bench with storage under, vertical wood slats with coat hooks above it and a shelf on top. 47\" wide, 16\" deep.",
+        "ref": "refs/fy1-entry-bench.jpg",
         "trades": [
           "millwork"
         ],
@@ -1582,7 +1599,8 @@
         "id": "PT1",
         "change": "pantry",
         "title": "Pantry shelving",
-        "note": "14\" shelves across the back wall with 12\" returns either side of the door.",
+        "note": "14\" back shelves, 12\" returns.",
+        "detail": "14\" shelves across the back wall with 12\" returns either side of the door.",
         "trades": [
           "millwork"
         ],

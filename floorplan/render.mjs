@@ -686,6 +686,37 @@ body.sight .key{display:flex}
 .rpin.gone{display:none}
 .rpin:focus{outline:none}.rpin:focus-visible circle{stroke:#111;stroke-width:2}
 
+.prev{display:inline-flex;align-items:center;gap:5px;margin-left:auto;padding:3px 9px 3px 7px;font-size:12px;color:#333;
+  background:#fff;border:1px solid #dcdcd7;border-radius:6px;cursor:pointer;transition:border-color .12s,background .12s}
+.prev:hover{border-color:#b9b9b3;background:#fafaf8}
+.prev svg{width:14px;height:14px;color:${C.diff}}
+.itags{align-items:center}
+.pvtags .prev{display:none}
+dialog.pv{width:min(760px,calc(100vw - 32px));max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:14px;background:#fff;color:#111;
+  box-shadow:0 24px 60px rgba(0,0,0,.28),0 2px 8px rgba(0,0,0,.12);overflow:auto}
+dialog.pv::backdrop{background:rgba(20,20,18,.45)}
+dialog.pv[open]{animation:pvin .18s cubic-bezier(.2,.8,.2,1)}
+@keyframes pvin{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){dialog.pv[open]{animation:none}}
+.pvhead{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:14px 14px 12px 20px;background:#fff;border-bottom:1px solid #ececea;z-index:1}
+.pvhead .iid{min-width:0}
+.pvhead h2{flex:1;margin:0;font-size:16px;font-weight:650;line-height:1.3}
+.pvhead small{display:block;font-size:12px;font-weight:400;color:#666}
+.pvclose{flex:none;display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:8px;background:#f1f1ee;cursor:pointer;color:#333}
+.pvclose:hover{background:#e4e4df;color:#111}
+.pvclose svg{width:14px;height:14px}
+.pvbody{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 20px 20px}
+.pvbody.solo{grid-template-columns:1fr}
+.pvfig{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.pvfig figcaption{font-size:11.5px;font-weight:600;color:#666;letter-spacing:.02em}
+.pvplan{border:1px solid #e0e0dc;border-radius:10px;background:#fff;padding:6px;display:flex;max-height:340px;width:100%}
+.pvbody.solo .pvfig{max-width:520px}
+.pvplan svg{width:100%;height:100%}
+.pvphoto{width:100%;max-height:420px;object-fit:contain;border-radius:10px;background:#f4f4f2}
+.pvtext{grid-column:1/-1;margin:0;font-size:13.5px;line-height:1.55;color:#333;max-width:65ch}
+.pvtags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 10px}
+@media (max-width:560px){.pvbody{grid-template-columns:1fr}}
+
 /* units + legend */
 .units{align-self:flex-start;display:flex;padding:2px;border-radius:7px;background:#e7e7e3}
 .units button{font-size:12px;padding:4px 12px;border:0;background:transparent;border-radius:5px;cursor:pointer;color:#666}
@@ -825,6 +856,25 @@ const opt = (attrs, label, note, on) => {
 };
 
 // the renovation scope panel: filters, then every item grouped by room
+const eyeIcon = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8 12.1 12.5 8 12.5 1.5 8 1.5 8z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>`;
+// what each item's preview shows: a close-up of its room on the plan, the
+// reference photo if there is one, and the full detail
+const previewData = (p) => {
+  const sc = p.data.scope, items = {}, boxes = {};
+  for (const [code, a] of Object.entries(sc.areas)) {
+    const pts = a.rooms.flatMap((id) => p.data.rooms.find((r) => r.id === id)?.boundary ?? []);
+    if (pts.length) { const b = bbox(pts); boxes[code] = [b.x0, b.y0, b.x1, b.y1]; }
+  }
+  for (const it of sc.items) {
+    let img = null;
+    if (it.ref) {
+      const ext = it.ref.split('.').pop().toLowerCase();
+      img = `data:image/${ext === 'jpg' ? 'jpeg' : ext};base64,${readFileSync(join(HERE, it.ref)).toString('base64')}`;
+    }
+    items[it.id] = { title: it.title, detail: it.detail ?? it.note ?? '', area: areaOf(it.id), areaName: sc.areas[areaOf(it.id)]?.name ?? '', img };
+  }
+  return { items, boxes };
+};
 const TRADE_C = { framing: '#1a8a42', plumbing: '#1668cc', electrical: '#b07800', hvac: '#0f8b8d', millwork: '#8a6430', tile: '#6d5bd0' };
 const PRIO = { high: 'High', medium: 'Medium', low: 'Low', tbd: 'TBD' };
 const scopePanel = (p) => {
@@ -850,7 +900,8 @@ const scopePanel = (p) => {
         + `<span class="ititle">${esc(it.title)}</span><span class="pri pri-${esc(it.priority)}">${PRIO[it.priority]}</span></div>`
         + (it.note ? `<p class="inote">${esc(it.note)}</p>` : '')
         + `<div class="itags">${(it.trades ?? []).map((t) => `<span class="tag"><i style="background:${TRADE_C[t] ?? '#888'}"></i>${esc(sc.trades[t])}</span>`).join('')}`
-        + (it.approval ? `<span class="tag sign">${esc(it.approval)}</span>` : '') + `</div></li>`).join('')
+        + (it.approval ? `<span class="tag sign">${esc(it.approval)}</span>` : '')
+        + `<button type="button" class="prev" data-item="${esc(it.id)}" aria-haspopup="dialog">${eyeIcon}Preview</button></div></li>`).join('')
       + `</ul></section>`;
   }).join('');
   return `<div class="scope">${filters}`
@@ -914,12 +965,16 @@ ${tabs}
   ${legend}
   <footer>Drawn to scale from <code>plans/${esc(files.join(', plans/'))}</code>${archivedFiles.length ? ` and <code>plans/archived/${esc(archivedFiles.join(', plans/archived/'))}</code>` : ''}. Dimensions are those printed on the original survey; not a legal survey.</footer>
 </aside>
+<dialog class="pv" id="pv" aria-labelledby="pvtitle"><div class="pvhead"><span class="iid" id="pvid"></span>
+<h2 id="pvtitle"></h2><button type="button" class="pvclose" aria-label="Close preview"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+<div class="pvbody" id="pvbody"></div></dialog>
 <main class="stage">
 ${sheets.map((s) => `<section class="sheet" data-plan="${esc(s.id)}" aria-label="${esc(s.name ?? s.id)}">${s.svg}</section>`).join('\n')}
 </main>
 </div>
 <script>
 var DIFF=${JSON.stringify(diffCounts)};
+var PV=${JSON.stringify(Object.fromEntries(allPlans.filter((p) => p.data.scope).map((p) => [p.id, previewData(p)])))};
 var TOG=${JSON.stringify(toggled)};
 var PLANS=${JSON.stringify(allPlans.map((p) => p.id))};
 var layerIds=${JSON.stringify(layerIds)};
@@ -998,6 +1053,38 @@ $$('.scope .area').forEach(function(a){
   a.addEventListener('mouseenter',function(){$$('.rhit').forEach(function(h){h.classList.toggle('hl',h.dataset.area===a.dataset.area&&h.dataset.area!==SC.focus)})});
   a.addEventListener('mouseleave',function(){$$('.rhit').forEach(function(h){h.classList.remove('hl')})});
 });
+// item preview: a close-up of the room cut from the live plan, the photo, the detail
+var pv=document.getElementById('pv');
+function openPreview(id){
+  var d=PV[cur]; if(!d||!d.items[id])return; var it=d.items[id], b=d.boxes[it.area];
+  document.getElementById('pvid').textContent=id;
+  document.getElementById('pvtitle').innerHTML='';
+  var t=document.getElementById('pvtitle'); t.textContent=it.title;
+  var sm=document.createElement('small'); sm.textContent=it.areaName; t.appendChild(sm);
+  var body=document.getElementById('pvbody'); body.innerHTML=''; body.classList.toggle('solo',!it.img&&!b);
+  var src=document.querySelector('.sheet.on svg');
+  if(src&&b){
+    var m=14, vw=b[2]-b[0]+2*m, vh=b[3]-b[1]+2*m, svg=src.cloneNode(true);
+    svg.setAttribute('viewBox',(b[0]-m)+' '+(b[1]-m)+' '+vw+' '+vh);
+    svg.querySelectorAll('.scope-pins,.north,.scale,.entry,.entrytxt').forEach(function(n){n.remove()});
+    svg.querySelectorAll('.rhit').forEach(function(h){h.setAttribute('class','rhit'+(h.dataset.area===it.area?' on':''))});
+    svg.setAttribute('aria-label','Plan of '+it.areaName);
+    var f=document.createElement('figure'); f.className='pvfig';
+    f.innerHTML='<figcaption>On the plan</figcaption><div class="pvplan"></div>'; var pp=f.querySelector('.pvplan'); pp.style.aspectRatio=vw+' / '+vh; pp.appendChild(svg); body.appendChild(f);
+  }
+  if(it.img){
+    var g=document.createElement('figure'); g.className='pvfig';
+    g.innerHTML='<figcaption>Reference</figcaption>'; var im=new Image(); im.className='pvphoto'; im.src=it.img; im.alt='Reference photo for '+it.title; g.appendChild(im); body.appendChild(g);
+  }
+  if(it.img&&!b||!it.img&&b)body.classList.add('solo');
+  var p=document.createElement('p'); p.className='pvtext'; p.textContent=it.detail; body.appendChild(p);
+  var li=document.querySelector('.prev[data-item="'+id+'"]'), tg=li&&li.closest('li').querySelector('.itags');
+  if(tg){var c=tg.cloneNode(true);c.className='pvtags';body.appendChild(c)}
+  pv.showModal();
+}
+$$('.prev').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();openPreview(b.dataset.item)})});
+pv.querySelector('.pvclose').addEventListener('click',function(){pv.close()});
+pv.addEventListener('click',function(e){if(e.target===pv)pv.close()});
 function setUnit(u){
   document.body.classList.toggle('metric',u==='metric');
   $$('.units button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.unit===u))});

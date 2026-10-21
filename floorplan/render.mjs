@@ -739,6 +739,7 @@ dialog.pv[open]{animation:pvin .18s cubic-bezier(.2,.8,.2,1)}
 .pvbody.solo{grid-template-columns:1fr}
 .pvbody.multi .pvfig:first-child{grid-column:1/-1}
 .pvbody.multi .pvplan{max-height:240px}
+.pvbody.three{grid-template-columns:repeat(3,1fr)}
 .pvfig{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
 .pvfig figcaption{font-size:11.5px;font-weight:600;color:#666;letter-spacing:.02em}
 .pvplan{border:1px solid #e0e0dc;border-radius:10px;background:#fff;padding:6px;display:flex;max-height:340px;width:100%}
@@ -747,7 +748,7 @@ dialog.pv[open]{animation:pvin .18s cubic-bezier(.2,.8,.2,1)}
 .pvphoto{width:100%;max-height:420px;object-fit:contain;border-radius:10px;background:#f4f4f2}
 .pvtext{grid-column:1/-1;margin:0;font-size:13.5px;line-height:1.55;color:#333;max-width:65ch}
 .pvtags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 10px}
-@media (max-width:560px){.pvbody{grid-template-columns:1fr}}
+@media (max-width:560px){.pvbody,.pvbody.three{grid-template-columns:1fr}}
 
 .phit{fill:transparent;cursor:pointer;transition:fill .12s}
 .phit.hl{fill:rgba(22,104,204,.08)}
@@ -1110,7 +1111,7 @@ function openPreview(id){
   var t=document.getElementById('pvtitle'); t.textContent=it.title;
   var sm=document.createElement('small'); sm.textContent=it.areaName; t.appendChild(sm);
   var refs=it.refs||[], body=document.getElementById('pvbody'); body.innerHTML='';
-  body.className='pvbody'+(refs.length>1?' multi':(!refs.length||!b)?' solo':'');
+  body.className='pvbody'+(refs.length>1?' multi':(!refs.length||!b)?' solo':'')+(refs.length>2?' three':'');
   var src=document.querySelector('.sheet.on svg');
   if(src&&b){
     var m=14, vw=b[2]-b[0]+2*m, vh=b[3]-b[1]+2*m, svg=src.cloneNode(true);

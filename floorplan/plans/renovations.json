@@ -1430,7 +1430,12 @@
         "change": "wic",
         "title": "Closet system",
         "note": "Hanging on the west wall, shelves on the north.",
-        "detail": "24\" deep hanging along the west wall, 14\" shelves along the north wall, door swing kept clear.",
+        "detail": "24\" deep hanging along the west wall, 14\" shelves along the north wall, door swing kept clear. Double rods (one above the other) roughly double the hanging length; a shoe tower or drawer stack can sit at the end of the shelf run. At 5'4\" x 4'11\" the closet fits an L like this, not the full U in the second reference.",
+        "ref": [
+          {"src": "refs/wic-shoe-tower.jpg", "caption": "Shoe tower beside double hanging"},
+          {"src": "refs/wic-u-system.jpg", "caption": "Full system: shelves, drawers, double rods"},
+          {"src": "refs/wic-drawers.jpg", "caption": "Drawer stack, double rods, baskets up top"}
+        ],
         "trades": [
           "millwork"
         ],

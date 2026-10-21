@@ -1480,6 +1480,7 @@
         "title": "Unstack washer and dryer",
         "note": "24\" compact units side by side.",
         "detail": "Side by side as 24\" compact units, the stacked pair's width; dryer vent and outlet moved.",
+        "ref": "refs/ld1-laundry.jpg",
         "trades": [
           "plumbing",
           "electrical"

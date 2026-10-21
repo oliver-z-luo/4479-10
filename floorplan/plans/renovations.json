@@ -1661,6 +1661,10 @@
         "title": "Pantry shelving",
         "note": "14\" back shelves, 12\" returns.",
         "detail": "14\" shelves across the back wall with 12\" returns either side of the door.",
+        "ref": [
+          {"src": "refs/pantry-shelves.jpg", "caption": "Stained wood shelves on white cleats"},
+          {"src": "refs/pantry-coat-shoe.jpg", "caption": "Variant: coat rod above, shoe shelves below"}
+        ],
         "trades": [
           "millwork"
         ],

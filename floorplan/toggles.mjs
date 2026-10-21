@@ -31,3 +31,15 @@ export function combinations(plan, { structuralOnly = false } = {}) {
   }
   return out;
 }
+
+// A plan can carry "alternatives": groups of other layouts, one decision per
+// group (say the living-room sofa). Each option swaps the furniture ids in its
+// group's `replaces` for its own pieces. `resolve` moves those pieces onto the
+// current dimensions.
+export const altGroups = (plan) => plan.alternatives?.groups ?? [];
+export function alternativePlans(plan, group, resolve = (fs) => fs) {
+  return group.options.map((o) => ({
+    option: o,
+    data: { ...plan, furniture: (plan.furniture ?? []).filter((f) => !group.replaces.includes(f.id)).concat(resolve(o.furniture)) },
+  }));
+}

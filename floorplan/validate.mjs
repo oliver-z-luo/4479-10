@@ -12,7 +12,7 @@ import {
   swings, swingBox, boxAreaInSwing, boxAreaInPoly, pointAt, unitVec, sightline,
   zoneClearArea,
 } from './geom.mjs';
-import { combinations } from './toggles.mjs';
+import { combinations, alternativePlans, altGroups } from './toggles.mjs';
 import { loadDims, resolvePlan, checkDims, isEdited } from './dims.mjs';
 
 const DIMS = loadDims();
@@ -431,6 +431,20 @@ for (const file of files) {
       console.log(`\x1b[32mPASS\x1b[0m ${name}`);
     }
     if (!plan.toggles || c === combos[0]) for (const m of warn) console.log(`  \x1b[33m!\x1b[0m ${m}`);
+  }
+  for (const a of altGroups(plan)) {
+    const fail = [];
+    const cur = a.options.find((o) => o.id === a.current);
+    if (!cur) fail.push(`no option "${a.current}"`);
+    const drawn = (plan.furniture ?? []).filter((f) => a.replaces.includes(f.id));
+    if (cur && JSON.stringify(resolvePlan({ furniture: cur.furniture }, DIMS).furniture) !== JSON.stringify(drawn))
+      fail.push(`option ${a.current} is marked current but the plan's ${a.replaces.join(', ')} differ from it`);
+    for (const { option, data } of alternativePlans(plan, a, (fs) => resolvePlan({ furniture: fs }, DIMS).furniture)) {
+      const r = validate(data, `${label} [${a.title}: ${option.id}]`);
+      for (const m of r.fail) fail.push(`option ${option.id}: ${m}`);
+    }
+    if (fail.length) { bad++; console.error(`\x1b[31mFAIL\x1b[0m ${label} alternatives: ${a.title}`); for (const m of fail) console.error(`  \x1b[31mx\x1b[0m ${m}`); }
+    else console.log(`\x1b[32mPASS\x1b[0m ${label} alternatives: ${a.title} (${a.options.map((o) => o.id).join(', ')})`);
   }
   if (plan.roomPhotos) {
     const rooms = new Set(plan.rooms.map((r) => r.id)), fail = [];

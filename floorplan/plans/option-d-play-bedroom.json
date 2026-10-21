@@ -1339,6 +1339,193 @@
     }
   ],
   "furnitureCatalog": "furniture-catalog.json",
+  "alternatives": {
+    "about": "Other layouts for a decision, shown side by side in a pop-up from the sidebar. In each group, each option replaces the furniture ids in 'replaces' with its own pieces; the one whose id is 'current' is what this plan draws. view is the plan area to show [x, y, w, h].",
+    "groups": [
+      {
+        "title": "Living room sofa",
+        "replaces": [
+          "sofa-living",
+          "sofa-living-return"
+        ],
+        "current": "B",
+        "view": [
+          112,
+          48,
+          172,
+          262
+        ],
+        "options": [
+          {
+            "id": "A",
+            "name": "Corner sectional, return toward dining",
+            "meta": "86\" x 78\" · 4 seats",
+            "note": "Faces the fireplace; the return marks off the living room from the dining area. 35\" walkway past the armchair.",
+            "furniture": [
+              {
+                "id": "sofa-living",
+                "room": "living-room",
+                "kind": "sectional",
+                "shape": "rect",
+                "x": 234,
+                "y": 100,
+                "w": 34,
+                "h": 86,
+                "seats": 3
+              },
+              {
+                "id": "sofa-living-return",
+                "room": "living-room",
+                "kind": "sectional-return",
+                "shape": "rect",
+                "x": 190,
+                "y": 152,
+                "w": 44,
+                "h": 34,
+                "seats": 1
+              }
+            ]
+          },
+          {
+            "id": "B",
+            "name": "Corner sectional, return toward balcony",
+            "meta": "86\" x 78\" · 4 seats",
+            "note": "Open to the dining room; the return sits toward the balcony, with 4'2\" clear in front of the balcony doors.",
+            "furniture": [
+              {
+                "id": "sofa-living",
+                "room": "living-room",
+                "kind": "sectional",
+                "shape": "rect",
+                "x": 234,
+                "y": 104,
+                "w": 34,
+                "h": 86,
+                "seats": 3
+              },
+              {
+                "id": "sofa-living-return",
+                "room": "living-room",
+                "kind": "sectional-return",
+                "shape": "rect",
+                "x": 190,
+                "y": 104,
+                "w": 44,
+                "h": 34,
+                "seats": 1
+              }
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Sofa and chaise toward dining",
+            "meta": "86\" x 62\" · 3 seats",
+            "note": "Smallest footprint: a chaise to put your feet up and the most open floor. Same seats as a plain sofa.",
+            "furniture": [
+              {
+                "id": "sofa-living",
+                "room": "living-room",
+                "kind": "loveseat",
+                "shape": "rect",
+                "x": 234,
+                "y": 100,
+                "w": 34,
+                "h": 52,
+                "seats": 2
+              },
+              {
+                "id": "sofa-living-return",
+                "room": "living-room",
+                "kind": "chaise",
+                "shape": "rect",
+                "x": 206,
+                "y": 152,
+                "w": 62,
+                "h": 34,
+                "seats": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Bedroom seating",
+        "replaces": [
+          "armchair-bed-1",
+          "armchair-bed-2"
+        ],
+        "current": "A",
+        "view": [
+          266,
+          128,
+          124,
+          178
+        ],
+        "options": [
+          {
+            "id": "A",
+            "name": "Two armchairs",
+            "meta": "30\" x 28\" each · 2 seats",
+            "note": "Proper seats for adults watching the play area.",
+            "furniture": [
+              {
+                "id": "armchair-bed-1",
+                "room": "bedroom",
+                "kind": "armchair",
+                "shape": "rect",
+                "x": 349,
+                "y": 175,
+                "w": 30,
+                "h": 28,
+                "seats": 1
+              },
+              {
+                "id": "armchair-bed-2",
+                "room": "bedroom",
+                "kind": "armchair",
+                "shape": "rect",
+                "x": 349,
+                "y": 205,
+                "w": 30,
+                "h": 28,
+                "seats": 1
+              }
+            ]
+          },
+          {
+            "id": "B",
+            "name": "Two small beanbags",
+            "meta": "24\" x 24\" each · 2 seats",
+            "note": "About 3.5 sq ft more floor, and light enough to push aside or pull onto the mat. Lower and harder to get up from than a chair.",
+            "furniture": [
+              {
+                "id": "armchair-bed-1",
+                "room": "bedroom",
+                "kind": "beanbag",
+                "shape": "rect",
+                "x": 353,
+                "y": 177,
+                "w": 24,
+                "h": 24,
+                "seats": 1
+              },
+              {
+                "id": "armchair-bed-2",
+                "room": "bedroom",
+                "kind": "beanbag",
+                "shape": "rect",
+                "x": 353,
+                "y": 205,
+                "w": 24,
+                "h": 24,
+                "seats": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "furniture": [
     {
       "id": "bed-primary",
@@ -1425,13 +1612,24 @@
     {
       "id": "sofa-living",
       "room": "living-room",
-      "kind": "sofa",
+      "kind": "sectional",
       "shape": "rect",
       "x": 234,
-      "y": 110,
+      "y": 104,
       "w": 34,
-      "h": 72,
+      "h": 86,
       "seats": 3
+    },
+    {
+      "id": "sofa-living-return",
+      "room": "living-room",
+      "kind": "sectional-return",
+      "shape": "rect",
+      "x": 190,
+      "y": 104,
+      "w": 44,
+      "h": 34,
+      "seats": 1
     },
     {
       "id": "armchair-living-1",

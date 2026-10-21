@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, mkdirSync, writeFileSync, existsSync } from 
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { boxOf, bbox, overlapArea, pointInPoly, sightline, zoneClearArea } from './geom.mjs';
-import { combinations, isLayer } from './toggles.mjs';
+import { combinations, isLayer, altGroups, alternativePlans } from './toggles.mjs';
 import { loadDims, resolvePlan } from './dims.mjs';
 
 const DIMS = loadDims();
@@ -763,6 +763,24 @@ dialog.pv[open]{animation:pvin .18s cubic-bezier(.2,.8,.2,1)}
 .pvgal img{width:100%;max-height:62dvh;object-fit:contain;border-radius:10px;background:#f4f4f2;display:block}
 .pvgal figcaption{font-size:11.5px;color:#666;margin-top:4px}
 
+.alts{display:flex;flex-direction:column;gap:6px}
+.altbtn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 10px;background:#fff;border:1px solid #dcdcd7;border-radius:9px;cursor:pointer;transition:border-color .12s,background .12s}
+.altbtn:hover{border-color:#b9b9b3;background:#fafaf8}
+.altbtn>span:first-child{flex:1;min-width:0}
+.altbtn b{display:block;font-size:13px;font-weight:600}
+.altbtn small{display:block;font-size:12px;color:#666;margin-top:1px}
+.altbtn .cmp{flex:none;font-size:12px;font-weight:600;color:${C.window}}
+.pvbody.altgrid{grid-template-columns:repeat(var(--n),1fr)}
+.altc{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.altplan{border:1px solid #e0e0dc;border-radius:10px;padding:6px;background:#fff}
+.altc.cur .altplan{border-color:#111;box-shadow:0 0 0 1px #111}
+.altplan svg{width:100%;height:auto;display:block}
+.altc b{font-size:13.5px;font-weight:650}
+.altc small{display:block;font-size:12px;color:#666;margin-top:1px}
+.altc p{margin:4px 0 0;font-size:12.5px;color:#444;line-height:1.5}
+.incur{display:inline-block;margin-left:6px;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:#111;border-radius:4px;padding:1px 5px;vertical-align:1px}
+@media (max-width:560px){.pvbody.altgrid{grid-template-columns:1fr}}
+
 /* units + legend */
 .units{align-self:flex-start;display:flex;padding:2px;border-radius:7px;background:#e7e7e3}
 .units button{font-size:12px;padding:4px 12px;border:0;background:transparent;border-radius:5px;cursor:pointer;color:#666}
@@ -960,11 +978,37 @@ const scopePanel = (p) => {
     + `</div>`;
 };
 
+// alternatives: one sidebar button per decision; its pop-up compares the
+// layouts side by side, each drawn by the same renderer as the plan
+let altN = 0;
+const altKey = (p, gi) => `alt-${p.id.replace(/[^\w-]/g, '_')}-${gi}`;
+const altPanel = (p) => {
+  const groups = altGroups(p.data);
+  if (!groups.length) return '';
+  return `<div class="alts"><p class="flabel">Layouts</p>` + groups.map((g, gi) => {
+    const cur = g.options.find((o) => o.id === g.current);
+    return `<button type="button" class="altbtn" data-alt="${altKey(p, gi)}" aria-haspopup="dialog"><span><b>${esc(g.title)}</b>`
+      + `<small>${esc(cur ? `${cur.id} \u00b7 ${cur.name}` : '')}</small></span><span class="cmp">Compare ${g.options.length}</span></button>`;
+  }).join('') + `</div>`;
+};
+const altTemplates = () => allPlans.flatMap((p) => altGroups(p.data).map((g, gi) => {
+  const [vx, vy, vw, vh] = g.view;
+  const cards = alternativePlans(p.data, g, (fs) => resolvePlan({ furniture: fs }, DIMS).furniture).map(({ option: o, data }) => {
+    const svg = sheet(data, base, catalog, 900 + altN++).svg
+      .replace(/viewBox="[^"]*"/, `viewBox="${vx} ${vy} ${vw} ${vh}"`);
+    return `<figure class="altc${o.id === g.current ? ' cur' : ''}"><div class="altplan">${svg}</div><figcaption>`
+      + `<b>${esc(o.id)} \u00b7 ${esc(o.name)}</b>${o.id === g.current ? '<span class="incur">On the plan</span>' : ''}`
+      + `<small>${esc(o.meta ?? '')}</small>${o.note ? `<p>${esc(o.note)}</p>` : ''}</figcaption></figure>`;
+  }).join('');
+  return `<template id="${altKey(p, gi)}" data-title="${esc(g.title)}" data-n="${g.options.length}" data-cur="${esc(g.current)}">${cards}</template>`;
+})).join('');
+
 const hasPlay = (p) => (p.data.zones ?? []).some((z) => z.kind === 'play');
 
 const contexts = allPlans.map((p) => `<div class="ctx" data-group="${esc(p.id)}" hidden>`
   + (p.data.scope ? scopePanel(p) : p.data.toggles ? `<div class="controls" role="group" aria-label="Changes">`
     + p.data.toggles.map((t) => opt(`data-toggle="${esc(t.id)}"`, t.label, t.note, t.default !== false)).join('') + `</div>` : '')
+  + altPanel(p)
   + (hasPlay(p) ? `<div class="controls">${opt('data-sight', 'Sightlines', 'A line from every seat to the centre of the play area.', false)}</div>`
     + `<div class="key"><span><i style="border-color:#0f9d58"></i>clear view</span>`
     + `<span><i style="border-color:#1668cc;border-top-style:dashed"></i>through glass only</span>`
@@ -1016,6 +1060,7 @@ ${tabs}
 <dialog class="pv" id="pv" aria-labelledby="pvtitle"><div class="pvhead"><span class="iid" id="pvid"></span>
 <h2 id="pvtitle"></h2><button type="button" class="pvclose" aria-label="Close preview"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
 <div class="pvbody" id="pvbody"></div></dialog>
+${altTemplates()}
 <main class="stage">
 ${sheets.map((s) => `<section class="sheet" data-plan="${esc(s.id)}" aria-label="${esc(s.name ?? s.id)}">${s.svg}</section>`).join('\n')}
 </main>
@@ -1151,6 +1196,17 @@ $$('.phit,.pmark').forEach(function(el){
   el.addEventListener('mouseenter',function(){photoHl(el.dataset.room)});
   el.addEventListener('mouseleave',function(){photoHl(null)});
 });
+// layout alternatives, side by side
+function openAlts(key){
+  var tp=document.getElementById(key); if(!tp)return;
+  document.getElementById('pvid').textContent='';
+  var t=document.getElementById('pvtitle'); t.textContent=tp.dataset.title;
+  var sm=document.createElement('small'); sm.textContent=tp.dataset.n+' layouts \u00b7 '+tp.dataset.cur+' is drawn on the plan'; t.appendChild(sm);
+  var body=document.getElementById('pvbody'); body.innerHTML=''; body.className='pvbody altgrid';
+  body.style.setProperty('--n',Math.min(3,+tp.dataset.n)); body.appendChild(tp.content.cloneNode(true));
+  pv.showModal();
+}
+$$('.altbtn').forEach(function(b){b.addEventListener('click',function(){openAlts(b.dataset.alt)})});
 $$('.prev').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();openPreview(b.dataset.item)})});
 pv.querySelector('.pvclose').addEventListener('click',function(){pv.close()});
 pv.addEventListener('click',function(e){if(e.target===pv)pv.close()});

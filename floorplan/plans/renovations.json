@@ -1441,10 +1441,10 @@
         "change": "bath",
         "title": "Tub to walk-in shower",
         "note": "Shower in the tub's 30\" x 58\" footprint.",
-        "detail": "Same 30\" x 58\" footprint: new shower pan, valve and wall tile.",
+        "detail": "Tub out, walk-in shower in the same 30\" x 58\" footprint: low-threshold shower base sloped to a centre drain, new pressure-balance valve, rain head plus a hand shower on a slide bar, and a frameless glass door, as in the reference photo. Tile, niche and grab bars are PBA4 to PBA6.",
+        "ref": "refs/primary-shower.jpg",
         "trades": [
-          "plumbing",
-          "tile"
+          "plumbing"
         ],
         "approval": "Permit",
         "priority": "tbd"
@@ -1472,6 +1472,44 @@
           "millwork"
         ],
         "approval": "Permit",
+        "priority": "tbd"
+      },
+      {
+        "id": "PBA4",
+        "change": "bath",
+        "title": "Shower tile",
+        "note": "Large marble-look porcelain walls, mosaic floor.",
+        "detail": "Walls: large-format marble-look porcelain (12\" x 24\" or bigger) to the ceiling, fewer grout lines. Floor: 2\" mosaic sloped to the drain, for grip. A waterproofing membrane goes behind and under all of it.",
+        "ref": "refs/primary-shower.jpg",
+        "trades": [
+          "tile"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "PBA5",
+        "change": "bath",
+        "title": "Grab bars",
+        "note": "Three stainless bars, blocked in the walls.",
+        "detail": "Brushed stainless grab bars as in the reference photo: a vertical bar by the entry, a long horizontal bar on the back wall and a short one on the side wall. Each needs solid wood blocking in the stud wall before tile, so they hold a person's weight.",
+        "ref": "refs/primary-shower.jpg",
+        "trades": [
+          "framing",
+          "tile"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "PBA6",
+        "change": "bath",
+        "title": "Recessed shower niche",
+        "note": "Tiled wall niche with a shelf, laundry-side wall.",
+        "detail": "A recessed, tiled niche for bottles, about 12\" x 14\" with a small shelf below, as in the reference photo. Set it in the south (laundry-side) interior wall: the back wall is an exterior wall and the north end is a plumbing chase, neither of which should be cut into. Confirm the stud bay is empty first.",
+        "ref": "refs/primary-shower.jpg",
+        "trades": [
+          "framing",
+          "tile"
+        ],
         "priority": "tbd"
       },
       {

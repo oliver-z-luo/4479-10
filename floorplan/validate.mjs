@@ -399,7 +399,10 @@ function checkScope(plan) {
     for (const t of it.trades ?? []) if (!sc.trades?.[t]) fail.push(`${it.id}: unknown trade "${t}"`);
     if (!PRIORITIES.includes(it.priority)) fail.push(`${it.id}: priority must be one of ${PRIORITIES.join(', ')}`);
     if (!it.title) fail.push(`${it.id}: no title`);
-    if (it.ref && !existsSync(join(HERE, it.ref))) fail.push(`${it.id}: reference photo ${it.ref} not found`);
+    for (const r of Array.isArray(it.ref) ? it.ref : it.ref ? [it.ref] : []) {
+      const src = typeof r === 'string' ? r : r?.src;
+      if (!src || !existsSync(join(HERE, src))) fail.push(`${it.id}: reference photo ${src} not found`);
+    }
   }
   return fail;
 }

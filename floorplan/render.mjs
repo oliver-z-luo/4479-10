@@ -737,6 +737,8 @@ dialog.pv[open]{animation:pvin .18s cubic-bezier(.2,.8,.2,1)}
 .pvclose svg{width:14px;height:14px}
 .pvbody{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 20px 20px}
 .pvbody.solo{grid-template-columns:1fr}
+.pvbody.multi .pvfig:first-child{grid-column:1/-1}
+.pvbody.multi .pvplan{max-height:240px}
 .pvfig{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
 .pvfig figcaption{font-size:11.5px;font-weight:600;color:#666;letter-spacing:.02em}
 .pvplan{border:1px solid #e0e0dc;border-radius:10px;background:#fff;padding:6px;display:flex;max-height:340px;width:100%}
@@ -900,6 +902,8 @@ const opt = (attrs, label, note, on) => {
 
 // the renovation scope panel: filters, then every item grouped by room
 const eyeIcon = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8 12.1 12.5 8 12.5 1.5 8 1.5 8z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>`;
+// an item's ref is one photo path or a list of {src, caption}
+const refsOf = (it) => (Array.isArray(it.ref) ? it.ref : it.ref ? [it.ref] : []).map((r) => (typeof r === 'string' ? { src: r } : r));
 // what each item's preview shows: a close-up of its room on the plan, the
 // reference photo if there is one, and the full detail
 const previewData = (p) => {
@@ -909,11 +913,12 @@ const previewData = (p) => {
     if (pts.length) { const b = bbox(pts); boxes[code] = [b.x0, b.y0, b.x1, b.y1]; }
   }
   for (const it of sc.items) {
-    if (it.ref && !imgs[it.ref]) {
-      const ext = it.ref.split('.').pop().toLowerCase();
-      imgs[it.ref] = `data:image/${ext === 'jpg' ? 'jpeg' : ext};base64,${readFileSync(join(HERE, it.ref)).toString('base64')}`;
+    const refs = refsOf(it);
+    for (const r of refs) if (!imgs[r.src]) {
+      const ext = r.src.split('.').pop().toLowerCase();
+      imgs[r.src] = `data:image/${ext === 'jpg' ? 'jpeg' : ext};base64,${readFileSync(join(HERE, r.src)).toString('base64')}`;
     }
-    items[it.id] = { title: it.title, detail: it.detail ?? it.note ?? '', area: areaOf(it.id), areaName: sc.areas[areaOf(it.id)]?.name ?? '', img: it.ref ?? null };
+    items[it.id] = { title: it.title, detail: it.detail ?? it.note ?? '', area: areaOf(it.id), areaName: sc.areas[areaOf(it.id)]?.name ?? '', refs };
   }
   return { items, boxes, imgs };
 };
@@ -1104,7 +1109,8 @@ function openPreview(id){
   document.getElementById('pvtitle').innerHTML='';
   var t=document.getElementById('pvtitle'); t.textContent=it.title;
   var sm=document.createElement('small'); sm.textContent=it.areaName; t.appendChild(sm);
-  var body=document.getElementById('pvbody'); body.innerHTML=''; body.className='pvbody'; body.classList.toggle('solo',!it.img&&!b);
+  var refs=it.refs||[], body=document.getElementById('pvbody'); body.innerHTML='';
+  body.className='pvbody'+(refs.length>1?' multi':(!refs.length||!b)?' solo':'');
   var src=document.querySelector('.sheet.on svg');
   if(src&&b){
     var m=14, vw=b[2]-b[0]+2*m, vh=b[3]-b[1]+2*m, svg=src.cloneNode(true);
@@ -1115,11 +1121,11 @@ function openPreview(id){
     var f=document.createElement('figure'); f.className='pvfig';
     f.innerHTML='<figcaption>On the plan</figcaption><div class="pvplan"></div>'; var pp=f.querySelector('.pvplan'); pp.style.aspectRatio=vw+' / '+vh; pp.appendChild(svg); body.appendChild(f);
   }
-  if(it.img){
+  refs.forEach(function(r,i){
     var g=document.createElement('figure'); g.className='pvfig';
-    g.innerHTML='<figcaption>Reference</figcaption>'; var im=new Image(); im.className='pvphoto'; im.src=d.imgs[it.img]; im.alt='Reference photo for '+it.title; g.appendChild(im); body.appendChild(g);
-  }
-  if(it.img&&!b||!it.img&&b)body.classList.add('solo');
+    var cap=document.createElement('figcaption'); cap.textContent=r.caption||(refs.length>1?'Reference '+(i+1):'Reference'); g.appendChild(cap);
+    var im=new Image(); im.className='pvphoto'; im.src=d.imgs[r.src]; im.alt=(r.caption||'Reference photo')+' for '+it.title; g.appendChild(im); body.appendChild(g);
+  });
   var p=document.createElement('p'); p.className='pvtext'; p.textContent=it.detail; body.appendChild(p);
   var li=document.querySelector('.prev[data-item="'+id+'"]'), tg=li&&li.closest('li').querySelector('.itags');
   if(tg){var c=tg.cloneNode(true);c.className='pvtags';body.appendChild(c)}

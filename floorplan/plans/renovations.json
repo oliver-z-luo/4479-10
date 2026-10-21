@@ -1334,7 +1334,7 @@
     }
   ],
   "scope": {
-    "about": "The renovation work, room by room, for quoting. note is the one line shown in the list; detail and ref (a reference photo under floorplan/refs/) show in the item's preview. Each item's id is its area code plus a number (BR1 = Bedroom, item 1); ids are written here, never renumbered, so a reference stays valid when items are added or removed. 'change' is the toggle below that draws it. priority: high, medium, low or tbd. approval is a guess at sign-off needed (Strata or Permit), to be confirmed.",
+    "about": "The renovation work, room by room, for quoting. note is the one line shown in the list; detail and ref (a reference photo under floorplan/refs/, or a list of {src, caption}) show in the item's preview. Each item's id is its area code plus a number (BR1 = Bedroom, item 1); ids are written here, never renumbered, so a reference stays valid when items are added or removed. 'change' is the toggle below that draws it. priority: high, medium, low or tbd. approval is a guess at sign-off needed (Strata or Permit), to be confirmed.",
     "areas": {
       "PB": {
         "name": "Primary Bedroom",
@@ -1568,6 +1568,10 @@
         "title": "Double French door, office side",
         "note": "Office side of BR1: patch and paint.",
         "detail": "Same opening as BR1, seen from the Office Bedroom: patch and paint this face.",
+        "ref": [
+          {"src": "refs/double-door-glazed.jpg", "caption": "Option: glazed French doors"},
+          {"src": "refs/double-door-panel.jpg", "caption": "Option: solid panel doors"}
+        ],
         "trades": [
           "framing"
         ],
@@ -1590,7 +1594,11 @@
         "change": "double",
         "title": "Double French door",
         "note": "5'0\" double door in a rebuilt solid wall.",
-        "detail": "Glass partition rebuilt solid with a 5'0\" double door (two 30\" leaves), centred, swinging into the Bedroom.",
+        "detail": "Glass partition rebuilt solid with a 5'0\" double door (two 30\" leaves), centred, swinging into the Bedroom. Two styles in the references: glazed French doors keep the light the glass wall gives today; solid panel doors give privacy.",
+        "ref": [
+          {"src": "refs/double-door-glazed.jpg", "caption": "Option: glazed French doors"},
+          {"src": "refs/double-door-panel.jpg", "caption": "Option: solid panel doors"}
+        ],
         "trades": [
           "framing",
           "electrical"

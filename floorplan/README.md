@@ -205,17 +205,12 @@ surface, not something standing on it.
     either side of the door.
 - `archived/option-a-double-door.json`, `archived/option-b-folding-wall.json` —
   shelved options, still viewable under **Archive** on the page.
-- `option-c-play-living.json` — furnished; the visit play area is in the living
-  room. 43 sq ft clear.
-- `option-d-play-bedroom.json` — furnished; the visit play area is in the
-  bedroom, with two armchairs in there so adults can talk while watching.
-  30 sq ft clear.
-
-C and D both carry the **double-door partition** (Option A, now the Double door toggle) — that decision
-is made. They are identical apart from the play decision: same walls, same
-openings, and every piece of furniture that is not part of that decision is in
-the same position in both. The guest futon is rolled up in the bedroom closet,
-so it takes no floor in either.
+- `option-d-play-bedroom.json` — **Furniture view**: the plan furnished, with
+  the visit play area in the bedroom and two armchairs in there so adults can
+  talk while watching. 30 sq ft clear. It carries the **double-door
+  partition** (the Double door change). The guest futon is rolled up in the
+  bedroom closet, so it takes no floor. (A living-room play variant was
+  dropped; it is in git history.)
 
 Use the **sightlines** button to overlay, for each seat, a line to the centre of
 the play area — green where it is clear, blue dashed where it only passes

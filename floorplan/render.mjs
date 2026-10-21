@@ -770,7 +770,7 @@ footer code{font-size:10px}
 .fx-shelf,.fx-hanging{fill:#fafafa;stroke:#999;stroke-width:1}
 .fxrod{stroke:#888;stroke-width:1;stroke-dasharray:3 2}
 .fx.fx-upper-cabinet{fill:none;stroke:#888;stroke-width:1;stroke-dasharray:3 2}
-.fx.fx-shelf-above{fill:none;stroke:#888;stroke-width:1;stroke-dasharray:3 2}
+.fx.fx-shelf-above,.fx.fx-counter-above{fill:none;stroke:#888;stroke-width:1;stroke-dasharray:3 2}
 .fx-chase{fill:#d8d8d8;stroke:#777;stroke-width:1}
 .fx-counter{fill:#fafafa}
 .hatch{stroke:#555;stroke-width:1}
@@ -860,20 +860,19 @@ const eyeIcon = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8s2.4
 // what each item's preview shows: a close-up of its room on the plan, the
 // reference photo if there is one, and the full detail
 const previewData = (p) => {
-  const sc = p.data.scope, items = {}, boxes = {};
+  const sc = p.data.scope, items = {}, boxes = {}, imgs = {};
   for (const [code, a] of Object.entries(sc.areas)) {
     const pts = a.rooms.flatMap((id) => p.data.rooms.find((r) => r.id === id)?.boundary ?? []);
     if (pts.length) { const b = bbox(pts); boxes[code] = [b.x0, b.y0, b.x1, b.y1]; }
   }
   for (const it of sc.items) {
-    let img = null;
-    if (it.ref) {
+    if (it.ref && !imgs[it.ref]) {
       const ext = it.ref.split('.').pop().toLowerCase();
-      img = `data:image/${ext === 'jpg' ? 'jpeg' : ext};base64,${readFileSync(join(HERE, it.ref)).toString('base64')}`;
+      imgs[it.ref] = `data:image/${ext === 'jpg' ? 'jpeg' : ext};base64,${readFileSync(join(HERE, it.ref)).toString('base64')}`;
     }
-    items[it.id] = { title: it.title, detail: it.detail ?? it.note ?? '', area: areaOf(it.id), areaName: sc.areas[areaOf(it.id)]?.name ?? '', img };
+    items[it.id] = { title: it.title, detail: it.detail ?? it.note ?? '', area: areaOf(it.id), areaName: sc.areas[areaOf(it.id)]?.name ?? '', img: it.ref ?? null };
   }
-  return { items, boxes };
+  return { items, boxes, imgs };
 };
 const TRADE_C = { framing: '#1a8a42', plumbing: '#1668cc', electrical: '#b07800', hvac: '#0f8b8d', millwork: '#8a6430', tile: '#6d5bd0' };
 const PRIO = { high: 'High', medium: 'Medium', low: 'Low', tbd: 'TBD' };
@@ -942,7 +941,7 @@ const legend = `<div class="legend" id="legend">`
   + `<span><i style="border-color:${C.door}"></i>doors</span>`
   + `<span><i style="border-color:${C.window}"></i>windows</span>`
   + (allPlans.some((p) => (p.data.furniture ?? []).length) ? `<span><i style="border-color:${C.furn}"></i>furniture</span>` : '')
-  + (JSON.stringify(allPlans.map((p) => [p.data.fixtures, p.data.toggles])).match(/"kind":"(hanging|shelf-above|upper-cabinet)"/)
+  + (JSON.stringify(allPlans.map((p) => [p.data.fixtures, p.data.toggles])).match(/"kind":"(hanging|shelf-above|counter-above|upper-cabinet)"/)
     ? `<span><i style="border-color:#888;border-top-style:dashed;border-top-width:2px"></i>overhead: upper cabinets, shelves, rods</span>` : '')
   + `</div>`;
 
@@ -1074,7 +1073,7 @@ function openPreview(id){
   }
   if(it.img){
     var g=document.createElement('figure'); g.className='pvfig';
-    g.innerHTML='<figcaption>Reference</figcaption>'; var im=new Image(); im.className='pvphoto'; im.src=it.img; im.alt='Reference photo for '+it.title; g.appendChild(im); body.appendChild(g);
+    g.innerHTML='<figcaption>Reference</figcaption>'; var im=new Image(); im.className='pvphoto'; im.src=d.imgs[it.img]; im.alt='Reference photo for '+it.title; g.appendChild(im); body.appendChild(g);
   }
   if(it.img&&!b||!it.img&&b)body.classList.add('solo');
   var p=document.createElement('p'); p.className='pvtext'; p.textContent=it.detail; body.appendChild(p);

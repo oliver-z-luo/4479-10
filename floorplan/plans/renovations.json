@@ -1480,7 +1480,7 @@
         "title": "Unstack washer and dryer",
         "note": "24\" compact units side by side.",
         "detail": "Side by side as 24\" compact units, the stacked pair's width; dryer vent and outlet moved.",
-        "ref": "refs/ld1-laundry.jpg",
+        "ref": "refs/laundry.jpg",
         "trades": [
           "plumbing",
           "electrical"
@@ -1490,9 +1490,10 @@
       {
         "id": "LD2",
         "change": "laundry",
-        "title": "Shelf above",
-        "note": "12\" shelf over both units.",
-        "detail": "12\" deep shelf over both units.",
+        "title": "Countertop and two shelves",
+        "note": "Wood counter over both units, two shelves above.",
+        "detail": "A 48\" x 25\" wood countertop laid over the washer and dryer for folding, and two 12\" deep open shelves on brackets above it, as in the reference photo.",
+        "ref": "refs/laundry.jpg",
         "trades": [
           "millwork"
         ],
@@ -1824,7 +1825,7 @@
       "id": "laundry",
       "label": "Laundry",
       "default": true,
-      "note": "Washer and dryer unstacked and set side by side (24\" compact units, the stacked pair's width), with a 12\" shelf above them.",
+      "note": "Washer and dryer unstacked and set side by side (24\" compact units, the stacked pair's width), under a wood countertop, with two 12\" shelves above.",
       "remove": {
         "fixtures": [
           "washer-dryer"
@@ -1833,7 +1834,27 @@
       "add": {
         "fixtures": [
           {
+            "id": "laundry-counter",
+            "room": "laundry",
+            "kind": "counter-above",
+            "shape": "rect",
+            "x": 36,
+            "y": 309,
+            "w": 48,
+            "h": 25
+          },
+          {
             "id": "laundry-shelf",
+            "room": "laundry",
+            "kind": "shelf-above",
+            "shape": "rect",
+            "x": 36,
+            "y": 309,
+            "w": 48,
+            "h": 12
+          },
+          {
+            "id": "laundry-shelf-2",
             "room": "laundry",
             "kind": "shelf-above",
             "shape": "rect",

@@ -583,34 +583,35 @@ button{font:inherit;color:inherit}
 .tnum{font-variant-numeric:tabular-nums}
 
 /* shell: sidebar + stage; the drawing always fits the window */
-.app{display:grid;grid-template-columns:300px minmax(0,1fr);height:100vh;height:100dvh}
-aside{display:flex;flex-direction:column;gap:18px;padding:18px 18px 14px;overflow-y:auto;border-right:1px solid #e0e0dc;scrollbar-width:thin}
-.stage{min-width:0;min-height:0;padding:14px;display:flex}
-.sheet{display:none;flex:1;min-width:0;min-height:0;background:#fff;border:1px solid #e0e0dc;border-radius:10px;padding:10px}
+.app{display:grid;grid-template-columns:300px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);height:100vh;height:100dvh}
+.head{grid-column:1;grid-row:1;padding:18px 18px 0;border-right:1px solid #e0e0dc}
+aside{grid-column:1;grid-row:2;display:flex;flex-direction:column;gap:18px;padding:18px 18px 14px;overflow-y:auto;border-right:1px solid #e0e0dc;scrollbar-width:thin}
+.stage{grid-column:2;grid-row:2;min-width:0;min-height:0;padding:0 14px 14px;display:flex}
+.sheet{display:none;flex:1;min-width:0;min-height:0;background:#fff;border:1px solid #e0e0dc;border-radius:0 10px 10px 10px;padding:10px}
 .sheet.on{display:flex}
 svg{display:block;width:100%;height:100%}
 .label{font-size:11px;font-weight:600;color:#666;margin:0 0 6px;letter-spacing:.02em}
 
-/* plan list */
-.tabs{display:flex;flex-direction:column;gap:1px}
-.tab{text-align:left;font-size:13.5px;padding:7px 10px;border:0;background:none;border-radius:7px;cursor:pointer;color:#444;transition:background .12s,color .12s}
-.tab:hover{background:#eaeae6;color:#111}
-.tab[aria-selected=true]{background:#fff;color:#111;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px #e0e0dc}
-
-.archive{margin-top:6px}
-.archive summary{list-style:none;display:flex;align-items:center;gap:6px;font-size:12.5px;color:#666;cursor:pointer;padding:6px 10px;border-radius:7px;user-select:none}
+/* plan tabs: folder tabs sitting on the drawing; Archive is the last one */
+.plans{grid-column:2;grid-row:1;align-self:end;display:flex;align-items:flex-end;gap:2px;padding:14px 14px 0;position:relative;z-index:2;min-width:0}
+.tabs{display:flex;gap:2px;min-width:0}
+.tab,.archive summary{display:flex;align-items:center;gap:7px;font-size:14px;line-height:1.2;padding:10px 16px;border:1px solid transparent;border-bottom:0;
+  border-radius:9px 9px 0 0;margin-bottom:-1px;background:none;color:#555;cursor:pointer;white-space:nowrap;transition:background .12s,color .12s}
+.tab:hover,.archive summary:hover{background:#e9e9e5;color:#111}
+.tab[aria-selected=true],.archive.active summary{background:#fff;border-color:#e0e0dc;color:#111;font-weight:600}
+.archive{position:relative;flex:none}
+.archive summary{list-style:none;user-select:none}
 .archive summary::-webkit-details-marker{display:none}
-.archive summary:hover{background:#eaeae6;color:#111}
-.archive.active summary{color:#111;font-weight:600}
-.archive .count{font-size:11px;min-width:18px;padding:0 5px;border-radius:9px;background:#dcdcd7;color:#444;text-align:center;font-weight:500}
-.archive svg{width:12px;height:12px;margin-left:auto;transition:transform .15s}
+.archive .count{font-size:11px;min-width:18px;padding:1px 5px;border-radius:9px;background:#dcdcd7;color:#444;text-align:center;font-weight:500}
+.archive svg{width:12px;height:12px;transition:transform .15s}
 .archive[open] summary svg{transform:rotate(180deg)}
-.menu{padding:2px 0 0 8px}
-.menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:6px 10px;border-radius:7px;cursor:pointer}
-.menu button:hover{background:#eaeae6}
-.menu button[aria-current=true]{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px #e0e0dc}
+.menu{position:absolute;top:calc(100% + 6px);left:0;z-index:10;width:300px;padding:5px;background:#fff;border:1px solid #e0e0dc;border-radius:10px;
+  box-shadow:0 10px 28px rgba(0,0,0,.13),0 1px 3px rgba(0,0,0,.08)}
+.menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:8px 10px;border-radius:7px;cursor:pointer}
+.menu button:hover{background:#f1f1ee}
+.menu button[aria-current=true]{background:#f1f1ee}
 .menu b{display:block;font-size:13px;font-weight:600}
-.menu small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:11.5px;color:#666;margin-top:1px;line-height:1.4}
+.menu small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;color:#666;margin-top:1px;line-height:1.4}
 
 /* this plan */
 .ctx{display:flex;flex-direction:column;gap:12px}
@@ -695,13 +696,17 @@ footer code{font-size:10px}
 /* narrow screens: stack, plan fits the width */
 @media (max-width:860px){
   .app{display:block;height:auto}
+  .head{border-right:0;padding:14px 16px 0}
   aside{border-right:0;padding:14px 16px 4px;gap:14px;overflow:visible}
-  .tabs{flex-direction:row;overflow-x:auto;scrollbar-width:none;gap:4px;padding-right:24px;
+  .plans{padding:12px 16px 0;align-items:center;gap:4px;align-self:stretch}
+  .tabs{flex:1;overflow-x:auto;scrollbar-width:none;gap:4px;padding-right:24px;
     -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
   .tabs::-webkit-scrollbar{display:none}
-  .tab{flex:none;white-space:nowrap}
+  .tab,.archive summary{flex:none;font-size:13.5px;padding:7px 12px;border:1px solid transparent;border-radius:8px;margin:0}
+  .tab[aria-selected=true],.archive.active summary{box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .menu{left:auto;right:0;width:min(300px,calc(100vw - 32px))}
   .stage{padding:4px 10px 10px}
-  .sheet{padding:4px}
+  .sheet{padding:4px;border-radius:10px}
   svg{height:auto}
   .legend{flex-direction:row;flex-wrap:wrap;gap:4px 14px}
   footer{display:none}
@@ -709,7 +714,7 @@ footer code{font-size:10px}
   .app:has(.ctx:not([hidden]) .scope){display:flex;flex-direction:column}
   .app:has(.ctx:not([hidden]) .scope) aside,.ctx:not([hidden]):has(.scope),.scope{display:contents}
   .app:has(.ctx:not([hidden]) .scope) aside>*,.ctx:not([hidden]):has(.scope)>*,.scope>*{margin-inline:16px}
-  .app:has(.ctx:not([hidden]) .scope) aside>*{margin-top:12px}
+  .app:has(.ctx:not([hidden]) .scope) aside>*,.ctx:not([hidden]):has(.scope)>.desc{margin-top:12px}
   .app:has(.ctx:not([hidden]) .scope) aside>:first-child{margin-top:14px}
   .scope .filters{margin-top:12px}
   .app:has(.ctx:not([hidden]) .scope) .stage{order:5;margin:0}
@@ -791,7 +796,7 @@ const activeSheets = allPlans.filter((p) => !p.archived);
 const archivedSheets = allPlans.filter((p) => p.archived);
 const planName = (p) => p.data.name ?? p.id.replace('archived/', '');
 
-const tabs = `<nav class="plans" aria-label="Plans"><p class="label">Plans</p><div class="tabs" role="tablist" aria-orientation="vertical">`
+const tabs = `<nav class="plans" aria-label="Plans"><div class="tabs" role="tablist">`
   + activeSheets.map((p) => `<button type="button" class="tab" role="tab" data-plan="${esc(p.id)}" aria-selected="false">${esc(planName(p))}</button>`).join('')
   + `</div>`
   + (archivedSheets.length
@@ -899,12 +904,12 @@ const html = `<!doctype html>
 <title>${esc(meta.title ?? 'Floor plan')} — ${esc(meta.floor ?? '')}</title>
 <style>${style}</style></head><body>
 <div class="app">
+<header class="head">
+  <h1>${esc(meta.title ?? 'Floor plan')}</h1>
+  <div class="sub tnum">${[esc(meta.floor ?? '')].concat(bits).filter(Boolean).join(' &middot; ')}</div>
+</header>
+${tabs}
 <aside>
-  <div>
-    <h1>${esc(meta.title ?? 'Floor plan')}</h1>
-    <div class="sub tnum">${[esc(meta.floor ?? '')].concat(bits).filter(Boolean).join(' &middot; ')}</div>
-  </div>
-  ${tabs}
   ${contexts}
   ${units}
   ${legend}
@@ -933,7 +938,7 @@ function show(g){
     if(on){var t=b.parentNode;t.scrollLeft=Math.max(0,b.offsetLeft-t.offsetLeft-t.clientWidth/2+b.offsetWidth/2)}});
   $$('.menu button').forEach(function(b){b.setAttribute('aria-current',String(b.dataset.plan===g))});
   $$('.ctx').forEach(function(c){c.hidden=c.dataset.group!==g});
-  if(arch){var a=g.indexOf('archived/')===0;arch.classList.toggle('active',a);if(a)arch.open=true}
+  if(arch){arch.classList.toggle('active',g.indexOf('archived/')===0);arch.open=false}
   var t=TOG[g], lay=false;
   layerIds.forEach(function(k){var on=!!(t&&t.layers.indexOf(k)>=0&&t.on[k]);document.body.classList.toggle('tg-'+k,on);lay=lay||on});
   document.getElementById('legend').classList.toggle('on',!!(DIFF[id]||{}).any||lay);
@@ -954,8 +959,8 @@ $$('.info').forEach(function(i){i.addEventListener('click',function(e){
   var open=i.getAttribute('aria-expanded')!=='true';
   i.setAttribute('aria-expanded',String(open)); i.nextElementSibling.classList.toggle('open',open);
 })});
-document.addEventListener('click',function(){closeTips()});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTips()});
+document.addEventListener('click',function(e){closeTips();if(arch&&!arch.contains(e.target))arch.open=false});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeTips();if(arch)arch.open=false}});
 // renovation scope: one filter at a time; a room is focused by click, previewed by hover
 var SC={f:null,focus:null,hover:null}, hoverOK=window.matchMedia('(hover:hover)').matches;
 function scopeApply(){

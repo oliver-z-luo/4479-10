@@ -1466,7 +1466,11 @@
         "change": "bath",
         "title": "52\" double vanity",
         "note": "Two sinks; second drain and supply.",
-        "detail": "Two sinks replace the single vanity: a second drain and supply.",
+        "detail": "Two sinks replace the single vanity: a second drain and supply. Wall-mounted faucets (first reference) need their valves set in the wall before it closes. A single trough basin with two faucets (second reference) needs only one drain, which is simpler plumbing.",
+        "ref": [
+          {"src": "refs/double-vanity.jpg", "caption": "Two undermount sinks, wall-mounted faucets"},
+          {"src": "refs/double-trough.jpg", "caption": "Option: one trough basin, two faucets, one drain"}
+        ],
         "trades": [
           "plumbing",
           "millwork"

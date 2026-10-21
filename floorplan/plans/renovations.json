@@ -1632,7 +1632,12 @@
         "change": "closet",
         "title": "Closet shelving",
         "note": "Hanging left, 16\" shelves right.",
-        "detail": "Hanging rod on the left, 16\" shelves on the right.",
+        "detail": "Hanging rod on the left, 16\" shelves on the right, across the 5'2\" x 1'9\" closet behind the bifold doors. Double rods on the left would double the hanging. A tall open bay at the bottom of the shelf side fits a vacuum or stroller; an outlet inside, as in the second reference, would charge a cordless vacuum (adds an electrician).",
+        "ref": [
+          {"src": "refs/closet-rod-baskets.jpg", "caption": "Rod between shelves, baskets top and bottom"},
+          {"src": "refs/closet-vacuum-bay.jpg", "caption": "Coats one side, vacuum and supplies tower the other"},
+          {"src": "refs/closet-double-rod.jpg", "caption": "Double rods beside a shelf tower, tall bay below"}
+        ],
         "trades": [
           "millwork"
         ],

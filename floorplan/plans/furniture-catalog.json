@@ -13,6 +13,7 @@
     "queen-bed":    { "label": "Bed",          "w": 60, "d": 80,             "note": "Standard queen mattress. Primary bedroom." },
     "futon":        { "label": "Futon",        "w": 75, "d": 35, "seats": 2, "note": "Footprint folded as a sofa. Opens to 75 x 54 for a guest." },
     "desk":         { "label": "Desk",         "w": 48, "d": 24,             "note": "Fits the 77 x 54 storage room on the short wall, clear of the inward door swing." },
+    "small-desk":   { "label": "Desk",         "w": 40, "d": 20,             "note": "Small writing desk; primary bedroom, by the window." },
     "desk-chair":   { "label": "Chair",        "w": 20, "d": 20, "seats": 1 },
     "low-shelf":    { "label": "Low shelf",    "w": 36, "d": 12,             "note": "Child height, open front, everything visible and reachable." },
     "storage-cabinet": { "label": "Cabinet", "w": 36, "d": 20,           "note": "Yuna's room has no closet; this holds what a closet would." },

@@ -1346,9 +1346,31 @@
       "kind": "queen-bed",
       "shape": "rect",
       "x": 7,
-      "y": 46,
+      "y": 54,
       "w": 80,
       "h": 60
+    },
+    {
+      "id": "desk-primary",
+      "room": "primary-bedroom",
+      "kind": "small-desk",
+      "shape": "rect",
+      "x": 7,
+      "y": 7,
+      "w": 20,
+      "h": 40,
+      "note": "By the window, long side against the west wall."
+    },
+    {
+      "id": "chair-primary",
+      "room": "primary-bedroom",
+      "kind": "desk-chair",
+      "shape": "rect",
+      "x": 29,
+      "y": 17,
+      "w": 20,
+      "h": 20,
+      "seats": 1
     },
     {
       "id": "bed-yuna",

@@ -1333,33 +1333,247 @@
       "h": 75
     }
   ],
-  "toggles": [
-    {
-      "id": "moved",
-      "label": "Moved door",
-      "default": true,
-      "note": "Bedroom door moved from the foyer side to the dining-room wall, 6\" off the south corner, swinging into the Bedroom.",
-      "remove": {
-        "openings": [
-          "dr-bedroom"
+  "scope": {
+    "about": "The renovation work, room by room, for quoting. Each item's id is its area code plus a number (BR1 = Bedroom, item 1); ids are written here, never renumbered, so a reference stays valid when items are added or removed. 'change' is the toggle below that draws it. priority: high, medium, low or tbd. approval is a guess at sign-off needed (Strata or Permit), to be confirmed.",
+    "areas": {
+      "PB": {
+        "name": "Primary Bedroom",
+        "rooms": [
+          "primary-bedroom"
         ]
       },
-      "add": {
-        "openings": [
-          {
-            "id": "dr-bedroom-w",
-            "wall": "w-int-lr-e",
-            "offset": 203.5,
-            "width": 30,
-            "type": "door",
-            "style": "hinged",
-            "leaves": 1,
-            "hinge": "end",
-            "swingTo": "east"
-          }
+      "WIC": {
+        "name": "Walk-in Closet",
+        "rooms": [
+          "wic"
+        ]
+      },
+      "PBA": {
+        "name": "Primary Bath",
+        "rooms": [
+          "bath-main"
+        ]
+      },
+      "LD": {
+        "name": "Laundry",
+        "rooms": [
+          "laundry"
+        ]
+      },
+      "BC": {
+        "name": "Balcony",
+        "rooms": [
+          "balcony"
+        ]
+      },
+      "LR": {
+        "name": "Living Room",
+        "rooms": [
+          "living-room"
+        ]
+      },
+      "OB": {
+        "name": "Office Bedroom",
+        "rooms": [
+          "office-bedroom"
+        ]
+      },
+      "BR": {
+        "name": "Bedroom",
+        "rooms": [
+          "bedroom",
+          "closet"
+        ]
+      },
+      "SB": {
+        "name": "Shared Bath",
+        "rooms": [
+          "bath-second"
+        ]
+      },
+      "PT": {
+        "name": "Pantry",
+        "rooms": [
+          "pantry"
         ]
       }
     },
+    "trades": {
+      "framing": "Doors & framing",
+      "plumbing": "Plumbing",
+      "electrical": "Electrical",
+      "hvac": "HVAC",
+      "millwork": "Millwork",
+      "tile": "Tile"
+    },
+    "items": [
+      {
+        "id": "PB1",
+        "change": "heat-pump",
+        "title": "Heat pump head",
+        "note": "Wall-mounted head, high on the east wall; line set from the balcony unit.",
+        "trades": [
+          "hvac",
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "WIC1",
+        "change": "wic",
+        "title": "Closet system",
+        "note": "24\" deep hanging along the west wall, 14\" shelves along the north wall, door swing kept clear.",
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "PBA1",
+        "change": "bath",
+        "title": "Tub to walk-in shower",
+        "note": "Same 30\" x 58\" footprint: new shower pan, valve and wall tile.",
+        "trades": [
+          "plumbing",
+          "tile"
+        ],
+        "approval": "Permit",
+        "priority": "tbd"
+      },
+      {
+        "id": "PBA2",
+        "change": "bath",
+        "title": "Bidet toilet",
+        "note": "Toilet with a bidet seat; needs a GFCI outlet beside it.",
+        "trades": [
+          "plumbing",
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "PBA3",
+        "change": "bath",
+        "title": "52\" double vanity",
+        "note": "Two sinks replace the single vanity: a second drain and supply.",
+        "trades": [
+          "plumbing",
+          "millwork"
+        ],
+        "approval": "Permit",
+        "priority": "tbd"
+      },
+      {
+        "id": "LD1",
+        "change": "laundry",
+        "title": "Unstack washer and dryer",
+        "note": "Side by side as 24\" compact units, the stacked pair's width; dryer vent and outlet moved.",
+        "trades": [
+          "plumbing",
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "LD2",
+        "change": "laundry",
+        "title": "Shelf above",
+        "note": "12\" deep shelf over both units.",
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "BC1",
+        "change": "heat-pump",
+        "title": "Heat pump outdoor unit",
+        "note": "Multi-zone unit against the balcony's east wall, feeding three heads; wall penetration for the line sets.",
+        "trades": [
+          "hvac",
+          "electrical"
+        ],
+        "approval": "Strata",
+        "priority": "tbd"
+      },
+      {
+        "id": "LR1",
+        "change": "heat-pump",
+        "title": "Heat pump head",
+        "note": "On the fireplace wall, north of the fireplace.",
+        "trades": [
+          "hvac",
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "OB1",
+        "change": "double",
+        "title": "Double French door, office side",
+        "note": "Same opening as BR1, seen from the Office Bedroom: patch and paint this face.",
+        "trades": [
+          "framing"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "OB2",
+        "change": "heat-pump",
+        "title": "Heat pump head",
+        "note": "Wall-mounted head on the west wall, next to the balcony.",
+        "trades": [
+          "hvac",
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "BR1",
+        "change": "double",
+        "title": "Double French door",
+        "note": "Glass partition rebuilt solid with a 5'0\" double door (two 30\" leaves), centred, swinging into the Bedroom.",
+        "trades": [
+          "framing",
+          "electrical"
+        ],
+        "approval": "Strata",
+        "priority": "tbd"
+      },
+      {
+        "id": "BR2",
+        "change": "closet",
+        "title": "Closet shelving",
+        "note": "Hanging rod on the left, 16\" shelves on the right.",
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "SB1",
+        "change": "shared-bath",
+        "title": "Vanity",
+        "note": "Pedestal sink replaced by a 32\" x 21\" vanity with a sink, keeping 15\" from the toilet's centre.",
+        "trades": [
+          "plumbing",
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "PT1",
+        "change": "pantry",
+        "title": "Pantry shelving",
+        "note": "14\" shelves across the back wall with 12\" returns either side of the door.",
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      }
+    ]
+  },
+  "toggles": [
     {
       "id": "double",
       "label": "Double door",

@@ -379,6 +379,30 @@ if (dimFail.length) {
   console.error(`\x1b[31mFAIL\x1b[0m dimensions.json — ${dimFail.length} problem${dimFail.length > 1 ? 's' : ''}`);
   for (const m of dimFail) console.error(`  \x1b[31mx\x1b[0m ${m}`);
 } else console.log(`\x1b[32mPASS\x1b[0m dimensions.json`);
+// the renovation item list: ids unique and well formed, every reference real
+const PRIORITIES = ['high', 'medium', 'low', 'tbd'];
+function checkScope(plan) {
+  const sc = plan.scope, fail = [];
+  const rooms = new Set(plan.rooms.map((r) => r.id)), toggles = new Set((plan.toggles ?? []).map((t) => t.id));
+  for (const [code, a] of Object.entries(sc.areas ?? {})) {
+    if (!/^[A-Z]+$/.test(code)) fail.push(`area code "${code}" must be capital letters`);
+    for (const r of a.rooms ?? []) if (!rooms.has(r)) fail.push(`area ${code} names room "${r}", which isn't in the plan`);
+  }
+  const seen = new Set();
+  for (const it of sc.items ?? []) {
+    const m = /^([A-Z]+)(\d+)$/.exec(it.id ?? '');
+    if (!m) { fail.push(`item id "${it.id}" must be an area code plus a number, e.g. BR1`); continue; }
+    if (seen.has(it.id)) fail.push(`item id ${it.id} is used twice`);
+    seen.add(it.id);
+    if (!sc.areas?.[m[1]]) fail.push(`${it.id}: no area "${m[1]}"`);
+    if (it.change && !toggles.has(it.change)) fail.push(`${it.id}: change "${it.change}" isn't a toggle`);
+    for (const t of it.trades ?? []) if (!sc.trades?.[t]) fail.push(`${it.id}: unknown trade "${t}"`);
+    if (!PRIORITIES.includes(it.priority)) fail.push(`${it.id}: priority must be one of ${PRIORITIES.join(', ')}`);
+    if (!it.title) fail.push(`${it.id}: no title`);
+  }
+  return fail;
+}
+
 const results = [];
 for (const file of files) {
   const label = basename(file);
@@ -403,6 +427,11 @@ for (const file of files) {
       console.log(`\x1b[32mPASS\x1b[0m ${name}`);
     }
     if (!plan.toggles || c === combos[0]) for (const m of warn) console.log(`  \x1b[33m!\x1b[0m ${m}`);
+  }
+  if (plan.scope) {
+    const fail = checkScope(plan);
+    if (fail.length) { bad++; console.error(`\x1b[31mFAIL\x1b[0m ${label} scope`); for (const m of fail) console.error(`  \x1b[31mx\x1b[0m ${m}`); }
+    else console.log(`\x1b[32mPASS\x1b[0m ${label} scope (${plan.scope.items.length} items)`);
   }
   if (plan.toggles && combos.every((c) => results.find((r) => r.label === `${label} [${c.key || 'all off'}]`)?.ok !== false))
     console.log(`\x1b[32mPASS\x1b[0m ${label} (all ${combos.length} combinations of ${plan.toggles.length} toggles)`);

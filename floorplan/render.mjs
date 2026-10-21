@@ -311,6 +311,11 @@ function roomLabel(r, furniture = []) {
     if (best) { cx = best.px; cy = best.py; scale = best.sc; }
   }
   const tr = rotate ? ` transform="rotate(-90 ${n(cx)} ${n(cy)})"` : '';
+  {
+    const fs = (rotate ? fit(setImp, h, w) : fit(setImp, w, h)) * scale;
+    const along = Math.max(...setImp.map((t) => t.length)) * 0.6 * fs, across = setImp.length * fs * 1.18;
+    r._lbl = { cx, cy, bw: rotate ? across : along, bh: rotate ? along : across };
+  }
 
   const block = (lines, cls) => {
     const fs = (rotate ? fit(lines, h, w) : fit(lines, w, h)) * scale;
@@ -325,6 +330,48 @@ function roomLabel(r, furniture = []) {
 
   if (!met) return block(setImp, '');
   return block(setImp, 'u-imp') + block(setMet, 'u-met');
+}
+
+// --- renovation scope: a hover area per room and a pin with its item count ---
+const areaOf = (id) => /^[A-Z]+/.exec(id)[0];
+const PIN_R = 7;
+function pinAt(r) {
+  // beside the room's label if that is clear of fixtures, else wherever in
+  // the room the pin covers the least
+  const b = bbox(r.boundary), L = r._lbl, gap = PIN_R + 2.5;
+  const fits = (x, y) => x - PIN_R >= b.x0 + 2 && x + PIN_R <= b.x1 - 2 && y - PIN_R >= b.y0 + 2 && y + PIN_R <= b.y1 - 2
+    && pointInPoly([x, y], r.boundary);
+  const lbl = L ? { x0: L.cx - L.bw / 2, x1: L.cx + L.bw / 2, y0: L.cy - L.bh / 2, y1: L.cy + L.bh / 2 } : null;
+  const avoid = (r._fixtures ?? []).map(boxOf).concat(lbl ? [lbl] : []);
+  const cost = (x, y) => avoid.reduce((s, m) => s + overlapArea({ x0: x - PIN_R, x1: x + PIN_R, y0: y - PIN_R, y1: y + PIN_R }, m), 0);
+  const tries = L ? [[L.cx + L.bw / 2 + gap, L.cy - L.bh / 2 + PIN_R], [L.cx - L.bw / 2 - gap, L.cy - L.bh / 2 + PIN_R],
+    [L.cx, L.cy - L.bh / 2 - gap], [L.cx, L.cy + L.bh / 2 + gap]] : [];
+  for (const fy of [0.5, 0.25, 0.75, 0.12, 0.88]) for (const fx of [0.5, 0.25, 0.75, 0.12, 0.88]) tries.push([b.x0 + (b.x1 - b.x0) * fx, b.y0 + (b.y1 - b.y0) * fy]);
+  let best = null;
+  for (const [x, y] of tries.filter(([x, y]) => fits(x, y))) {
+    const c = cost(x, y);
+    if (!best || c < best.c - 0.5) best = { x, y, c };
+    if (c === 0) break;
+  }
+  return best ? [best.x, best.y] : [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2];
+}
+function scopeLayer(plan, scope) {
+  const allFx = plan.rooms.flatMap((r) => r._fixtures ?? []);
+  const counts = {};
+  for (const it of scope.items) counts[areaOf(it.id)] = (counts[areaOf(it.id)] ?? 0) + 1;
+  let hits = '', pins = '';
+  for (const [code, a] of Object.entries(scope.areas)) {
+    if (!counts[code]) continue;
+    const rooms = a.rooms.map((id) => plan.rooms.find((r) => r.id === id)).filter(Boolean);
+    for (const r of rooms)
+      hits += `<polygon class="rhit" data-area="${code}" points="${r.boundary.map((p) => `${n(p[0])},${n(p[1])}`).join(' ')}"/>`;
+    const rb = bbox(rooms[0].boundary);
+    const near = allFx.filter((f) => overlapArea(boxOf(f), rb) > 0);
+    const [x, y] = pinAt({ ...rooms[0], _fixtures: near });
+    pins += `<g class="rpin" data-area="${code}" role="button" tabindex="0" aria-label="${esc(a.name)}: ${counts[code]} renovation items">`
+      + `<circle cx="${n(x)}" cy="${n(y)}" r="${PIN_R}"/><text x="${n(x)}" y="${n(y + 0.3)}">${counts[code]}</text></g>`;
+  }
+  return `<g class="scope-hits">${hits}</g><g class="scope-pins">${pins}</g>`;
 }
 
 // --- diff against baseline -------------------------------------------------
@@ -362,7 +409,7 @@ function diff(base, plan) {
 }
 
 // --- one sheet -------------------------------------------------------------
-function sheet(plan, base, catalog, sheetIdx, layers = [], labelFixtures = null) {
+function sheet(plan, base, catalog, sheetIdx, layers = [], labelFixtures = null, scope = null) {
   const { changed, removed, any } = diff(base, plan);
   const d = (id) => (changed.has(id) ? ' is-diff' : '');
 
@@ -411,6 +458,7 @@ function sheet(plan, base, catalog, sheetIdx, layers = [], labelFixtures = null)
     r._fixtures = (labelFixtures ?? plan.fixtures ?? []).filter((f) => f.room === r.id);
     s += roomLabel(r, plan.furniture ?? []);
   }
+  if (scope) s += scopeLayer(plan, scope);
 
   // sightlines from every seat to the centre of the play area, hidden by default
   const play = (plan.zones ?? []).find((z) => z.kind === 'play');
@@ -506,7 +554,8 @@ const layerSpecs = (p, data) => (p.data.toggles ?? []).filter(isLayer).map((t) =
 }));
 const expanded = allPlans.flatMap((p) => {
   if (!p.data.toggles) return [{ ...p, group: p.id, name: p.data.name }];
-  return combinations(p.data, { structuralOnly: true }).map((c) => {
+  const defKey = p.data.toggles.filter((t) => !isLayer(t) && t.default !== false).map((t) => t.id).join('+');
+  return combinations(p.data, { structuralOnly: true }).filter((c) => !p.data.scope || c.key === defKey).map((c) => {
     const layers = layerSpecs(p, c.data);
     const swapped = new Set(layers.flatMap((L) => L.off.map((f) => f.id)));
     const data = { ...c.data, fixtures: (c.data.fixtures ?? []).filter((f) => !swapped.has(f.id)) };
@@ -515,7 +564,7 @@ const expanded = allPlans.flatMap((p) => {
     return { ...p, group: p.id, id: `${p.id}~${c.key}`, name: p.data.name, data, layers, labelFixtures };
   });
 });
-const sheets = expanded.map((p, i) => ({ ...p, ...sheet(p.data, base, catalog, i, p.layers, p.labelFixtures) }));
+const sheets = expanded.map((p, i) => ({ ...p, ...sheet(p.data, base, catalog, i, p.layers, p.labelFixtures, p.data.scope) }));
 const layerIds = [...new Set(allPlans.flatMap((p) => (p.data.toggles ?? []).filter(isLayer).map((t) => t.id)))];
 const toggled = Object.fromEntries(allPlans.filter((p) => p.data.toggles).map((p) => [p.id, {
   order: p.data.toggles.filter((t) => !isLayer(t)).map((t) => t.id),
@@ -584,6 +633,54 @@ svg{display:block;width:100%;height:100%}
 body.sight .key{display:flex}
 .key i{display:inline-block;width:18px;height:0;border-top:2px solid;vertical-align:middle;margin-right:6px}
 
+/* renovation scope */
+.filters{display:flex;flex-direction:column;gap:8px}
+.frow{display:flex;flex-direction:column;gap:4px}
+.flabel{font-size:11px;font-weight:600;color:#666;letter-spacing:.02em}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;line-height:1;padding:5px 8px;border:1px solid #dcdcd7;border-radius:99px;background:#fff;cursor:pointer;color:#333;transition:background .12s,border-color .12s}
+.chip:hover{border-color:#b9b9b3}
+.chip i{width:7px;height:7px;border-radius:50%}
+.chip span{color:#888;font-size:11px}
+.chip[aria-pressed=true]{background:#111;border-color:#111;color:#fff}
+.chip[aria-pressed=true] span{color:#bbb}
+.focusbar{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px;color:#444;padding:6px 6px 6px 10px;background:#fbe3ec;border-radius:7px}
+.focusbar[hidden]{display:none}
+.focusbar b{color:#111}
+.allrooms{font-size:12px;border:0;background:#fff;border-radius:5px;padding:4px 9px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.allrooms:hover{background:#f4f4f2}
+.empty{margin:0;font-size:12.5px;color:#666}
+.empty[hidden]{display:none}
+.areas{display:flex;flex-direction:column;gap:18px}
+.area[hidden]{display:none}
+.area h2{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0;padding:0 0 6px;border-bottom:1px solid #e0e0dc;font-size:13.5px;font-weight:650}
+.area h2 .size{font-size:11.5px;font-weight:400;color:#777}
+.area ul{list-style:none;margin:0;padding:0}
+.area li{padding:9px 0 10px;border-bottom:1px solid #ececea}
+.area li:last-child{border-bottom:0}
+.area li[hidden]{display:none}
+.ihead{display:flex;align-items:baseline;gap:8px}
+.iid{flex:none;min-width:34px;font:700 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:${C.diff}}
+.ititle{flex:1;font-size:13px;font-weight:600;line-height:1.35}
+.pri{flex:none;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 5px;border-radius:4px;line-height:1.2}
+.pri-high{background:#fde2e1;color:#a51d1d}.pri-medium{background:#fbf0cc;color:#7a5a00}.pri-low{background:#e1f2e4;color:#1e6b2c}.pri-tbd{background:#ececea;color:#5c5c58}
+.inote{margin:3px 0 0 42px;font-size:12px;color:#555;line-height:1.45}
+.itags{display:flex;flex-wrap:wrap;gap:4px 10px;margin:6px 0 0 42px}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#555}
+.tag i{width:7px;height:7px;border-radius:50%}
+.tag.sign{font-weight:600;color:#7a5a00;background:#fbf0cc;border-radius:4px;padding:1px 6px}
+.fine{margin:0;font-size:12px;color:#6b6b6b}
+.rhit{fill:transparent;cursor:pointer;transition:fill .12s}
+.rhit.hl{fill:rgba(216,27,96,.07)}
+.rhit.on{fill:rgba(216,27,96,.12);stroke:${C.diff};stroke-width:1.6}
+.rhit.dim{fill:rgba(244,244,242,.55)}
+.rpin{cursor:pointer}
+.rpin circle{fill:${C.diff};stroke:#fff;stroke-width:1.6;transition:r .12s}
+.rpin text{fill:#fff;font:700 8.5px Helvetica,Arial,sans-serif;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.rpin.on circle,.rpin:hover circle{r:8.5}
+.rpin.gone{display:none}
+.rpin:focus{outline:none}.rpin:focus-visible circle{stroke:#111;stroke-width:2}
+
 /* units + legend */
 .units{align-self:flex-start;display:flex;padding:2px;border-radius:7px;background:#e7e7e3}
 .units button{font-size:12px;padding:4px 12px;border:0;background:transparent;border-radius:5px;cursor:pointer;color:#666}
@@ -608,6 +705,17 @@ footer code{font-size:10px}
   svg{height:auto}
   .legend{flex-direction:row;flex-wrap:wrap;gap:4px 14px}
   footer{display:none}
+  /* renovations: filters above the plan, the item list below it */
+  .app:has(.ctx:not([hidden]) .scope){display:flex;flex-direction:column}
+  .app:has(.ctx:not([hidden]) .scope) aside,.ctx:not([hidden]):has(.scope),.scope{display:contents}
+  .app:has(.ctx:not([hidden]) .scope) aside>*,.ctx:not([hidden]):has(.scope)>*,.scope>*{margin-inline:16px}
+  .app:has(.ctx:not([hidden]) .scope) aside>*{margin-top:12px}
+  .app:has(.ctx:not([hidden]) .scope) aside>:first-child{margin-top:14px}
+  .scope .filters{margin-top:12px}
+  .app:has(.ctx:not([hidden]) .scope) .stage{order:5;margin:0}
+  .scope .focusbar,.scope .empty,.scope .areas,.scope .fine{order:6;margin-top:14px;scroll-margin-top:10px}
+  .app:has(.ctx:not([hidden]) .scope) .units,.app:has(.ctx:not([hidden]) .scope) .legend{order:7;margin-top:14px}
+  .app:has(.ctx:not([hidden]) .scope) .legend{margin-bottom:24px}
 }
 
 .wall{fill:${C.wall};stroke:${C.wallEdge};stroke-width:1.6;stroke-linejoin:miter}
@@ -671,7 +779,7 @@ ${layerIds.map((k) => `.tg-${k}-on{display:none}body.tg-${k} .tg-${k}-on{display
   body{background:#fff}
   .app{display:block;height:auto}
   aside{border:0;padding:0 0 6px;gap:6px}
-  nav,.units,.controls,.key,.legend,.label{display:none !important}
+  nav,.units,.controls,.key,.legend,.label,.filters,.focusbar{display:none !important}
   .stage{padding:0}
   .sheet{display:none !important;border:0;padding:0}
   .sheet.on{display:block !important}
@@ -707,14 +815,52 @@ const opt = (attrs, label, note, on) => {
     + `</div>`;
 };
 
+// the renovation scope panel: filters, then every item grouped by room
+const TRADE_C = { framing: '#1a8a42', plumbing: '#1668cc', electrical: '#b07800', hvac: '#0f8b8d', millwork: '#8a6430', tile: '#6d5bd0' };
+const PRIO = { high: 'High', medium: 'Medium', low: 'Low', tbd: 'TBD' };
+const scopePanel = (p) => {
+  const sc = p.data.scope, items = sc.items;
+  const tagsOf = (it) => [...(it.trades ?? []).map((t) => `t:${t}`), ...(it.approval ? [`a:${it.approval}`] : []), `p:${it.priority}`].join(' ');
+  const chip = (key, label, count, dot) => `<button type="button" class="chip" data-f="${esc(key)}" aria-pressed="false">`
+    + (dot ? `<i style="background:${dot}"></i>` : '') + `${esc(label)}<span class="tnum">${count}</span></button>`;
+  const row = (label, chips) => (chips.length ? `<div class="frow"><span class="flabel">${label}</span><div class="chips">${chips.join('')}</div></div>` : '');
+  const trades = Object.entries(sc.trades).map(([k, v]) => [k, v, items.filter((i) => (i.trades ?? []).includes(k)).length]).filter((t) => t[2]);
+  const approvals = [...new Set(items.map((i) => i.approval).filter(Boolean))];
+  const filters = `<div class="filters" role="group" aria-label="Filter renovation items">`
+    + row('Trade', trades.map(([k, v, c]) => chip(`t:${k}`, v, c, TRADE_C[k])))
+    + row('Sign-off', approvals.map((a) => chip(`a:${a}`, a, items.filter((i) => i.approval === a).length)))
+    + row('Priority', Object.entries(PRIO).map(([k, v]) => chip(`p:${k}`, v, items.filter((i) => i.priority === k).length)))
+    + `</div>`;
+  const areas = Object.entries(sc.areas).map(([code, a]) => {
+    const mine = items.filter((i) => areaOf(i.id) === code);
+    if (!mine.length) return '';
+    const room = p.data.rooms.find((r) => r.id === a.rooms[0]);
+    const size = room?.labelled ? `<span class="u-imp">${esc(room.labelled.text)}</span><span class="u-met">${metres(room.labelled.a)} &times; ${metres(room.labelled.b)} m</span>` : '';
+    return `<section class="area" data-area="${code}"><h2><span>${esc(a.name)}</span><span class="size tnum">${size}</span></h2><ul>`
+      + mine.map((it) => `<li data-tags="${esc(tagsOf(it))}"><div class="ihead"><span class="iid">${esc(it.id)}</span>`
+        + `<span class="ititle">${esc(it.title)}</span><span class="pri pri-${esc(it.priority)}">${PRIO[it.priority]}</span></div>`
+        + (it.note ? `<p class="inote">${esc(it.note)}</p>` : '')
+        + `<div class="itags">${(it.trades ?? []).map((t) => `<span class="tag"><i style="background:${TRADE_C[t] ?? '#888'}"></i>${esc(sc.trades[t])}</span>`).join('')}`
+        + (it.approval ? `<span class="tag sign">${esc(it.approval)}</span>` : '') + `</div></li>`).join('')
+      + `</ul></section>`;
+  }).join('');
+  return `<div class="scope">${filters}`
+    + `<div class="focusbar" hidden><span>Showing <b></b></span><button type="button" class="allrooms">All rooms</button></div>`
+    + `<p class="empty" hidden>No items match this filter.</p>`
+    + `<div class="areas">${areas}</div>`
+    + (approvals.length ? `<p class="fine">Sign-off tags are a first guess; confirm with the strata and the city.</p>` : '')
+    + `</div>`;
+};
+
 const hasPlay = (p) => (p.data.zones ?? []).some((z) => z.kind === 'play');
 const descOf = (p) => p.data.meta?.optionNote
-  ?? (p.data.toggles ? 'Tick a change to show it on the plan. Changes are drawn in magenta.'
+  ?? (p.data.scope ? 'Every planned change, by room. Pins count each room\u2019s items; hover or tap a room to focus it. Changes are drawn in magenta.'
+    : p.data.toggles ? 'Tick a change to show it on the plan. Changes are drawn in magenta.'
     : p.id === 'baseline' ? 'The plan as surveyed. Every other plan is compared against this one.' : '');
 
 const contexts = allPlans.map((p) => `<div class="ctx" data-group="${esc(p.id)}" hidden>`
   + `<p class="desc">${p.archived ? '<span class="badge">Archived</span>' : ''}${esc(descOf(p))}</p>`
-  + (p.data.toggles ? `<div class="controls" role="group" aria-label="Changes">`
+  + (p.data.scope ? scopePanel(p) : p.data.toggles ? `<div class="controls" role="group" aria-label="Changes">`
     + p.data.toggles.map((t) => opt(`data-toggle="${esc(t.id)}"`, t.label, t.note, t.default !== false)).join('') + `</div>` : '')
   + (hasPlay(p) ? `<div class="controls">${opt('data-sight', 'Sightlines', 'A line from every seat to the centre of the play area.', false)}</div>`
     + `<div class="key"><span><i style="border-color:#0f9d58"></i>clear view</span>`
@@ -792,6 +938,7 @@ function show(g){
   layerIds.forEach(function(k){var on=!!(t&&t.layers.indexOf(k)>=0&&t.on[k]);document.body.classList.toggle('tg-'+k,on);lay=lay||on});
   document.getElementById('legend').classList.toggle('on',!!(DIFF[id]||{}).any||lay);
   try{localStorage.setItem('fp-plan',g)}catch(e){}
+  scopeApply();
 }
 $$('.tab,.menu button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.plan)})});
 $$('[data-toggle]').forEach(function(b){b.addEventListener('change',function(){
@@ -809,6 +956,43 @@ $$('.info').forEach(function(i){i.addEventListener('click',function(e){
 })});
 document.addEventListener('click',function(){closeTips()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTips()});
+// renovation scope: one filter at a time; a room is focused by click, previewed by hover
+var SC={f:null,focus:null,hover:null}, hoverOK=window.matchMedia('(hover:hover)').matches;
+function scopeApply(){
+  var box=document.querySelector('.ctx:not([hidden]) .scope'); if(!box)return;
+  var room=SC.hover||SC.focus, shown=0, per={};
+  $$('.scope .area').forEach(function(a){
+    var n=0;
+    a.querySelectorAll('li').forEach(function(li){var ok=!SC.f||li.dataset.tags.split(' ').indexOf(SC.f)>=0;li.hidden=!ok;if(ok)n++});
+    per[a.dataset.area]=n; a.hidden=!n||(room&&a.dataset.area!==room); if(!a.hidden)shown++;
+  });
+  $$('.rpin').forEach(function(p){var n=per[p.dataset.area]||0;p.classList.toggle('gone',!n);p.querySelector('text').textContent=n;
+    p.classList.toggle('on',p.dataset.area===room)});
+  $$('.rhit').forEach(function(h){var a=h.dataset.area;h.classList.toggle('on',a===SC.focus);h.classList.toggle('hl',a===SC.hover&&a!==SC.focus);
+    h.classList.toggle('dim',!!SC.f&&!per[a])});
+  $$('.chip').forEach(function(c){c.setAttribute('aria-pressed',String(c.dataset.f===SC.f))});
+  var bar=box.querySelector('.focusbar'); bar.hidden=!SC.focus;
+  if(SC.focus){var h=box.querySelector('.area[data-area="'+SC.focus+'"] h2 span');bar.querySelector('b').textContent=h?h.textContent:SC.focus}
+  box.querySelector('.empty').hidden=shown>0;
+}
+function scopeFocus(a){SC.focus=SC.focus===a?null:a;SC.hover=null;scopeApply();
+  // on a phone the list is below the plan: take the reader to it
+  if(SC.focus&&!hoverOK){var b=document.querySelector('.ctx:not([hidden]) .focusbar');if(b)b.scrollIntoView({behavior:'smooth',block:'start'})}}
+$$('.chip').forEach(function(c){c.addEventListener('click',function(){SC.f=SC.f===c.dataset.f?null:c.dataset.f;scopeApply()})});
+$$('.allrooms').forEach(function(b){b.addEventListener('click',function(){SC.focus=null;scopeApply()})});
+$$('.rhit,.rpin').forEach(function(el){
+  el.addEventListener('click',function(){scopeFocus(el.dataset.area)});
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();scopeFocus(el.dataset.area)}});
+  if(hoverOK){
+    el.addEventListener('mouseenter',function(){SC.hover=el.dataset.area;scopeApply()});
+    el.addEventListener('mouseleave',function(){SC.hover=null;scopeApply()});
+  }
+});
+// pointing at a room's list lights the room up on the plan
+$$('.scope .area').forEach(function(a){
+  a.addEventListener('mouseenter',function(){$$('.rhit').forEach(function(h){h.classList.toggle('hl',h.dataset.area===a.dataset.area&&h.dataset.area!==SC.focus)})});
+  a.addEventListener('mouseleave',function(){$$('.rhit').forEach(function(h){h.classList.remove('hl')})});
+});
 function setUnit(u){
   document.body.classList.toggle('metric',u==='metric');
   $$('.units button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.unit===u))});

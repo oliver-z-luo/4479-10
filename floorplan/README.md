@@ -178,11 +178,15 @@ surface, not something standing on it.
 
 ### Options on file
 
-- `renovations.json` — the baseline with independent changes, each ticked
-  on and off from the sidebar (all on by default). Sizes of new fixtures are
-  proposals, not from the survey.
-  - **Moved door** — the Bedroom door moves from the foyer side to the
-    dining-room wall, swinging into the Bedroom.
+- `renovations.json` — the baseline with every planned change drawn in. Sizes
+  of new fixtures are proposals, not from the survey. Its `scope` block is the
+  work list the page shows: one pin per room with its item count, and the
+  items grouped by room in the sidebar, filterable by trade, sign-off
+  (Strata / Permit, a first guess) and priority (high, medium, low, tbd).
+  Each item has a fixed id, area code plus number (PB1, PBA2, BR1...), so it
+  can be referenced in quotes; ids are never renumbered. To change a priority,
+  edit the item's `priority` and re-render. Each item names the `change`
+  (toggle) that draws it; the toggles also drive the Fusion model's options.
   - **Double door** — the Office Bedroom / Bedroom partition rebuilt solid,
     with a 5'0" double door (two 30" leaves) centred in it, swinging south.
   - **Primary bath** — tub replaced by a shower in the same 30" x 58"

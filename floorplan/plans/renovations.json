@@ -1385,6 +1385,12 @@
           "closet"
         ]
       },
+      "FY": {
+        "name": "Foyer",
+        "rooms": [
+          "foyer"
+        ]
+      },
       "SB": {
         "name": "Shared Bath",
         "rooms": [
@@ -1563,6 +1569,16 @@
         "priority": "tbd"
       },
       {
+        "id": "FY1",
+        "change": "foyer",
+        "title": "Entry bench and storage wall",
+        "note": "Built-in on the entry-door wall, west of the door, clear of its swing: a 15\" tall cabinet in the corner, then a 32\" bench with storage under, vertical wood slats with coat hooks above it and a shelf on top. 47\" wide, 16\" deep.",
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "PT1",
         "change": "pantry",
         "title": "Pantry shelving",
@@ -1575,6 +1591,20 @@
     ]
   },
   "toggles": [
+    {
+      "id": "foyer",
+      "label": "Entry bench",
+      "default": true,
+      "note": "Built-in against the entry-door wall, west of the door: 15\" tall cabinet, 32\" bench with slats, hooks and a shelf above. 47\" x 16\".",
+      "remove": {},
+      "add": {
+        "fixtures": [
+          {"id": "foyer-cabinet", "room": "foyer", "kind": "tall-cabinet", "shape": "rect", "x": 197, "y": 380, "w": 15, "h": 16},
+          {"id": "foyer-bench", "room": "foyer", "kind": "entry-bench", "shape": "rect", "x": 212, "y": 380, "w": 32, "h": 16, "label": "Bench"},
+          {"id": "foyer-shelf", "room": "foyer", "kind": "shelf-above", "shape": "rect", "x": 212, "y": 386, "w": 32, "h": 10}
+        ]
+      }
+    },
     {
       "id": "double",
       "label": "Double door",

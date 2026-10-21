@@ -358,7 +358,7 @@ function pinAt(r) {
   return best ? [best.x, best.y] : [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2];
 }
 function scopeLayer(plan, scope) {
-  const allFx = plan.rooms.flatMap((r) => r._fixtures ?? []);
+  const allFx = plan.rooms.flatMap((r) => r._fixtures ?? []).concat(plan.furniture ?? []);
   const counts = {};
   for (const it of scope.items) counts[areaOf(it.id)] = (counts[areaOf(it.id)] ?? 0) + 1;
   let hits = '', pins = '';
@@ -596,7 +596,17 @@ const expanded = allPlans.flatMap((p) => {
     return { ...p, group: p.id, id: `${p.id}~${c.key}`, name: p.data.name, data, layers, labelFixtures };
   });
 });
-const sheets = expanded.map((p, i) => ({ ...p, ...sheet(p.data, base, catalog, i, p.layers, p.labelFixtures, p.data.scope) }));
+// rooms are broken down the same way on every tab: the renovation scope's
+// area codes. A furnished plan pins each room with its number of pieces.
+const AREAS = allPlans.find((p) => p.data.scope)?.data.scope.areas ?? null;
+const codeOf = (room) => Object.entries(AREAS ?? {}).find(([, a]) => a.rooms.includes(room))?.[0];
+const furnScope = (data) => {
+  if (data.scope || !AREAS || !(data.furniture ?? []).length) return null;
+  const n = {}, items = [];
+  for (const f of data.furniture) { const c = codeOf(f.room); if (c) items.push({ id: `${c}${(n[c] = (n[c] ?? 0) + 1)}` }); }
+  return { areas: AREAS, items };
+};
+const sheets = expanded.map((p, i) => ({ ...p, ...sheet(p.data, base, catalog, i, p.layers, p.labelFixtures, p.data.scope ?? furnScope(p.data)) }));
 const layerIds = [...new Set(allPlans.flatMap((p) => (p.data.toggles ?? []).filter(isLayer).map((t) => t.id)))];
 const toggled = Object.fromEntries(allPlans.filter((p) => p.data.toggles).map((p) => [p.id, {
   order: p.data.toggles.filter((t) => !isLayer(t)).map((t) => t.id),
@@ -764,6 +774,11 @@ dialog.pv[open]{animation:pvin .18s cubic-bezier(.2,.8,.2,1)}
 .pvgal figcaption{font-size:11.5px;color:#666;margin-top:4px}
 
 .alts{display:flex;flex-direction:column;gap:6px}
+.area .alts{margin-top:8px}
+.furn .area li{padding:6px 0}
+.furn .ititle{font-weight:400}
+.cnt{color:#777;font-weight:500}
+.fsize{flex:none;font-size:12px;color:#777}
 .altbtn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 10px;background:#fff;border:1px solid #dcdcd7;border-radius:9px;cursor:pointer;transition:border-color .12s,background .12s}
 .altbtn:hover{border-color:#b9b9b3;background:#fafaf8}
 .altbtn>span:first-child{flex:1;min-width:0}
@@ -991,6 +1006,32 @@ const altPanel = (p) => {
       + `<small>${esc(cur ? `${cur.id} \u00b7 ${cur.name}` : '')}</small></span><span class="cmp">Compare ${g.options.length}</span></button>`;
   }).join('') + `</div>`;
 };
+const furnPanel = (p) => {
+  const data = p.data, groups = altGroups(data);
+  if (!AREAS || !(data.furniture ?? []).length) return altPanel(p);
+  const altBtn = (g, gi) => {
+    const cur = g.options.find((o) => o.id === g.current);
+    return `<button type="button" class="altbtn" data-alt="${altKey(p, gi)}" aria-haspopup="dialog"><span><b>${esc(g.title)}</b>`
+      + `<small>${esc(cur ? `${cur.id} \u00b7 ${cur.name}` : '')}</small></span><span class="cmp">Compare ${g.options.length}</span></button>`;
+  };
+  const sections = Object.entries(AREAS).map(([code, a]) => {
+    const pieces = data.furniture.filter((f) => a.rooms.includes(f.room));
+    const mine = groups.map((g, gi) => [g, gi]).filter(([g]) => g.area === code);
+    if (!pieces.length && !mine.length) return '';
+    const room = data.rooms.find((r) => r.id === a.rooms[0]);
+    const size = room?.labelled ? `<span class="u-imp">${esc(room.labelled.text)}</span><span class="u-met">${metres(room.labelled.a)} &times; ${metres(room.labelled.b)} m</span>` : '';
+    const kinds = new Map();
+    for (const f of pieces) { const k = `${f.kind}|${Math.max(f.w, f.h)}|${Math.min(f.w, f.h)}`; kinds.set(k, [f, (kinds.get(k)?.[1] ?? 0) + 1]); }
+    const rows = [...kinds.values()].map(([f, c]) => `<li data-tags=""><div class="ihead"><span class="ititle">${esc(catalog?.[f.kind]?.label ?? f.kind)}${c > 1 ? ` <span class="cnt">\u00d7${c}</span>` : ''}</span>`
+      + `<span class="fsize tnum">${esc(ft(Math.max(f.w, f.h)))} \u00d7 ${esc(ft(Math.min(f.w, f.h)))}</span></div></li>`).join('');
+    return `<section class="area" data-area="${code}"><h2><span>${esc(a.name)}</span><span class="size tnum">${size}</span></h2>`
+      + `<ul>${rows}</ul>${mine.length ? `<div class="alts">${mine.map(([g, gi]) => altBtn(g, gi)).join('')}</div>` : ''}</section>`;
+  }).join('');
+  const loose = groups.map((g, gi) => [g, gi]).filter(([g]) => !g.area || !AREAS[g.area]);
+  return `<div class="scope furn"><div class="focusbar" hidden><span>Showing <b></b></span><button type="button" class="allrooms">All rooms</button></div>`
+    + `<p class="empty" hidden>No furniture in this room.</p><div class="areas">${sections}</div>`
+    + (loose.length ? `<div class="alts"><p class="flabel">Layouts</p>${loose.map(([g, gi]) => altBtn(g, gi)).join('')}</div>` : '') + `</div>`;
+};
 const altTemplates = () => allPlans.flatMap((p) => altGroups(p.data).map((g, gi) => {
   const [vx, vy, vw, vh] = g.view;
   const cards = alternativePlans(p.data, g, (fs) => resolvePlan({ furniture: fs }, DIMS).furniture).map(({ option: o, data }) => {
@@ -1008,7 +1049,7 @@ const hasPlay = (p) => (p.data.zones ?? []).some((z) => z.kind === 'play');
 const contexts = allPlans.map((p) => `<div class="ctx" data-group="${esc(p.id)}" hidden>`
   + (p.data.scope ? scopePanel(p) : p.data.toggles ? `<div class="controls" role="group" aria-label="Changes">`
     + p.data.toggles.map((t) => opt(`data-toggle="${esc(t.id)}"`, t.label, t.note, t.default !== false)).join('') + `</div>` : '')
-  + altPanel(p)
+  + (p.data.scope ? '' : furnPanel(p))
   + (hasPlay(p) ? `<div class="controls">${opt('data-sight', 'Sightlines', 'A line from every seat to the centre of the play area.', false)}</div>`
     + `<div class="key"><span><i style="border-color:#0f9d58"></i>clear view</span>`
     + `<span><i style="border-color:#1668cc;border-top-style:dashed"></i>through glass only</span>`
@@ -1092,6 +1133,7 @@ function show(g){
   layerIds.forEach(function(k){var on=!!(t&&t.layers.indexOf(k)>=0&&t.on[k]);document.body.classList.toggle('tg-'+k,on);lay=lay||on});
   document.getElementById('legend').classList.toggle('on',!!(DIFF[id]||{}).any||lay);
   try{localStorage.setItem('fp-plan',g)}catch(e){}
+  if(SC.plan!==g){SC.plan=g;SC.f=null;SC.focus=null;SC.hover=null}
   scopeApply();
 }
 $$('.tab,.menu button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.plan)})});
@@ -1115,16 +1157,16 @@ var SC={f:null,focus:null,hover:null}, hoverOK=window.matchMedia('(hover:hover)'
 function scopeApply(){
   var box=document.querySelector('.ctx:not([hidden]) .scope'); if(!box)return;
   var room=SC.hover||SC.focus, shown=0, per={};
-  $$('.scope .area').forEach(function(a){
+  box.querySelectorAll('.area').forEach(function(a){
     var n=0;
     a.querySelectorAll('li').forEach(function(li){var ok=!SC.f||li.dataset.tags.split(' ').indexOf(SC.f)>=0;li.hidden=!ok;if(ok)n++});
     per[a.dataset.area]=n; a.hidden=!n||(room&&a.dataset.area!==room); if(!a.hidden)shown++;
   });
-  $$('.rpin').forEach(function(p){var n=per[p.dataset.area]||0;p.classList.toggle('gone',!n);p.querySelector('text').textContent=n;
+  $$('.sheet.on .rpin').forEach(function(p){var n=per[p.dataset.area]||0;p.classList.toggle('gone',!n);p.querySelector('text').textContent=n;
     p.classList.toggle('on',p.dataset.area===room)});
-  $$('.rhit').forEach(function(h){var a=h.dataset.area;h.classList.toggle('on',a===SC.focus);h.classList.toggle('hl',a===SC.hover&&a!==SC.focus);
+  $$('.sheet.on .rhit').forEach(function(h){var a=h.dataset.area;h.classList.toggle('on',a===SC.focus);h.classList.toggle('hl',a===SC.hover&&a!==SC.focus);
     h.classList.toggle('dim',!!SC.f&&!per[a])});
-  $$('.chip').forEach(function(c){c.setAttribute('aria-pressed',String(c.dataset.f===SC.f))});
+  box.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed',String(c.dataset.f===SC.f))});
   var bar=box.querySelector('.focusbar'); bar.hidden=!SC.focus;
   if(SC.focus){var h=box.querySelector('.area[data-area="'+SC.focus+'"] h2 span');bar.querySelector('b').textContent=h?h.textContent:SC.focus}
   box.querySelector('.empty').hidden=shown>0;

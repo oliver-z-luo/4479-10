@@ -1340,10 +1340,11 @@
   ],
   "furnitureCatalog": "furniture-catalog.json",
   "alternatives": {
-    "about": "Other layouts for a decision, shown side by side in a pop-up from the sidebar. In each group, each option replaces the furniture ids in 'replaces' with its own pieces; the one whose id is 'current' is what this plan draws. view is the plan area to show [x, y, w, h].",
+    "about": "Other layouts for a decision, shown side by side in a pop-up from the sidebar. Each group names its room by area code (as in renovations.json's scope); each option replaces the furniture ids in 'replaces' with its own pieces; the one whose id is 'current' is what this plan draws. view is the plan area to show [x, y, w, h].",
     "groups": [
       {
         "title": "Living room sofa",
+        "area": "LR",
         "replaces": [
           "sofa-living",
           "sofa-living-return"
@@ -1450,6 +1451,7 @@
       },
       {
         "title": "Bedroom seating",
+        "area": "BR",
         "replaces": [
           "armchair-bed-1",
           "armchair-bed-2"
@@ -1519,6 +1521,191 @@
                 "w": 24,
                 "h": 24,
                 "seats": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Office bedroom",
+        "area": "OB",
+        "replaces": [
+          "bed-yuna",
+          "cabinet-yuna",
+          "books-yuna",
+          "shelf-yuna-toys",
+          "shelf-yuna-dress",
+          "bed-yuna-2"
+        ],
+        "current": "A",
+        "view": [
+          266,
+          -2,
+          124,
+          145
+        ],
+        "options": [
+          {
+            "id": "A",
+            "name": "One twin on the east wall",
+            "meta": "1 bed · books and toy shelf under the window",
+            "note": "Bed along the east wall, low shelves under the window, cabinet and dresser shelf on the west wall.",
+            "furniture": [
+              {
+                "id": "bed-yuna",
+                "room": "office-bedroom",
+                "kind": "twin-bed",
+                "shape": "rect",
+                "x": 345,
+                "y": 20,
+                "w": 38,
+                "h": 75
+              },
+              {
+                "id": "cabinet-yuna",
+                "room": "office-bedroom",
+                "kind": "storage-cabinet",
+                "shape": "rect",
+                "x": 275,
+                "y": 7,
+                "w": 20,
+                "h": 36
+              },
+              {
+                "id": "books-yuna",
+                "room": "office-bedroom",
+                "kind": "bookshelf",
+                "shape": "rect",
+                "x": 299,
+                "y": 7,
+                "w": 30,
+                "h": 12
+              },
+              {
+                "id": "shelf-yuna-toys",
+                "room": "office-bedroom",
+                "kind": "low-shelf",
+                "shape": "rect",
+                "x": 333,
+                "y": 7,
+                "w": 36,
+                "h": 12
+              },
+              {
+                "id": "shelf-yuna-dress",
+                "room": "office-bedroom",
+                "kind": "low-shelf",
+                "shape": "rect",
+                "x": 275,
+                "y": 96,
+                "w": 12,
+                "h": 36
+              }
+            ]
+          },
+          {
+            "id": "B",
+            "name": "Two twin beds in an L",
+            "meta": "2 beds · centre floor open",
+            "note": "One low twin under the window, one along the east wall, heads meeting in the corner. Keeps the path from the pocket door to the double door clear. The books and toy shelves no longer fit; they move to the bedroom.",
+            "furniture": [
+              {
+                "room": "office-bedroom",
+                "shape": "rect",
+                "id": "bed-yuna",
+                "kind": "twin-bed",
+                "x": 308,
+                "y": 7,
+                "w": 75,
+                "h": 38
+              },
+              {
+                "room": "office-bedroom",
+                "shape": "rect",
+                "id": "bed-yuna-2",
+                "kind": "twin-bed",
+                "x": 345,
+                "y": 47,
+                "w": 38,
+                "h": 75
+              },
+              {
+                "id": "cabinet-yuna",
+                "room": "office-bedroom",
+                "kind": "storage-cabinet",
+                "shape": "rect",
+                "x": 275,
+                "y": 7,
+                "w": 20,
+                "h": 36
+              },
+              {
+                "id": "shelf-yuna-dress",
+                "room": "office-bedroom",
+                "kind": "low-shelf",
+                "shape": "rect",
+                "x": 275,
+                "y": 96,
+                "w": 12,
+                "h": 36
+              }
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Low bed under the window, shelves on the east wall",
+            "meta": "1 bed · most open floor",
+            "note": "A low twin along the window wall (head to the east wall), with the books and toy shelf moved onto the east wall. Leaves the middle of the room open for play.",
+            "furniture": [
+              {
+                "room": "office-bedroom",
+                "shape": "rect",
+                "id": "bed-yuna",
+                "kind": "twin-bed",
+                "x": 308,
+                "y": 7,
+                "w": 75,
+                "h": 38
+              },
+              {
+                "id": "cabinet-yuna",
+                "room": "office-bedroom",
+                "kind": "storage-cabinet",
+                "shape": "rect",
+                "x": 275,
+                "y": 7,
+                "w": 20,
+                "h": 36
+              },
+              {
+                "id": "shelf-yuna-dress",
+                "room": "office-bedroom",
+                "kind": "low-shelf",
+                "shape": "rect",
+                "x": 275,
+                "y": 96,
+                "w": 12,
+                "h": 36
+              },
+              {
+                "room": "office-bedroom",
+                "shape": "rect",
+                "id": "books-yuna",
+                "kind": "bookshelf",
+                "x": 371,
+                "y": 50,
+                "w": 12,
+                "h": 30
+              },
+              {
+                "room": "office-bedroom",
+                "shape": "rect",
+                "id": "shelf-yuna-toys",
+                "kind": "low-shelf",
+                "x": 371,
+                "y": 84,
+                "w": 12,
+                "h": 36
               }
             ]
           }

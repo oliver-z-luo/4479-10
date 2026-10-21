@@ -211,6 +211,13 @@ surface, not something standing on it.
   partition** (the Double door change). The guest futon is rolled up in the
   bedroom closet, so it takes no floor. (A living-room play variant was
   dropped; it is in git history.)
+  Its sidebar is broken down by room like the Renovations tab (same area
+  codes, pins counting each room's pieces, hover or tap a room to focus it).
+  `alternatives.groups` holds other layouts for one decision each (living-room
+  sofa, bedroom seating, office bedroom); each group names its room (`area`),
+  the furniture ids it swaps (`replaces`) and which option is drawn
+  (`current`). Every option is validated like a plan and shown side by side
+  from the room's Compare button.
 
 Use the **sightlines** button to overlay, for each seat, a line to the centre of
 the play area — green where it is clear, blue dashed where it only passes

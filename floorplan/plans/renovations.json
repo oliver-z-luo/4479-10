@@ -1391,6 +1391,18 @@
           "foyer"
         ]
       },
+      "DR": {
+        "name": "Dining Room",
+        "rooms": [
+          "dining-room"
+        ]
+      },
+      "ST": {
+        "name": "Storage",
+        "rooms": [
+          "storage"
+        ]
+      },
       "SB": {
         "name": "Shared Bath",
         "rooms": [

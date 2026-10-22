@@ -1438,6 +1438,38 @@
         "priority": "tbd"
       },
       {
+        "id": "PB2",
+        "title": "Remove baseboard heater",
+        "note": "Disconnect, remove, make the wiring safe.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from PB1. The freed 240 V circuit may be reusable for the heat pump.",
+        "trades": [
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "PB3",
+        "title": "Baseboard where the heater was",
+        "note": "Patch, paint and run baseboard to match.",
+        "detail": "Patch the wall and the floor edge where the heater (PB2) sat, paint the wall, and run new baseboard across the gap in the same profile and paint as the rest of the room, so it reads as one continuous run.",
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "PB4",
+        "title": "Built-in storage wall around the bed",
+        "note": "Ceiling-height cabinets over the bed, lit cubbies, low side cabinets.",
+        "detail": "A built-in across the bed wall (west), as in the reference photo: flat-front cabinets up to the ceiling over the bed, a row of open cubbies under them with LED strip lighting, a ledge shelf behind the headboard, and low cabinets either side of the bed as nightstands. Keep the upper run shallow (about 12\") for headroom. In the Furniture view the desk sits in the north-west corner, so the north low cabinet would need to stop short of it or replace the desk.",
+        "ref": "refs/primary-storage-wall.jpg",
+        "trades": [
+          "millwork",
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "WIC1",
         "change": "wic",
         "title": "Closet system",
@@ -1596,6 +1628,26 @@
         "priority": "tbd"
       },
       {
+        "id": "LR3",
+        "title": "Remove baseboard heater",
+        "note": "Disconnect, remove, make the wiring safe.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from LR1. The freed 240 V circuit may be reusable for the heat pump.",
+        "trades": [
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "LR4",
+        "title": "Baseboard where the heater was",
+        "note": "Patch, paint and run baseboard to match.",
+        "detail": "Patch the wall and the floor edge where the heater (LR3) sat, paint the wall, and run new baseboard across the gap in the same profile and paint as the rest of the room, so it reads as one continuous run.",
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "OB1",
         "change": "double",
         "title": "Double French door, office side",
@@ -1619,6 +1671,26 @@
         "trades": [
           "hvac",
           "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "OB3",
+        "title": "Remove baseboard heater",
+        "note": "Disconnect, remove, make the wiring safe.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from OB2. The freed 240 V circuit may be reusable for the heat pump.",
+        "trades": [
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "OB4",
+        "title": "Baseboard where the heater was",
+        "note": "Patch, paint and run baseboard to match.",
+        "detail": "Patch the wall and the floor edge where the heater (OB3) sat, paint the wall, and run new baseboard across the gap in the same profile and paint as the rest of the room, so it reads as one continuous run.",
+        "trades": [
+          "millwork"
         ],
         "priority": "tbd"
       },
@@ -1650,6 +1722,26 @@
           {"src": "refs/closet-vacuum-bay.jpg", "caption": "Coats one side, vacuum and supplies tower the other"},
           {"src": "refs/closet-double-rod.jpg", "caption": "Double rods beside a shelf tower, tall bay below"}
         ],
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "BR3",
+        "title": "Remove baseboard heater",
+        "note": "Disconnect, remove, make the wiring safe.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; no heat pump head here: warmth comes through the double door from the Office Bedroom head (OB2), so leave the door open in cold weather. The freed 240 V circuit may be reusable for the heat pump.",
+        "trades": [
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "BR4",
+        "title": "Baseboard where the heater was",
+        "note": "Patch, paint and run baseboard to match.",
+        "detail": "Patch the wall and the floor edge where the heater (BR3) sat, paint the wall, and run new baseboard across the gap in the same profile and paint as the rest of the room, so it reads as one continuous run.",
         "trades": [
           "millwork"
         ],

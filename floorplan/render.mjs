@@ -756,7 +756,6 @@ dialog.pv[open]{animation:pvin .18s cubic-bezier(.2,.8,.2,1)}
 .pvbody.solo .pvfig{max-width:520px}
 .pvplan svg{width:100%;height:100%}
 .pvphoto{width:100%;max-height:420px;object-fit:contain;border-radius:10px;background:#f4f4f2}
-.pvtext{grid-column:1/-1;margin:0;font-size:13.5px;line-height:1.55;color:#333;max-width:65ch}
 .pvtags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 10px}
 @media (max-width:560px){.pvbody,.pvbody.three{grid-template-columns:1fr}}
 
@@ -939,7 +938,7 @@ const eyeIcon = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8s2.4
 // an item's ref is one photo path or a list of {src, caption}
 const refsOf = (it) => (Array.isArray(it.ref) ? it.ref : it.ref ? [it.ref] : []).map((r) => (typeof r === 'string' ? { src: r } : r));
 // what each item's preview shows: a close-up of its room on the plan, the
-// reference photo if there is one, and the full detail
+// reference photo if there is one
 const previewData = (p) => {
   const sc = p.data.scope, items = {}, boxes = {}, imgs = {};
   for (const [code, a] of Object.entries(sc.areas)) {
@@ -952,7 +951,7 @@ const previewData = (p) => {
       const ext = r.src.split('.').pop().toLowerCase();
       imgs[r.src] = `data:image/${ext === 'jpg' ? 'jpeg' : ext};base64,${readFileSync(join(HERE, r.src)).toString('base64')}`;
     }
-    items[it.id] = { title: it.title, detail: it.detail ?? it.note ?? '', area: areaOf(it.id), areaName: sc.areas[areaOf(it.id)]?.name ?? '', refs };
+    items[it.id] = { title: it.title, area: areaOf(it.id), areaName: sc.areas[areaOf(it.id)]?.name ?? '', refs };
   }
   return { items, boxes, imgs };
 };
@@ -1189,7 +1188,7 @@ $$('.scope .area').forEach(function(a){
   a.addEventListener('mouseenter',function(){$$('.rhit').forEach(function(h){h.classList.toggle('hl',h.dataset.area===a.dataset.area&&h.dataset.area!==SC.focus)})});
   a.addEventListener('mouseleave',function(){$$('.rhit').forEach(function(h){h.classList.remove('hl')})});
 });
-// item preview: a close-up of the room cut from the live plan, the photo, the detail
+// item preview: a close-up of the room cut from the live plan, the photo
 var pv=document.getElementById('pv');
 function openPreview(id){
   var d=PV[cur]; if(!d||!d.items[id])return; var it=d.items[id], b=d.boxes[it.area];
@@ -1214,7 +1213,6 @@ function openPreview(id){
     var cap=document.createElement('figcaption'); cap.textContent=r.caption||(refs.length>1?'Reference '+(i+1):'Reference'); g.appendChild(cap);
     var im=new Image(); im.className='pvphoto'; im.src=d.imgs[r.src]; im.alt=(r.caption||'Reference photo')+' for '+it.title; g.appendChild(im); body.appendChild(g);
   });
-  var p=document.createElement('p'); p.className='pvtext'; p.textContent=it.detail; body.appendChild(p);
   var li=document.querySelector('.prev[data-item="'+id+'"]'), tg=li&&li.closest('li').querySelector('.itags');
   if(tg){var c=tg.cloneNode(true);c.className='pvtags';body.appendChild(c)}
   pv.showModal();

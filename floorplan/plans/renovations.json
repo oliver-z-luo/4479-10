@@ -1604,7 +1604,10 @@
         "title": "Countertop and two shelves",
         "note": "Wood counter over both units, two shelves above.",
         "detail": "A 48\" x 25\" wood countertop laid over the washer and dryer for folding, and two 12\" deep open shelves on brackets above it, as in the reference photo.",
-        "ref": "refs/laundry.jpg",
+        "ref": [
+          {"src": "refs/laundry.jpg", "caption": "Side by side: folding counter, two shelves above"},
+          {"src": "refs/laundry-stacked-shelves.jpg", "caption": "If stacked: open shelves one side, pegboard bay for the vacuum the other, pull-out drying rack and cabinets above"}
+        ],
         "trades": [
           "millwork"
         ],

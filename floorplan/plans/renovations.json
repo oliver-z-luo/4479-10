@@ -1587,8 +1587,11 @@
         "change": "laundry",
         "title": "Unstack washer and dryer",
         "note": "24\" compact units side by side.",
-        "detail": "Side by side as 24\" compact units, the stacked pair's width; dryer vent and outlet moved.",
-        "ref": "refs/laundry.jpg",
+        "detail": "Side by side as 24\" compact units, the stacked pair's width; dryer vent and outlet moved. Alternative (second reference): keep them stacked and use the freed width for a 17\" broom cabinet beside them (mop, vacuum, cleaning supplies) with cabinets above to the ceiling. No plumbing or venting moves, but no folding counter (LD2).",
+        "ref": [
+          {"src": "refs/laundry.jpg", "caption": "Side by side under a folding counter"},
+          {"src": "refs/laundry-stacked-cabinet.jpg", "caption": "Option: stay stacked, broom cabinet beside, cabinets above"}
+        ],
         "trades": [
           "plumbing",
           "electrical"

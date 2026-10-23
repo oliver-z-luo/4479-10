@@ -1470,6 +1470,18 @@
         "priority": "tbd"
       },
       {
+        "id": "PB5",
+        "title": "Fold-down wall desk",
+        "note": "Wall-mounted drop-front desk, two shelves above.",
+        "detail": "A wall-mounted cabinet whose front folds down on stays into a desk, with two floating shelves above, as in the reference photo. It goes on the west wall in the corner by the walk-in closet, where the Furniture view puts the desk; closed it is about 8\" deep, so the corner stays open. Needs blocking in the wall for the cabinet and shelves.",
+        "ref": "refs/primary-fold-down-desk.jpg",
+        "trades": [
+          "millwork",
+          "framing"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "WIC1",
         "change": "wic",
         "title": "Closet system",

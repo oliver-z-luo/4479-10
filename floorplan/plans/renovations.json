@@ -1771,6 +1771,17 @@
         "priority": "tbd"
       },
       {
+        "id": "BR5",
+        "title": "Wall storage unit",
+        "note": "Floor-to-ceiling cabinets and open cubbies along one wall.",
+        "detail": "A built-in wall unit as in the reference photo: closed cabinets at the bottom with wood-front drawers, a mix of open cubbies and doors above, running floor to ceiling along one wall. Which wall is decided on site, keeping clear of the double door (BR1) and the window.",
+        "ref": "refs/bedroom-wall-storage.jpg",
+        "trades": [
+          "millwork"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "SB1",
         "change": "shared-bath",
         "title": "32\" floating trough sink",

@@ -315,7 +315,7 @@ function roomLabel(r, furniture = []) {
   const tr = rotate ? ` transform="rotate(-90 ${n(cx)} ${n(cy)})"` : '';
   {
     const fs = (rotate ? fit(setImp, h, w) : fit(setImp, w, h)) * scale;
-    const along = Math.max(...setImp.map((t) => t.length)) * 0.6 * fs, across = setImp.length * fs * 1.18;
+    const along = Math.max(...setImp.map((t) => t.length)) * 0.68 * fs, across = setImp.length * fs * 1.18;
     r._lbl = { cx, cy, bw: rotate ? across : along, bh: rotate ? along : across };
   }
 

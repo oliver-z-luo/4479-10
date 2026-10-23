@@ -1720,7 +1720,7 @@
       "kind": "queen-bed",
       "shape": "rect",
       "x": 7,
-      "y": 54,
+      "y": 36,
       "w": 80,
       "h": 60
     },
@@ -1730,10 +1730,10 @@
       "kind": "small-desk",
       "shape": "rect",
       "x": 7,
-      "y": 7,
+      "y": 119,
       "w": 20,
       "h": 40,
-      "note": "By the window, long side against the west wall."
+      "note": "In the corner by the walk-in closet, long side against the west wall."
     },
     {
       "id": "chair-primary",
@@ -1741,7 +1741,7 @@
       "kind": "desk-chair",
       "shape": "rect",
       "x": 29,
-      "y": 17,
+      "y": 129,
       "w": 20,
       "h": 20,
       "seats": 1

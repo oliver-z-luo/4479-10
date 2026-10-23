@@ -1566,6 +1566,23 @@
         "priority": "tbd"
       },
       {
+        "id": "PBA7",
+        "change": "bath",
+        "title": "Bathroom storage",
+        "note": "Wall cabinet over the toilet, lit ledge below.",
+        "detail": "Flat-panel wood wall cabinet over the toilet, about 8\" deep so it clears your head, with an LED strip under it lighting a tiled ledge (first reference). If there is floor space, a tall linen cabinet with open shelves for towels and baskets is the alternative (second reference). Needs blocking in the wall to hang the cabinet and a junction box for the LED strip.",
+        "ref": [
+                {"src": "refs/bath-cabinet-over-toilet.jpg", "caption": "Wall cabinet over the toilet, lit ledge below"},
+                {"src": "refs/bath-linen-tower.jpg", "caption": "Tall linen cabinet with open shelves for towels and baskets"}
+              ],
+        "trades": [
+          "millwork",
+          "electrical",
+          "framing"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "LD1",
         "change": "laundry",
         "title": "Unstack washer and dryer",
@@ -1757,6 +1774,23 @@
         "trades": [
           "plumbing",
           "millwork",
+          "framing"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "SB2",
+        "change": "shared-bath",
+        "title": "Bathroom storage",
+        "note": "Wall cabinet over the toilet, lit ledge below.",
+        "detail": "Flat-panel wood wall cabinet over the toilet, about 8\" deep so it clears your head, with an LED strip under it lighting a tiled ledge (first reference). If there is floor space, a tall linen cabinet with open shelves for towels and baskets is the alternative (second reference). Needs blocking in the wall to hang the cabinet and a junction box for the LED strip.",
+        "ref": [
+                {"src": "refs/bath-cabinet-over-toilet.jpg", "caption": "Wall cabinet over the toilet, lit ledge below"},
+                {"src": "refs/bath-linen-tower.jpg", "caption": "Tall linen cabinet with open shelves for towels and baskets"}
+              ],
+        "trades": [
+          "millwork",
+          "electrical",
           "framing"
         ],
         "priority": "tbd"

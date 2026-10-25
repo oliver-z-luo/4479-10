@@ -3,6 +3,8 @@
 A floor plan you change by editing data. The drawing is generated; it is never
 drawn by hand.
 
+Live: https://oliver-z-luo.github.io/4479-10/ (published from `main`).
+
 ```
 floorplan/
   plans/baseline.json   the plan as surveyed — the single source of truth

@@ -981,7 +981,9 @@ const scopePanel = (p) => {
         + (it.note ? `<p class="inote">${esc(it.note)}</p>` : '')
         + `<div class="itags">${(it.trades ?? []).map((t) => `<span class="tag"><i style="background:${TRADE_C[t] ?? '#888'}"></i>${esc(sc.trades[t])}</span>`).join('')}`
         + (it.approval ? `<span class="tag sign">${esc(it.approval)}</span>` : '')
-        + `<button type="button" class="prev" data-item="${esc(it.id)}" aria-haspopup="dialog">${eyeIcon}Preview</button></div></li>`).join('')
+        // only items with a reference photo get a preview
+        + (it.ref ? `<button type="button" class="prev" data-item="${esc(it.id)}" aria-haspopup="dialog">${eyeIcon}Preview</button>` : '')
+        + `</div></li>`).join('')
       + `</ul></section>`;
   }).join('');
   return `<div class="scope">${filters}`

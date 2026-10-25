@@ -43,10 +43,10 @@ export function loadDims(file = join(HERE, 'dimensions.json')) {
 
 // --- pinning ----------------------------------------------------------------
 const EPS = 0.01;
-// which grid line a drawn coordinate belongs to, and its offset from it
-export function pin(dims, axis, v) {
+// which grid line a drawn coordinate belongs to, and its offset from it.
+// lines narrows the candidates (a fixture only follows its own room's walls).
+export function pin(dims, axis, v, lines = dims[axis]) {
   const t = dims.env.wallT;
-  const lines = dims[axis];
   for (const g of lines) for (const off of [0, -t / 2, t / 2])
     if (Math.abs(v - (g.drawnAt + off)) < EPS) return { g, off };
   let best = null;
@@ -58,20 +58,50 @@ export function pin(dims, axis, v) {
 }
 // a rectangle keeps its size: pin whichever edge sits on a wall face (or is
 // nearest one) and move the whole thing with it
-export function pinSpan(dims, axis, a, b) {
-  const pa = pin(dims, axis, a), pb = pin(dims, axis, b);
+export function pinSpan(dims, axis, a, b, lines) {
+  const pa = pin(dims, axis, a, lines), pb = pin(dims, axis, b, lines);
   const exact = (p) => [0, dims.env.wallT / 2, -dims.env.wallT / 2].some((o) => Math.abs(p.off - o) < EPS);
   if (exact(pa)) return pa;
   if (exact(pb)) return { g: pb.g, off: pb.off - (b - a) };
   return Math.abs(pa.off) <= Math.abs(pb.off) ? pa : { g: pb.g, off: pb.off - (b - a) };
 }
 
-const move = (dims, axis, v) => { const p = pin(dims, axis, v); return p.g.at + p.off; };
+const move = (dims, axis, v, lines) => { const p = pin(dims, axis, v, lines); return p.g.at + p.off; };
 const movePt = (dims, [x, y]) => [move(dims, 'x', x), move(dims, 'y', y)];
-const moveRect = (dims, f) => {
-  if (f.shape === 'circle') return { ...f, cx: move(dims, 'x', f.cx), cy: move(dims, 'y', f.cy) };
-  const px = pinSpan(dims, 'x', f.x, f.x + f.w), py = pinSpan(dims, 'y', f.y, f.y + f.h);
+// the grid lines a room's walls sit on, per axis; a fixture or piece of
+// furniture pins only to these, never to a wall elsewhere on the same line of
+// the grid. Falls back to every line when the room is unknown.
+const roomGrid = (dims, rooms) => {
+  const t = dims.env.wallT, out = {};
+  for (const r of rooms ?? []) out[r.id] = Object.fromEntries(['x', 'y'].map((axis, i) => {
+    const vs = r.boundary.map((q) => q[i]);
+    const ls = dims[axis].filter((g) => vs.some((v) => [0, -t / 2, t / 2].some((o) => Math.abs(v - (g.drawnAt + o)) < EPS)));
+    return [axis, ls.length ? ls : undefined];
+  }));
+  return out;
+};
+const moveRect = (dims, f, grid = {}) => {
+  const ls = grid[f.room] ?? {};
+  if (f.shape === 'circle') return { ...f, cx: move(dims, 'x', f.cx, ls.x), cy: move(dims, 'y', f.cy, ls.y) };
+  const px = pinSpan(dims, 'x', f.x, f.x + f.w, ls.x), py = pinSpan(dims, 'y', f.y, f.y + f.h, ls.y);
   return { ...f, x: px.g.at + px.off, y: py.g.at + py.off };
+};
+
+// a circle drawn inside a rectangle (a sink in a vanity) moves with that
+// rectangle; anything else moves by its own centre. hosts are [drawn, moved]
+// rectangles from elsewhere in the plan that a circle in this list may sit in.
+const inside = (c, f) => f.shape !== 'circle'
+  && c.cx - c.r >= f.x - EPS && c.cx + c.r <= f.x + f.w + EPS && c.cy - c.r >= f.y - EPS && c.cy + c.r <= f.y + f.h + EPS;
+const moveFixtures = (dims, list, grid, hosts = []) => {
+  const pairs = list.map((f) => [f, f.shape === 'circle' ? null : moveRect(dims, f, grid)]);
+  const rects = [...pairs.filter(([, m]) => m), ...hosts];
+  return pairs.map(([f, m]) => {
+    if (m) return m;
+    const host = rects.filter(([h]) => inside(f, h)).sort(([a], [b]) => a.w * a.h - b.w * b.h)[0];
+    if (!host) return moveRect(dims, f, grid);
+    const [h, hm] = host;
+    return { ...f, cx: f.cx + hm.x - h.x, cy: f.cy + hm.y - h.y };
+  });
 };
 
 const ft = (inches) => { const t = Math.round(inches); return `${Math.floor(t / 12)}'${t % 12}"`; };
@@ -85,15 +115,17 @@ export function resolvePlan(plan, dims) {
   const services = (vs) => (vs ?? []).map((v) => ({ ...v, points: v.points.map((q) => movePt(dims, q)) }));
 
   if (p.walls) p.walls = walls(p.walls);
-  if (p.fixtures) p.fixtures = p.fixtures.map((f) => moveRect(dims, f));
-  if (p.furniture) p.furniture = p.furniture.map((f) => moveRect(dims, f));
+  const grid = roomGrid(dims, plan.rooms);
+  const baseHosts = (plan.fixtures ?? []).filter((f) => f.shape !== 'circle').map((f) => [f, moveRect(dims, f, grid)]);
+  if (p.fixtures) p.fixtures = moveFixtures(dims, p.fixtures, grid);
+  if (p.furniture) p.furniture = p.furniture.map((f) => moveRect(dims, f, grid));
   if (p.zones) p.zones = polys(p.zones);
   if (p.services) p.services = services(p.services);
   if (p.envelope) for (const k of ['livingArea', 'balcony'])
     if (Array.isArray(p.envelope[k])) p.envelope[k] = p.envelope[k].map((q) => movePt(dims, q));
   for (const t of p.toggles ?? []) if (t.add) {
     if (t.add.walls) t.add.walls = walls(t.add.walls);
-    if (t.add.fixtures) t.add.fixtures = t.add.fixtures.map((f) => moveRect(dims, f));
+    if (t.add.fixtures) t.add.fixtures = moveFixtures(dims, t.add.fixtures, grid, baseHosts);
     if (t.add.services) t.add.services = services(t.add.services);
   }
   // rooms: move the corners; where a room's size changed, its label follows
@@ -113,6 +145,9 @@ export function resolvePlan(plan, dims) {
     }
     return out;
   });
+  // the rooms as drawn, so furniture resolved on its own later (layout
+  // alternatives) pins to the same walls: resolvePlan({ rooms: p.drawnRooms, furniture })
+  Object.defineProperty(p, 'drawnRooms', { value: plan.drawnRooms ?? plan.rooms });
   return p;
 }
 

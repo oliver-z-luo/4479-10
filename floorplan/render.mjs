@@ -1033,7 +1033,7 @@ const furnPanel = (p) => {
 };
 const altTemplates = () => allPlans.flatMap((p) => altGroups(p.data).map((g, gi) => {
   const [vx, vy, vw, vh] = g.view;
-  const cards = alternativePlans(p.data, g, (fs) => resolvePlan({ furniture: fs }, DIMS).furniture).map(({ option: o, data }) => {
+  const cards = alternativePlans(p.data, g, (fs) => resolvePlan({ rooms: p.data.drawnRooms, furniture: fs }, DIMS).furniture).map(({ option: o, data }) => {
     const svg = sheet(data, base, catalog, 900 + altN++).svg
       .replace(/viewBox="[^"]*"/, `viewBox="${vx} ${vy} ${vw} ${vh}"`);
     return `<figure class="altc${o.id === g.current ? ' cur' : ''}"><div class="altplan">${svg}</div><figcaption>`

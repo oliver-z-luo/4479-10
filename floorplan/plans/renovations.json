@@ -1593,8 +1593,8 @@
         "id": "BC1",
         "change": "heat-pump",
         "title": "Heat pump outdoor unit",
-        "note": "Balcony east wall; feeds three heads.",
-        "detail": "Multi-zone unit against the balcony's east wall, feeding three heads; wall penetration for the line sets.",
+        "note": "Balcony west wall; feeds three heads.",
+        "detail": "Multi-zone unit against the balcony's west wall, feeding three heads; wall penetration for the line sets.",
         "trades": [
           "hvac",
           "electrical"
@@ -2061,7 +2061,7 @@
       "id": "heat-pump",
       "label": "Heat pump",
       "default": true,
-      "note": "Ductless multi-zone heat pump: outdoor unit on the balcony against its east wall, wall-mounted heads in the Office Bedroom, the Living Room (fireplace wall, north of the fireplace) and the Primary Bedroom, with refrigerant lines (dashed) run along the walls.",
+      "note": "Ductless multi-zone heat pump: outdoor unit on the balcony against its west wall, wall-mounted heads in the Office Bedroom, the Living Room (fireplace wall, north of the fireplace) and the Primary Bedroom, with refrigerant lines (dashed) run along the walls.",
       "remove": {},
       "add": {
         "fixtures": [
@@ -2070,7 +2070,7 @@
             "room": "balcony",
             "kind": "heat-pump-outdoor",
             "shape": "rect",
-            "x": 255,
+            "x": 125,
             "y": 12,
             "w": 13,
             "h": 33,
@@ -2114,64 +2114,17 @@
           {
             "id": "ls-office",
             "kind": "lineset",
-            "points": [
-              [
-                268,
-                29
-              ],
-              [
-                275,
-                29
-              ]
-            ]
+            "points": [[136, 45], [136, 50], [262, 50], [262, 29], [275, 29]]
           },
           {
             "id": "ls-living",
             "kind": "lineset",
-            "points": [
-              [
-                260,
-                45
-              ],
-              [
-                260,
-                53
-              ],
-              [
-                129,
-                53
-              ],
-              [
-                129,
-                64
-              ]
-            ]
+            "points": [[129, 45], [129, 64]]
           },
           {
             "id": "ls-primary",
             "kind": "lineset",
-            "points": [
-              [
-                258,
-                45
-              ],
-              [
-                258,
-                50
-              ],
-              [
-                127,
-                50
-              ],
-              [
-                127,
-                36
-              ],
-              [
-                118,
-                36
-              ]
-            ]
+            "points": [[125, 36], [118, 36]]
           }
         ]
       }

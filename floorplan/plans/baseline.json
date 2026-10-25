@@ -1,5 +1,5 @@
 {
-  "name": "As drawn",
+  "name": "Existing",
   "meta": {
     "title": "4479 W 10th Ave, Vancouver",
     "floor": "Main Floor",
@@ -614,7 +614,7 @@
     }
   ],
   "roomPhotos": {
-    "about": "Listing photos per room (web-sized copies of source/4479-photos), shown when a room is clicked on the As drawn tab.",
+    "about": "Listing photos per room (web-sized copies of source/4479-photos), shown when a room is clicked on the Existing tab.",
     "primary-bedroom": [
       "refs/rooms/primary-bedroom.jpg"
     ],

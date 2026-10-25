@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T06:09:42.538Z",
+  "title": "Design System: 4479 W 10th Ave floor plan",
+  "extensions": {
+    "colorMeta": {
+      "change-magenta": {
+        "role": "primary",
+        "displayName": "Change Magenta",
+        "canonical": "oklch(57.4% 0.218 7.8)",
+        "tonalRamp": [
+          "#280004",
+          "#510014",
+          "#7e0028",
+          "#ab003e",
+          "#cf0759",
+          "#ff5886",
+          "#ffa4bc",
+          "#ffd2e1"
+        ]
+      },
+      "change-wash": {
+        "role": "primary",
+        "displayName": "Change Wash",
+        "canonical": "oklch(93.8% 0.029 352.9)",
+        "tonalRamp": [
+          "#14060c",
+          "#2d1c23",
+          "#47343c",
+          "#634f57",
+          "#806b73",
+          "#ae97a0",
+          "#dec6cf",
+          "#ffe7f0"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(17.8% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#222222",
+          "#3a3a3a",
+          "#555555",
+          "#717171",
+          "#9e9e9e",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(96.7% 0.003 106.4)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#222220",
+          "#3b3b39",
+          "#555554",
+          "#727270",
+          "#9e9e9d",
+          "#cececc",
+          "#eeeeec"
+        ]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Sheet",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#222222",
+          "#3a3a3a",
+          "#555555",
+          "#717171",
+          "#9e9e9e",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "oklch(90.6% 0.005 106.5)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#22221f",
+          "#3b3b38",
+          "#555552",
+          "#72726e",
+          "#9f9f9b",
+          "#cececa",
+          "#efefeb"
+        ]
+      },
+      "rule-soft": {
+        "role": "neutral",
+        "displayName": "Rule Soft",
+        "canonical": "oklch(94.3% 0.003 106.5)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#222220",
+          "#3b3b39",
+          "#555554",
+          "#727270",
+          "#9e9e9d",
+          "#cececc",
+          "#eeeeec"
+        ]
+      },
+      "hover-stone": {
+        "role": "neutral",
+        "displayName": "Hover Stone",
+        "canonical": "oklch(93.3% 0.005 106.5)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#22221f",
+          "#3b3b38",
+          "#555552",
+          "#72726e",
+          "#9f9f9b",
+          "#cececa",
+          "#efefeb"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Text Secondary",
+        "canonical": "oklch(45.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#222222",
+          "#3a3a3a",
+          "#555555",
+          "#717171",
+          "#9e9e9e",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "text-tertiary": {
+        "role": "neutral",
+        "displayName": "Text Tertiary",
+        "canonical": "oklch(51.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#222222",
+          "#3a3a3a",
+          "#555555",
+          "#717171",
+          "#9e9e9e",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "window-blue": {
+        "role": "drawing",
+        "displayName": "Window Blue",
+        "canonical": "oklch(52.9% 0.172 256.8)",
+        "tonalRamp": [
+          "#000235",
+          "#001664",
+          "#003091",
+          "#0050b2",
+          "#1f6fd3",
+          "#519eff",
+          "#8ed0ff",
+          "#c2f2ff"
+        ]
+      },
+      "door-green": {
+        "role": "drawing",
+        "displayName": "Door Green",
+        "canonical": "oklch(62.8% 0.169 149.0)",
+        "tonalRamp": [
+          "#001400",
+          "#003100",
+          "#004f00",
+          "#006c0f",
+          "#008b32",
+          "#3dba60",
+          "#85e899",
+          "#beffc9"
+        ]
+      },
+      "wall-grey": {
+        "role": "drawing",
+        "displayName": "Wall Grey",
+        "canonical": "oklch(64.7% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#222222",
+          "#3a3a3a",
+          "#555555",
+          "#717171",
+          "#9e9e9e",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "furniture-oat": {
+        "role": "drawing",
+        "displayName": "Furniture Oat",
+        "canonical": "oklch(93.8% 0.016 86.4)",
+        "tonalRamp": [
+          "#0e0b05",
+          "#252119",
+          "#3e3a31",
+          "#59554c",
+          "#767167",
+          "#a39e94",
+          "#d2cdc3",
+          "#f3eee3"
+        ]
+      },
+      "furniture-umber": {
+        "role": "drawing",
+        "displayName": "Furniture Umber",
+        "canonical": "oklch(53.3% 0.041 77.7)",
+        "tonalRamp": [
+          "#140800",
+          "#2c1f08",
+          "#463821",
+          "#62533b",
+          "#7f6f57",
+          "#ad9c82",
+          "#ddcbb1",
+          "#feecd1"
+        ]
+      },
+      "outdoor-sand": {
+        "role": "drawing",
+        "displayName": "Outdoor Sand",
+        "canonical": "oklch(95.8% 0.007 97.4)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#22221e",
+          "#3b3b37",
+          "#565551",
+          "#72726d",
+          "#9f9e9a",
+          "#cfcec9",
+          "#efeeea"
+        ]
+      },
+      "entry-red": {
+        "role": "drawing",
+        "displayName": "Entry Red",
+        "canonical": "oklch(57.5% 0.209 26.9)",
+        "tonalRamp": [
+          "#290000",
+          "#530000",
+          "#810000",
+          "#ac0000",
+          "#d01e22",
+          "#ff5c53",
+          "#ffa79a",
+          "#ffd4c9"
+        ]
+      },
+      "tip-charcoal": {
+        "role": "neutral",
+        "displayName": "Tip Charcoal",
+        "canonical": "oklch(22.2% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#222222",
+          "#3a3a3a",
+          "#555555",
+          "#717171",
+          "#9e9e9e",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "priority-high-bg": {
+        "role": "status",
+        "displayName": "Priority High Bg",
+        "canonical": "oklch(93.5% 0.030 20.2)",
+        "tonalRamp": [
+          "#160606",
+          "#2f1c1c",
+          "#493434",
+          "#654f4e",
+          "#826b6a",
+          "#b09797",
+          "#e1c7c6",
+          "#ffe7e6"
+        ]
+      },
+      "priority-high-text": {
+        "role": "status",
+        "displayName": "Priority High Text",
+        "canonical": "oklch(46.8% 0.171 27.0)",
+        "tonalRamp": [
+          "#290000",
+          "#530000",
+          "#7c0000",
+          "#9f1417",
+          "#c13c36",
+          "#f66d62",
+          "#ffa79a",
+          "#ffd4c9"
+        ]
+      },
+      "priority-medium-bg": {
+        "role": "status",
+        "displayName": "Priority Medium Bg",
+        "canonical": "oklch(95.5% 0.048 93.0)",
+        "tonalRamp": [
+          "#120a00",
+          "#2a2102",
+          "#433a1b",
+          "#5e5536",
+          "#7b7151",
+          "#a99e7d",
+          "#d8ceab",
+          "#f9eeca"
+        ]
+      },
+      "priority-medium-text": {
+        "role": "status",
+        "displayName": "Priority Medium Text",
+        "canonical": "oklch(48.8% 0.100 84.4)",
+        "tonalRamp": [
+          "#1d0200",
+          "#371a00",
+          "#523400",
+          "#6f4f00",
+          "#8d6c1f",
+          "#bb9951",
+          "#ecc980",
+          "#ffeaa0"
+        ]
+      },
+      "priority-low-bg": {
+        "role": "status",
+        "displayName": "Priority Low Bg",
+        "canonical": "oklch(94.5% 0.026 150.8)",
+        "tonalRamp": [
+          "#040e06",
+          "#18251b",
+          "#313f34",
+          "#4b5a4e",
+          "#67766a",
+          "#93a396",
+          "#c2d3c5",
+          "#e3f4e6"
+        ]
+      },
+      "priority-low-text": {
+        "role": "status",
+        "displayName": "Priority Low Text",
+        "canonical": "oklch(46.6% 0.122 146.3)",
+        "tonalRamp": [
+          "#001400",
+          "#002f00",
+          "#004a08",
+          "#186627",
+          "#3a8444",
+          "#69b370",
+          "#98e39e",
+          "#c1ffc6"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "Title",
+        "purpose": "Sidebar address and dialog titles."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Room group headings in the scope list."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Page default and plan tabs."
+      },
+      "body-small": {
+        "displayName": "Body small",
+        "purpose": "Option labels, item notes, menu descriptions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Section labels and captions."
+      },
+      "item-id": {
+        "displayName": "Item ID",
+        "purpose": "Scope item numbers, in Change Magenta."
+      },
+      "priority": {
+        "displayName": "Priority",
+        "purpose": "Uppercase priority pills and the current badge."
+      },
+      "drawing-label": {
+        "displayName": "Drawing label",
+        "purpose": "Room names and sizes inside the SVG, haloed in white."
+      }
+    },
+    "shadows": [
+      {
+        "name": "menu",
+        "value": "0 10px 28px rgba(0,0,0,.13), 0 1px 3px rgba(0,0,0,.08)",
+        "purpose": "Archive dropdown."
+      },
+      {
+        "name": "tooltip",
+        "value": "0 6px 18px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.12)",
+        "purpose": "Option info tips."
+      },
+      {
+        "name": "dialog",
+        "value": "0 24px 60px rgba(0,0,0,.28), 0 2px 8px rgba(0,0,0,.12)",
+        "purpose": "Preview dialog."
+      },
+      {
+        "name": "thumb",
+        "value": "0 1px 2px rgba(0,0,0,.12)",
+        "purpose": "Selected segment of a segmented control."
+      }
+    ],
+    "motion": [
+      {
+        "name": "hover",
+        "value": ".12s",
+        "purpose": "Background, border and fill changes on hover."
+      },
+      {
+        "name": "dialog-in",
+        "value": ".18s cubic-bezier(.2,.8,.2,1)",
+        "purpose": "Preview dialog fades and rises 8px; off under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "dialog-stack",
+        "value": "560px"
+      },
+      {
+        "name": "stack",
+        "value": "860px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Plan tabs",
+      "kind": "nav",
+      "refersTo": "tab",
+      "description": "Folder tabs sitting on the drawing sheet; the selected tab joins it.",
+      "html": "<div class=\"ds-tabs\"><button class=\"ds-tab\" aria-selected=\"true\">Existing</button><button class=\"ds-tab\">Renovations</button><button class=\"ds-tab\">Furniture view</button></div><div class=\"ds-sheet\"></div>",
+      "css": ".ds-tabs{display:flex;gap:2px;padding:0 14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}.ds-tab{font:14px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;padding:10px 16px;border:1px solid transparent;border-bottom:0;border-radius:9px 9px 0 0;margin-bottom:-1px;background:none;color:#555;cursor:pointer;transition:background .12s,color .12s}.ds-tab:hover{background:#e9e9e5;color:#111}.ds-tab[aria-selected=true]{background:#fff;border-color:#e0e0dc;color:#111;font-weight:600}.ds-tab:focus-visible{outline:2px solid #1668cc;outline-offset:2px}.ds-sheet{height:60px;margin:0 14px;background:#fff;border:1px solid #e0e0dc;border-radius:0 10px 10px 10px}"
+    },
+    {
+      "name": "Units toggle",
+      "kind": "custom",
+      "refersTo": "units-toggle",
+      "description": "Segmented control for ft/in and metric.",
+      "html": "<div class=\"ds-units\"><button aria-pressed=\"true\">ft / in</button><button aria-pressed=\"false\">metric</button></div>",
+      "css": ".ds-units{display:inline-flex;padding:2px;border-radius:7px;background:#e7e7e3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}.ds-units button{font:12px -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;padding:4px 12px;border:0;background:transparent;border-radius:5px;cursor:pointer;color:#666}.ds-units button[aria-pressed=true]{background:#fff;color:#111;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.12)}.ds-units button:focus-visible{outline:2px solid #1668cc;outline-offset:2px}"
+    },
+    {
+      "name": "Filter chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Round filter chips with a colour dot and count; pressed is solid ink.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\">All <span>33</span></button><button class=\"ds-chip\" aria-pressed=\"false\"><i style=\"background:#d81b60\"></i>Walls <span>4</span></button></div>",
+      "css": ".ds-chips{display:flex;gap:4px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}.ds-chip{display:inline-flex;align-items:center;gap:5px;font:12px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;padding:5px 8px;border:1px solid #dcdcd7;border-radius:99px;background:#fff;cursor:pointer;color:#333;transition:background .12s,border-color .12s}.ds-chip:hover{border-color:#b9b9b3}.ds-chip i{width:7px;height:7px;border-radius:50%}.ds-chip span{color:#888;font-size:11px}.ds-chip[aria-pressed=true]{background:#111;border-color:#111;color:#fff}.ds-chip[aria-pressed=true] span{color:#bbb}.ds-chip:focus-visible{outline:2px solid #1668cc;outline-offset:2px}"
+    },
+    {
+      "name": "Scope item",
+      "kind": "custom",
+      "refersTo": "priority-high",
+      "description": "Magenta mono ID, title, priority pill, indented note and a preview button.",
+      "html": "<div class=\"ds-item\"><div class=\"ds-ihead\"><span class=\"ds-iid\">BR5</span><span class=\"ds-ititle\">Bedroom wall storage unit</span><span class=\"ds-pri\">high</span></div><p class=\"ds-inote\">Full-height storage along the west wall, with low open shelves at her reach.</p></div>",
+      "css": ".ds-item{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;padding:9px 0 10px;border-bottom:1px solid #ececea;max-width:300px}.ds-ihead{display:flex;align-items:baseline;gap:8px}.ds-iid{flex:none;min-width:34px;font:700 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#d81b60}.ds-ititle{flex:1;font-size:13px;font-weight:600;line-height:1.35;color:#111}.ds-pri{flex:none;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 5px;border-radius:4px;line-height:1.2;background:#fde2e1;color:#a51d1d}.ds-inote{margin:3px 0 0 42px;font-size:12px;color:#555;line-height:1.45}"
+    },
+    {
+      "name": "Option toggle",
+      "kind": "custom",
+      "refersTo": "tooltip",
+      "description": "Checkbox row with an info button that reveals a dark tip.",
+      "html": "<div class=\"ds-opt\"><label><input type=\"checkbox\" checked> Double doors</label><button class=\"ds-info\" aria-label=\"About\">i</button><div class=\"ds-tip\">Hinged solid doors, about a 5' opening.</div></div>",
+      "css": ".ds-opt{position:relative;display:flex;align-items:center;gap:6px;border-radius:7px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:280px}.ds-opt:hover{background:#eaeae6}.ds-opt label{flex:1;display:flex;align-items:center;gap:9px;padding:5px 6px;font-size:13px;cursor:pointer}.ds-opt input{width:15px;height:15px;margin:0;accent-color:#111}.ds-info{display:grid;place-items:center;width:22px;height:22px;margin-right:4px;border:0;border-radius:50%;background:none;color:#777;cursor:pointer;font:italic 600 12px Georgia,serif}.ds-info:hover{background:#dcdcd7;color:#111}.ds-tip{display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);background:#1b1b1b;color:#f2f2f2;font-size:12px;line-height:1.5;padding:9px 11px;border-radius:7px;box-shadow:0 6px 18px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12)}.ds-info:hover+.ds-tip,.ds-info:focus-visible+.ds-tip{display:block}"
+    },
+    {
+      "name": "Alternative button",
+      "kind": "button",
+      "refersTo": "alt-button",
+      "description": "Full-width button that opens alternatives side by side.",
+      "html": "<button class=\"ds-alt\"><span><b>Living room sofa</b><small>3 alternatives</small></span><span class=\"ds-cmp\">compare</span></button>",
+      "css": ".ds-alt{display:flex;align-items:center;gap:10px;width:280px;text-align:left;padding:9px 10px;background:#fff;border:1px solid #dcdcd7;border-radius:9px;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;transition:border-color .12s,background .12s}.ds-alt:hover{border-color:#b9b9b3;background:#fafaf8}.ds-alt:focus-visible{outline:2px solid #1668cc;outline-offset:2px}.ds-alt>span:first-child{flex:1}.ds-alt b{display:block;font-size:13px;font-weight:600;color:#111}.ds-alt small{display:block;font-size:12px;color:#666;margin-top:1px}.ds-cmp{font-size:12px;font-weight:600;color:#1668cc}"
+    },
+    {
+      "name": "Room pin",
+      "kind": "custom",
+      "refersTo": "focus-bar",
+      "description": "Numbered magenta pin on the drawing that selects a room.",
+      "html": "<svg class=\"ds-pin\" viewBox=\"0 0 40 40\" width=\"40\" height=\"40\"><g tabindex=\"0\"><circle cx=\"20\" cy=\"20\" r=\"7\"/><text x=\"20\" y=\"20\">3</text></g></svg>",
+      "css": ".ds-pin g{cursor:pointer}.ds-pin circle{fill:#d81b60;stroke:#fff;stroke-width:1.6;transition:r .12s}.ds-pin g:hover circle{r:8.5}.ds-pin g:focus{outline:none}.ds-pin g:focus-visible circle{stroke:#111;stroke-width:2}.ds-pin text{fill:#fff;font:700 8.5px Helvetica,Arial,sans-serif;text-anchor:middle;dominant-baseline:central;pointer-events:none}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Workbench",
+    "overview": "A plain, practical tool you work at. Tabs, toggles, filters and the scope list sit on a quiet stone-grey bench; the drawing is the piece being worked on, laid on a white sheet beside them. Nothing is decorative. Every colour on the page either means something on the drawing or marks a state of a control.\n\nThe page is dense but calm: small system type (11–14px), hairline rules instead of boxes, and almost no shadow. Its one loud voice is Change Magenta, which marks what the renovation alters, so a contractor or a relative can see the scope at a glance. The drawing keeps the conventions of an architect's plan (grey walls, blue windows, green door swings, a north arrow and a scale bar), but the tool around it stays approachable: it is not CAD software and never looks like it.\n\nIt is generated, offline and self-contained: one HTML file with system fonts, inline SVG and no external assets.",
+    "keyCharacteristics": [
+      "Sidebar of controls beside a drawing that always fits the window.",
+      "Neutral warm greys; colour is reserved for drawing meaning and for change.",
+      "Small, tight system type; a monospace face only for scope item IDs.",
+      "Flat surfaces; shadows only on things that float (menus, tooltips, dialogs).",
+      "Imperial and metric, switched in place."
+    ],
+    "rules": [
+      {
+        "name": "The Change Magenta Rule",
+        "body": "Magenta means \"this is different from today\". Use it only for changes, scope items and the room they point to; never for decoration, buttons or general emphasis.",
+        "section": "colors"
+      },
+      {
+        "name": "The Plan Colours Rule",
+        "body": "Blue is glass, green is a door, grey is a wall, oat is furniture. A new drawing element reuses these meanings or gets a neutral; it never borrows a meaning colour for something else.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono-for-IDs Rule",
+        "body": "Monospace is reserved for scope item IDs, so an ID reads the same in the list, on the drawing and in conversation with a trade.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Bench Rule",
+        "body": "Anything that sits in the page is flat. Only things that float over it get a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep the drawing the largest thing on screen; on desktop it fits the window without scrolling.",
+      "**Do** reserve Change Magenta (#d81b60) for what the renovation changes and the scope items that describe it.",
+      "**Do** keep plan colours to their meanings: blue glass, green doors, grey walls, oat furniture.",
+      "**Do** show every size in both imperial and metric via the units toggle.",
+      "**Do** use hairline rules and the paper/sheet contrast for structure; keep surfaces flat.",
+      "**Do** use system fonts and inline SVG only, so the page stays one offline file."
+    ],
+    "donts": [
+      "**Don't** make it decorative or cute: no illustrations, playful type or child-themed styling, even though the home is planned around a toddler.",
+      "**Don't** make it look like CAD software: no dense toolbars, icon-only control strips or expert-only panels.",
+      "**Don't** use magenta for buttons, links or emphasis that isn't a change.",
+      "**Don't** add shadows to things that sit in the page.",
+      "**Don't** load web fonts, icon fonts or external images."
+    ]
+  }
+}

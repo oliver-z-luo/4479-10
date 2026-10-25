@@ -1417,7 +1417,7 @@
       "hvac": "HVAC",
       "millwork": "Millwork",
       "tile": "Tile",
-    "flooring": "Flooring"
+    "flooring": "Flooring", "curtains": "Window coverings"
     },
     "items": [
       {
@@ -1463,6 +1463,16 @@
         "trades": [
           "millwork",
           "framing"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "PB6",
+        "title": "Blackout curtains",
+        "note": "Blackout curtains on the window.",
+        "detail": "Blackout curtains across the window, on a track wide enough to clear the frame on both sides.",
+        "trades": [
+          "curtains"
         ],
         "priority": "tbd"
       },
@@ -1640,6 +1650,16 @@
         "priority": "tbd"
       },
       {
+        "id": "LR6",
+        "title": "Blackout curtains",
+        "note": "Blackout curtains across the balcony glazing.",
+        "detail": "Blackout curtains across the balcony doors and side windows, on a track wide enough to clear the glazing and draw fully off the doors.",
+        "trades": [
+          "curtains"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "DR1",
         "title": "New flooring",
         "note": "Same floor as LR5, continuous from the Living Room.",
@@ -1700,6 +1720,16 @@
           "millwork"
         ],
         "approval": "Strata",
+        "priority": "tbd"
+      },
+      {
+        "id": "OB6",
+        "title": "Blackout curtains",
+        "note": "Blackout curtains on the window.",
+        "detail": "Blackout curtains across the window, on a track wide enough to clear the frame on both sides.",
+        "trades": [
+          "curtains"
+        ],
         "priority": "tbd"
       },
       {

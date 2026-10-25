@@ -955,7 +955,7 @@ const previewData = (p) => {
   }
   return { items, boxes, imgs };
 };
-const TRADE_C = { framing: '#1a8a42', plumbing: '#1668cc', electrical: '#b07800', hvac: '#0f8b8d', millwork: '#8a6430', tile: '#6d5bd0' };
+const TRADE_C = { framing: '#1a8a42', plumbing: '#1668cc', electrical: '#b07800', hvac: '#0f8b8d', millwork: '#8a6430', tile: '#6d5bd0', flooring: '#b5653a' };
 const PRIO = { high: 'High', medium: 'Medium', low: 'Low', tbd: 'TBD' };
 const scopePanel = (p) => {
   const sc = p.data.scope, items = sc.items;

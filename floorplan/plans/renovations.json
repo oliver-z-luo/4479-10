@@ -1422,7 +1422,8 @@
       "electrical": "Electrical",
       "hvac": "HVAC",
       "millwork": "Millwork",
-      "tile": "Tile"
+      "tile": "Tile",
+    "flooring": "Flooring"
     },
     "items": [
       {
@@ -1652,10 +1653,10 @@
       },
       {
         "id": "LR2",
-        "title": "Limestone fireplace surround",
-        "note": "Floor-to-ceiling honed limestone panels, stone hearth.",
-        "detail": "Clad the fireplace wall floor to ceiling in large honed limestone panels, laid in a staggered pattern, with a raised limestone hearth slab in front, as in the reference photo. Thin stone veneer on cement board keeps the weight down. Keep the fireplace maker's clearances to combustibles. LR1's heat pump head is on this wall: run its line set before the stone goes on.",
-        "ref": "refs/limestone-fireplace.jpg",
+        "title": "Stacked stone fireplace surround",
+        "note": "Floor-to-ceiling split-face stacked stone, stone hearth.",
+        "detail": "Clad the fireplace wall floor to ceiling in light split-face stacked stone ledger panels (cream and grey tones, staggered joints), with a raised stone hearth slab in front, as in the reference photo. Thin stone veneer on cement board keeps the weight down. Keep the fireplace maker's clearances to combustibles. LR1's heat pump head is on this wall: run its line set before the stone goes on.",
+        "ref": "refs/stacked-stone-fireplace.jpg",
         "trades": [
           "tile",
           "framing"
@@ -1680,6 +1681,32 @@
         "trades": [
           "millwork"
         ],
+        "priority": "tbd"
+      },
+      {
+        "id": "LR5",
+        "title": "New flooring, Living and Dining",
+        "note": "Wide-plank light oak, one continuous floor through Dining.",
+        "detail": "Take up the existing floor and lay wide-plank light oak with a matte, wire-brushed natural finish, as in the reference photo. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered oak over an acoustic underlay that meets the strata's sound rating. Lay it after LR3 and before LR4, so the new baseboard sits on the new floor.",
+        "ref": "refs/light-oak-floor.jpg",
+        "trades": [
+          "flooring",
+          "millwork"
+        ],
+        "approval": "Strata",
+        "priority": "tbd"
+      },
+      {
+        "id": "DR1",
+        "title": "New flooring",
+        "note": "Same floor as LR5, continuous from the Living Room.",
+        "detail": "Part of LR5: the Living Room floor continues through the Dining Room with no threshold.",
+        "ref": "refs/light-oak-floor.jpg",
+        "trades": [
+          "flooring",
+          "millwork"
+        ],
+        "approval": "Strata",
         "priority": "tbd"
       },
       {
@@ -1727,6 +1754,19 @@
         "trades": [
           "millwork"
         ],
+        "priority": "tbd"
+      },
+      {
+        "id": "OB5",
+        "title": "New flooring",
+        "note": "Wide-plank light oak, same as the Living Room.",
+        "detail": "Take up the existing floor and lay the same wide-plank light oak as LR5 (matte, wire-brushed natural finish), over the same acoustic underlay. Lay it after OB3 and before OB4, so the new baseboard sits on the new floor.",
+        "ref": "refs/light-oak-floor.jpg",
+        "trades": [
+          "flooring",
+          "millwork"
+        ],
+        "approval": "Strata",
         "priority": "tbd"
       },
       {
@@ -2014,7 +2054,7 @@
             "x": 321,
             "y": 275,
             "w": 34,
-            "h": 21
+            "h": 18.5
           },
           {
             "id": "closet-shelves",

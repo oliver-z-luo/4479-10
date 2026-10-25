@@ -1441,20 +1441,10 @@
       {
         "id": "PB2",
         "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from PB1. The freed 240 V circuit may be reusable for the heat pump.",
+        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from PB1. The freed 240 V circuit may be reusable for the heat pump. Then patch and touch up the wall where it sat.",
         "trades": [
           "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "PB3",
-        "title": "Baseboard where the heater was",
-        "note": "Patch, paint and run baseboard to match.",
-        "detail": "Patch the wall and the floor edge where the heater (PB2) sat, paint the wall, and run new baseboard across the gap in the same profile and paint as the rest of the room, so it reads as one continuous run.",
-        "trades": [
-          "millwork"
         ],
         "priority": "tbd"
       },
@@ -1666,20 +1656,10 @@
       {
         "id": "LR3",
         "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from LR1. The freed 240 V circuit may be reusable for the heat pump.",
+        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from LR1. The freed 240 V circuit may be reusable for the heat pump. Then patch and touch up the wall where it sat.",
         "trades": [
           "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "LR4",
-        "title": "Baseboard where the heater was",
-        "note": "Patch, paint and run baseboard to match.",
-        "detail": "Patch the wall and the floor edge where the heater (LR3) sat, paint the wall, and run new baseboard across the gap in the same profile and paint as the rest of the room, so it reads as one continuous run.",
-        "trades": [
-          "millwork"
         ],
         "priority": "tbd"
       },
@@ -1687,7 +1667,7 @@
         "id": "LR5",
         "title": "New flooring, Living and Dining",
         "note": "Wide-plank light oak, one continuous floor through Dining.",
-        "detail": "Take up the existing floor and lay wide-plank light oak with a matte, wire-brushed natural finish, as in the reference photo. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered oak over an acoustic underlay that meets the strata's sound rating. Lay it after LR3 and before LR4, so the new baseboard sits on the new floor.",
+        "detail": "Take up the existing floor and lay wide-plank light oak with a matte, wire-brushed natural finish, as in the reference photo. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered oak over an acoustic underlay that meets the strata's sound rating. Lay it after the heater comes out (LR3).",
         "ref": "refs/light-oak-floor.jpg",
         "trades": [
           "flooring",
@@ -1739,20 +1719,10 @@
       {
         "id": "OB3",
         "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from OB2. The freed 240 V circuit may be reusable for the heat pump.",
+        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from OB2. The freed 240 V circuit may be reusable for the heat pump. Then patch and touch up the wall where it sat.",
         "trades": [
           "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "OB4",
-        "title": "Baseboard where the heater was",
-        "note": "Patch, paint and run baseboard to match.",
-        "detail": "Patch the wall and the floor edge where the heater (OB3) sat, paint the wall, and run new baseboard across the gap in the same profile and paint as the rest of the room, so it reads as one continuous run.",
-        "trades": [
-          "millwork"
         ],
         "priority": "tbd"
       },
@@ -1760,7 +1730,7 @@
         "id": "OB5",
         "title": "New flooring",
         "note": "Wide-plank light oak, same as the Living Room.",
-        "detail": "Take up the existing floor and lay the same wide-plank light oak as LR5 (matte, wire-brushed natural finish), over the same acoustic underlay. Lay it after OB3 and before OB4, so the new baseboard sits on the new floor.",
+        "detail": "Take up the existing floor and lay the same wide-plank light oak as LR5 (matte, wire-brushed natural finish), over the same acoustic underlay. Lay it after the heater comes out (OB3).",
         "ref": "refs/light-oak-floor.jpg",
         "trades": [
           "flooring",
@@ -1805,20 +1775,10 @@
       {
         "id": "BR3",
         "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; no heat pump head here: warmth comes through the double door from the Office Bedroom head (OB2), so leave the door open in cold weather. The freed 240 V circuit may be reusable for the heat pump.",
+        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; no heat pump head here: warmth comes through the double door from the Office Bedroom head (OB2), so leave the door open in cold weather. The freed 240 V circuit may be reusable for the heat pump. Then patch and touch up the wall where it sat.",
         "trades": [
           "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "BR4",
-        "title": "Baseboard where the heater was",
-        "note": "Patch, paint and run baseboard to match.",
-        "detail": "Patch the wall and the floor edge where the heater (BR3) sat, paint the wall, and run new baseboard across the gap in the same profile and paint as the rest of the room, so it reads as one continuous run.",
-        "trades": [
-          "millwork"
         ],
         "priority": "tbd"
       },

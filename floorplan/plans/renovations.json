@@ -1354,12 +1354,6 @@
           "bath-main"
         ]
       },
-      "LD": {
-        "name": "Laundry",
-        "rooms": [
-          "laundry"
-        ]
-      },
       "BC": {
         "name": "Balcony",
         "rooms": [
@@ -1582,37 +1576,6 @@
           "millwork",
           "electrical",
           "framing"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "LD1",
-        "change": "laundry",
-        "title": "Unstack washer and dryer",
-        "note": "24\" compact units side by side.",
-        "detail": "Side by side as 24\" compact units, the stacked pair's width; dryer vent and outlet moved. Alternative (second reference): keep them stacked and use the freed width for a 17\" broom cabinet beside them (mop, vacuum, cleaning supplies) with cabinets above to the ceiling. No plumbing or venting moves, but no folding counter (LD2).",
-        "ref": [
-          {"src": "refs/laundry.jpg", "caption": "Side by side under a folding counter"},
-          {"src": "refs/laundry-stacked-cabinet.jpg", "caption": "Option: stay stacked, broom cabinet beside, cabinets above"}
-        ],
-        "trades": [
-          "plumbing",
-          "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "LD2",
-        "change": "laundry",
-        "title": "Countertop and two shelves",
-        "note": "Wood counter over both units, two shelves above.",
-        "detail": "A 48\" x 25\" wood countertop laid over the washer and dryer for folding, and two 12\" deep open shelves on brackets above it, as in the reference photo.",
-        "ref": [
-          {"src": "refs/laundry.jpg", "caption": "Side by side: folding counter, two shelves above"},
-          {"src": "refs/laundry-stacked-shelves.jpg", "caption": "If stacked: open shelves one side, pegboard bay for the vacuum the other, pull-out drying rack and cabinets above"}
-        ],
-        "trades": [
-          "millwork"
         ],
         "priority": "tbd"
       },
@@ -2060,73 +2023,6 @@
             "y": 306,
             "w": 11,
             "h": 26
-          }
-        ]
-      }
-    },
-    {
-      "id": "laundry",
-      "label": "Laundry",
-      "default": true,
-      "note": "Washer and dryer unstacked and set side by side (24\" compact units, the stacked pair's width), under a wood countertop, with two 12\" shelves above.",
-      "remove": {
-        "fixtures": [
-          "washer-dryer"
-        ]
-      },
-      "add": {
-        "fixtures": [
-          {
-            "id": "laundry-counter",
-            "room": "laundry",
-            "kind": "counter-above",
-            "shape": "rect",
-            "x": 36,
-            "y": 309,
-            "w": 48,
-            "h": 25
-          },
-          {
-            "id": "laundry-shelf",
-            "room": "laundry",
-            "kind": "shelf-above",
-            "shape": "rect",
-            "x": 36,
-            "y": 309,
-            "w": 48,
-            "h": 12
-          },
-          {
-            "id": "laundry-shelf-2",
-            "room": "laundry",
-            "kind": "shelf-above",
-            "shape": "rect",
-            "x": 36,
-            "y": 309,
-            "w": 48,
-            "h": 12
-          },
-          {
-            "id": "washer",
-            "room": "laundry",
-            "kind": "washer",
-            "shape": "rect",
-            "x": 36,
-            "y": 309,
-            "w": 24,
-            "h": 24,
-            "label": "Washer"
-          },
-          {
-            "id": "dryer",
-            "room": "laundry",
-            "kind": "dryer",
-            "shape": "rect",
-            "x": 60,
-            "y": 309,
-            "w": 24,
-            "h": 24,
-            "label": "Dryer"
           }
         ]
       }

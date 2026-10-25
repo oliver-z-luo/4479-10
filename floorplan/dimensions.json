@@ -10,7 +10,7 @@
     "wicW":        { "value": 65.6875,  "status": "measured",   "note": "Walk-in closet width, 5'5\" 11/16. Listing printed 5'4\"." },
     "wicD":        { "value": 65.8125,  "status": "measured",   "note": "Walk-in closet depth, 5'5\" 13/16. Listing printed 4'11\"." },
     "bath1D":      { "value": 70.8125,  "status": "measured",   "note": "Primary Bath depth, 5'10\" 13/16." },
-    "storageW":    { "value": 77,  "status": "printed",   "note": "Storage width, 6'5\". Also laundry and lower hall width." },
+    "storageW":    { "value": 79.625, "status": "measured",   "note": "Storage width, 6'7\" 5/8. Listing printed 6'5\". Also laundry and lower hall width; the hall taped 185 cm to the storage door's east jamb, short of the wall." },
     "laundryD":    { "value": 30,  "status": "drawn",     "note": "Laundry closet depth." },
     "hallD":       { "value": 35,  "status": "printed",   "note": "Lower hall depth, 2'11\"." },
     "storageD":    { "value": 54,  "status": "printed",   "note": "Storage depth, 4'6\"." },

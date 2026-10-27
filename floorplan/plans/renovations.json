@@ -1521,15 +1521,17 @@
         "id": "PBA3",
         "change": "bath",
         "title": "52\" double vanity",
-        "note": "Two sinks; second drain and supply.",
-        "detail": "Two sinks replace the single vanity: a second drain and supply. Wall-mounted faucets (first reference) need their valves set in the wall before it closes. A single trough basin with two faucets (second reference) needs only one drain, which is simpler plumbing.",
+        "note": "Floating light oak, quartz top, two sinks; second drain and supply.",
+        "detail": "Floating light-oak flat-panel vanity with a drawer stack in the middle, a pale quartz top with a backsplash, two undermount sinks and single-hole deck-mounted faucets, as in the first reference. Two sinks replace the single one, so a second drain and supply. Floating means solid blocking in the wall behind it. Wall-mounted faucets (second reference) instead need their valves set in the wall before it closes. A single trough basin with two faucets (third reference) needs only one drain, which is simpler plumbing.",
         "ref": [
-          {"src": "refs/double-vanity.jpg", "caption": "Two undermount sinks, wall-mounted faucets"},
+          {"src": "refs/primary-vanity-oak.jpg", "caption": "Floating light-oak vanity, quartz top, two undermount sinks"},
+          {"src": "refs/double-vanity.jpg", "caption": "Option: two undermount sinks, wall-mounted faucets"},
           {"src": "refs/double-trough.jpg", "caption": "Option: one trough basin, two faucets, one drain"}
         ],
         "trades": [
           "plumbing",
-          "millwork"
+          "millwork",
+          "framing"
         ],
         "approval": "Permit",
         "priority": "tbd"
@@ -1573,18 +1575,14 @@
         "priority": "tbd"
       },
       {
-        "id": "PBA7",
+        "id": "PBA8",
         "change": "bath",
-        "title": "Bathroom storage",
-        "note": "Wall cabinet over the toilet, lit ledge below.",
-        "detail": "Flat-panel wood wall cabinet over the toilet, about 8\" deep so it clears your head, with an LED strip under it lighting a tiled ledge (first reference). If there is floor space, a tall linen cabinet with open shelves for towels and baskets is the alternative (second reference). Needs blocking in the wall to hang the cabinet and a junction box for the LED strip.",
-        "ref": [
-                {"src": "refs/bath-cabinet-over-toilet.jpg", "caption": "Wall cabinet over the toilet, lit ledge below"},
-                {"src": "refs/bath-linen-tower.jpg", "caption": "Tall linen cabinet with open shelves for towels and baskets"}
-              ],
+        "title": "Mirrored medicine cabinets",
+        "note": "One over each sink.",
+        "detail": "Two mirrored medicine cabinets, one centred over each sink, as in the reference photo. Recessed if the stud bays are empty (no drain vent or supply in them), otherwise surface-mounted. Either way they need blocking or a framed opening before drywall.",
+        "ref": "refs/primary-vanity-oak.jpg",
         "trades": [
           "millwork",
-          "electrical",
           "framing"
         ],
         "priority": "tbd"

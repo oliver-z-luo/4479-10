@@ -1417,7 +1417,7 @@
       "hvac": "HVAC",
       "millwork": "Millwork",
       "tile": "Tile",
-    "flooring": "Flooring", "curtains": "Window coverings"
+    "flooring": "Flooring", "curtains": "Window coverings", "painting": "Painting"
     },
     "items": [
       {
@@ -1610,10 +1610,10 @@
       },
       {
         "id": "LR2",
-        "title": "Stacked stone fireplace surround",
-        "note": "Floor-to-ceiling split-face stacked stone, stone hearth.",
-        "detail": "Clad the fireplace wall floor to ceiling in light split-face stacked stone ledger panels (cream and grey tones, staggered joints), with a raised stone hearth slab in front, as in the reference photo. Thin stone veneer on cement board keeps the weight down. Keep the fireplace maker's clearances to combustibles. LR1's heat pump head is on this wall: run its line set before the stone goes on.",
-        "ref": "refs/stacked-stone-fireplace.jpg",
+        "title": "Marble-look tile fireplace surround",
+        "note": "Large-format marble-look tile, mantel to ceiling.",
+        "detail": "Clad the fireplace wall above the mantel to the ceiling in large-format white marble-look porcelain tile with soft grey veining, laid in a staggered pattern, as in the reference photo. Keep the fireplace maker's clearances to combustibles. LR1's heat pump head is on this wall: run its line set before the tile goes on.",
+        "ref": "refs/living-marble-fireplace.jpg",
         "trades": [
           "tile",
           "framing"
@@ -1633,9 +1633,9 @@
       {
         "id": "LR5",
         "title": "New flooring, Living and Dining",
-        "note": "Wide-plank light oak, one continuous floor through Dining.",
-        "detail": "Take up the existing floor and lay wide-plank light oak with a matte, wire-brushed natural finish, as in the reference photo. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered oak over an acoustic underlay that meets the strata's sound rating. Lay it after the heater comes out (LR3).",
-        "ref": "refs/light-oak-floor.jpg",
+        "note": "Long light grey-washed planks, one continuous floor through Dining.",
+        "detail": "Take up the existing floor and lay long, light grey-washed oak-look planks with a matte finish, as in the reference photo. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered plank over an acoustic underlay that meets the strata's sound rating. Lay it after the heater comes out (LR3).",
+        "ref": "refs/living-marble-fireplace.jpg",
         "trades": [
           "flooring",
           "millwork"
@@ -1654,11 +1654,22 @@
         "priority": "tbd"
       },
       {
+        "id": "LR7",
+        "title": "Paint the fireplace off-white",
+        "note": "Mantel and surround painted off-white.",
+        "detail": "Paint the wood mantel, its fluted legs and the surround off-white, to sit with the marble-look tile above (LR2), as in the reference photo. Clean and scuff-sand, prime with a bonding primer, then two coats of a hard-wearing satin enamel. Mask the tile and the firebox; near the opening use a paint rated for the fireplace's surface temperature.",
+        "ref": "refs/living-marble-fireplace.jpg",
+        "trades": [
+          "painting"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "DR1",
         "title": "New flooring",
         "note": "Same floor as LR5, continuous from the Living Room.",
         "detail": "Part of LR5: the Living Room floor continues through the Dining Room with no threshold.",
-        "ref": "refs/light-oak-floor.jpg",
+        "ref": "refs/living-marble-fireplace.jpg",
         "trades": [
           "flooring",
           "millwork"
@@ -1706,9 +1717,9 @@
       {
         "id": "OB5",
         "title": "New flooring",
-        "note": "Wide-plank light oak, same as the Living Room.",
-        "detail": "Take up the existing floor and lay the same wide-plank light oak as LR5 (matte, wire-brushed natural finish), over the same acoustic underlay. Lay it after the heater comes out (OB3).",
-        "ref": "refs/light-oak-floor.jpg",
+        "note": "Light grey-washed planks, same as the Living Room.",
+        "detail": "Take up the existing floor and lay the same light grey-washed planks as LR5, over the same acoustic underlay. Lay it after the heater comes out (OB3).",
+        "ref": "refs/living-marble-fireplace.jpg",
         "trades": [
           "flooring",
           "millwork"

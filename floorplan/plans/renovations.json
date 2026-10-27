@@ -1522,12 +1522,8 @@
         "change": "bath",
         "title": "52\" double vanity",
         "note": "Floating light oak, quartz top, two sinks; second drain and supply.",
-        "detail": "Floating light-oak flat-panel vanity with a drawer stack in the middle, a pale quartz top with a backsplash, two undermount sinks and single-hole deck-mounted faucets, as in the first reference. Two sinks replace the single one, so a second drain and supply. Floating means solid blocking in the wall behind it. Wall-mounted faucets (second reference) instead need their valves set in the wall before it closes. A single trough basin with two faucets (third reference) needs only one drain, which is simpler plumbing.",
-        "ref": [
-          {"src": "refs/primary-vanity-oak.jpg", "caption": "Floating light-oak vanity, quartz top, two undermount sinks"},
-          {"src": "refs/double-vanity.jpg", "caption": "Option: two undermount sinks, wall-mounted faucets"},
-          {"src": "refs/double-trough.jpg", "caption": "Option: one trough basin, two faucets, one drain"}
-        ],
+        "detail": "Floating light-oak flat-panel vanity with a drawer stack in the middle, a pale quartz top with a backsplash, two undermount sinks and single-hole deck-mounted faucets, as in the reference photo. Two sinks replace the single one, so a second drain and supply. Floating means solid blocking in the wall behind it.",
+        "ref": "refs/primary-vanity-oak.jpg",
         "trades": [
           "plumbing",
           "millwork",

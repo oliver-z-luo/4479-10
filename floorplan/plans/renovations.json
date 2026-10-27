@@ -1784,29 +1784,12 @@
         "id": "SB1",
         "change": "shared-bath",
         "title": "32\" floating trough sink",
-        "note": "Wall-hung 32\" x 18\" trough vanity, one faucet.",
-        "detail": "Pedestal sink replaced by a wall-hung 32\" x 18\" vanity with a long trough basin and one centred faucet, as in the reference photo. Same spot, so supply and drain stay put; needs blocking in the wall to hang it.",
-        "ref": "refs/sb1-trough-sink.jpg",
+        "note": "Wall-hung 32\" x 18\" light-oak vanity, trough basin, two faucets.",
+        "detail": "Pedestal sink replaced by a wall-hung 32\" x 18\" light-oak flat-panel vanity with two doors and a pale quartz top with a long undermount trough basin and two faucets, as in the reference photo. One drain serves the trough. Same spot, so supply and drain stay put; needs blocking in the wall to hang it.",
+        "ref": "refs/shared-bath-oak.jpg",
         "trades": [
           "plumbing",
           "millwork",
-          "framing"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "SB2",
-        "change": "shared-bath",
-        "title": "Bathroom storage",
-        "note": "Wall cabinet over the toilet, lit ledge below.",
-        "detail": "Flat-panel wood wall cabinet over the toilet, about 8\" deep so it clears your head, with an LED strip under it lighting a tiled ledge (first reference). If there is floor space, a tall linen cabinet with open shelves for towels and baskets is the alternative (second reference). Needs blocking in the wall to hang the cabinet and a junction box for the LED strip.",
-        "ref": [
-                {"src": "refs/bath-cabinet-over-toilet.jpg", "caption": "Wall cabinet over the toilet, lit ledge below"},
-                {"src": "refs/bath-linen-tower.jpg", "caption": "Tall linen cabinet with open shelves for towels and baskets"}
-              ],
-        "trades": [
-          "millwork",
-          "electrical",
           "framing"
         ],
         "priority": "tbd"
@@ -2020,7 +2003,7 @@
       "id": "shared-bath",
       "label": "Shared bath trough sink",
       "default": true,
-      "note": "Pedestal sink replaced by a 32\" x 18\" floating vanity with a long trough basin and one centred faucet, in the same spot so the plumbing stays put. 32\" is the most the wall allows while keeping 15\" from the toilet's centre.",
+      "note": "Pedestal sink replaced by a 32\" x 18\" floating vanity with a long trough basin and two faucets, in the same spot so the plumbing stays put. 32\" is the most the wall allows while keeping 15\" from the toilet's centre.",
       "remove": {
         "fixtures": [
           "pedestal-sink"

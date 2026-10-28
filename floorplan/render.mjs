@@ -365,6 +365,8 @@ function scopeLayer(plan, scope) {
   for (const [code, a] of Object.entries(scope.areas)) {
     if (!counts[code]) continue;
     const rooms = a.rooms.map((id) => plan.rooms.find((r) => r.id === id)).filter(Boolean);
+    if (!rooms.length) continue; // whole-home items have no room to pin
+
     for (const r of rooms)
       hits += `<polygon class="rhit" data-area="${code}" points="${r.boundary.map((p) => `${n(p[0])},${n(p[1])}`).join(' ')}"/>`;
     const rb = bbox(rooms[0].boundary);

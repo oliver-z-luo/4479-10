@@ -1336,6 +1336,7 @@
   "scope": {
     "about": "The renovation work, room by room, for quoting. note is the one line shown in the list; detail and ref (a reference photo under floorplan/refs/, or a list of {src, caption}) show in the item's preview. Each item's id is its area code plus a number (BR1 = Bedroom, item 1); ids are written here, never renumbered, so a reference stays valid when items are added or removed. 'change' is the toggle below that draws it. priority: high, medium, low or tbd. approval is a guess at sign-off needed (Strata or Permit), to be confirmed.",
     "areas": {
+      "WH": { "name": "Whole home", "rooms": [] },
       "PB": {
         "name": "Primary Bedroom",
         "rooms": [
@@ -1421,6 +1422,26 @@
     },
     "items": [
       {
+        "id": "WH1",
+        "title": "Repaint off-white",
+        "note": "Walls and ceilings throughout, one off-white.",
+        "detail": "Repaint every room's walls and ceilings in one off-white, after the other work is done: patch and sand first, including where the heaters came off. Eggshell on walls, flat on ceilings, and a mildew-resistant satin in the bathrooms.",
+        "trades": [
+          "painting"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "WH2",
+        "title": "Remove baseboard heaters",
+        "note": "All of them, once the heat pump is running.",
+        "detail": "Turn off each breaker, remove the electric baseboard heaters and their thermostats, and terminate the wiring in covered junction boxes or take the circuits out at the panel. Do it after the heat pump is running. The freed 240 V circuits may be reusable for the heat pump. Rooms without a heat pump head (the Bedroom and the bathrooms) rely on open doors from the heated rooms. Patch the walls where they sat, ready for WH1.",
+        "trades": [
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "PB1",
         "change": "heat-pump",
         "title": "Heat pump head",
@@ -1428,16 +1449,6 @@
         "detail": "Wall-mounted head, high on the east wall; line set from the balcony unit.",
         "trades": [
           "hvac",
-          "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "PB2",
-        "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from PB1. The freed 240 V circuit may be reusable for the heat pump. Then patch and touch up the wall where it sat.",
-        "trades": [
           "electrical"
         ],
         "priority": "tbd"
@@ -1621,20 +1632,10 @@
         "priority": "tbd"
       },
       {
-        "id": "LR3",
-        "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from LR1. The freed 240 V circuit may be reusable for the heat pump. Then patch and touch up the wall where it sat.",
-        "trades": [
-          "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
         "id": "LR5",
         "title": "New flooring, Living and Dining",
         "note": "Long light grey-washed planks, one continuous floor through Dining.",
-        "detail": "Take up the existing floor and lay long, light grey-washed oak-look planks with a matte finish, as in the reference photo. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered plank over an acoustic underlay that meets the strata's sound rating. Lay it after the heater comes out (LR3).",
+        "detail": "Take up the existing floor and lay long, light grey-washed oak-look planks with a matte finish, as in the reference photo. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered plank over an acoustic underlay that meets the strata's sound rating. Lay it after the heater comes out (WH2).",
         "ref": "refs/living-marble-fireplace.jpg",
         "trades": [
           "flooring",
@@ -1705,20 +1706,10 @@
         "priority": "tbd"
       },
       {
-        "id": "OB3",
-        "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; heat now comes from OB2. The freed 240 V circuit may be reusable for the heat pump. Then patch and touch up the wall where it sat.",
-        "trades": [
-          "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
         "id": "OB5",
         "title": "New flooring",
         "note": "Light grey-washed planks, same as the Living Room.",
-        "detail": "Take up the existing floor and lay the same light grey-washed planks as LR5, over the same acoustic underlay. Lay it after the heater comes out (OB3).",
+        "detail": "Take up the existing floor and lay the same light grey-washed planks as LR5, over the same acoustic underlay. Lay it after the heater comes out (WH2).",
         "ref": "refs/living-marble-fireplace.jpg",
         "trades": [
           "flooring",
@@ -1771,16 +1762,6 @@
         "priority": "tbd"
       },
       {
-        "id": "BR3",
-        "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running; no heat pump head here: warmth comes through the double door from the Office Bedroom head (OB2), so leave the door open in cold weather. The freed 240 V circuit may be reusable for the heat pump. Then patch and touch up the wall where it sat.",
-        "trades": [
-          "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
         "id": "BR5",
         "title": "Wall storage unit",
         "note": "Floor-to-ceiling cabinets and open cubbies along one wall.",
@@ -1812,26 +1793,6 @@
         "detail": "Remove the old toilet and set a new one on the existing drain, with a new wax ring and supply line.",
         "trades": [
           "plumbing"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "SB4",
-        "title": "Remove baseboard heater",
-        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
-        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running. There's no heat pump head in here, so if the room runs cold, the freed circuit could feed a heated towel rail or a floor-heating mat. Then patch and touch up the wall where it sat.",
-        "trades": [
-          "electrical"
-        ],
-        "priority": "tbd"
-      },
-      {
-        "id": "SB5",
-        "title": "Repaint",
-        "note": "Walls and ceiling, bathroom-grade paint.",
-        "detail": "Repaint the walls and ceiling with a mildew-resistant bathroom paint in satin or eggshell, after the vanity, toilet and heater work is done.",
-        "trades": [
-          "painting"
         ],
         "priority": "tbd"
       },

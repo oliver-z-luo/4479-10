@@ -1466,18 +1466,6 @@
         "priority": "tbd"
       },
       {
-        "id": "PB5",
-        "title": "Fold-down wall desk",
-        "note": "Wall-mounted drop-front desk, two shelves above.",
-        "detail": "A wall-mounted cabinet whose front folds down on stays into a desk, with two floating shelves above, as in the reference photo. It goes on the west wall in the corner by the walk-in closet, where the Furniture view puts the desk; closed it is about 8\" deep, so the corner stays open. Needs blocking in the wall for the cabinet and shelves.",
-        "ref": "refs/primary-fold-down-desk.jpg",
-        "trades": [
-          "millwork",
-          "framing"
-        ],
-        "priority": "tbd"
-      },
-      {
         "id": "PB6",
         "title": "Blackout curtains",
         "note": "Blackout curtains on the window.",
@@ -1508,7 +1496,7 @@
         "change": "bath",
         "title": "Tub to walk-in shower",
         "note": "Shower in the tub's 30\" x 58\" footprint.",
-        "detail": "Tub out, walk-in shower in the same 30\" x 58\" footprint: low-threshold shower base sloped to a centre drain, new pressure-balance valve, rain head plus a hand shower on a slide bar, and a frameless glass door, as in the reference photo. Tile, niche and grab bars are PBA4 to PBA6.",
+        "detail": "Tub out, walk-in shower in the same 30\" x 58\" footprint: low-threshold shower base sloped to a centre drain, new pressure-balance valve, rain head plus a hand shower on a slide bar, and a frameless glass door, as in the reference photo. Niche and grab bars are PBA5 and PBA6.",
         "ref": "refs/primary-shower.jpg",
         "trades": [
           "plumbing"
@@ -1541,18 +1529,6 @@
           "framing"
         ],
         "approval": "Permit",
-        "priority": "tbd"
-      },
-      {
-        "id": "PBA4",
-        "change": "bath",
-        "title": "Shower tile",
-        "note": "Large marble-look porcelain walls, mosaic floor.",
-        "detail": "Walls: large-format marble-look porcelain (12\" x 24\" or bigger) to the ceiling, fewer grout lines. Floor: 2\" mosaic sloped to the drain, for grip. A waterproofing membrane goes behind and under all of it.",
-        "ref": "refs/primary-shower.jpg",
-        "trades": [
-          "tile"
-        ],
         "priority": "tbd"
       },
       {

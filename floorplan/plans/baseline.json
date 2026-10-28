@@ -624,6 +624,9 @@
     "bath-main": [
       "refs/rooms/primary-bath.jpg"
     ],
+    "hall-upper": [
+      "refs/rooms/hall-upper.jpg"
+    ],
     "laundry": [
       "refs/rooms/hall.jpg"
     ],

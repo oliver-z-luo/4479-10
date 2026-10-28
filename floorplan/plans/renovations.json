@@ -1794,14 +1794,44 @@
       {
         "id": "SB1",
         "change": "shared-bath",
-        "title": "32\" floating trough sink",
-        "note": "Wall-hung 32\" x 18\" light-oak vanity, trough basin, two faucets.",
-        "detail": "Pedestal sink replaced by a wall-hung 32\" x 18\" light-oak flat-panel vanity with two doors and a pale quartz top with a long undermount trough basin and two faucets, as in the reference photo. One drain serves the trough. Same spot, so supply and drain stay put; needs blocking in the wall to hang it.",
+        "title": "Vanity upgrade",
+        "note": "New vanity in place of the pedestal sink.",
+        "detail": "Replace the pedestal sink with a vanity along the lines of the reference photo. Same spot, so supply and drain stay put; a wall-hung vanity needs blocking in the wall.",
         "ref": "refs/shared-bath-oak.jpg",
         "trades": [
           "plumbing",
           "millwork",
           "framing"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "SB3",
+        "title": "Replace toilet",
+        "note": "New toilet on the existing flange.",
+        "detail": "Remove the old toilet and set a new one on the existing drain, with a new wax ring and supply line.",
+        "trades": [
+          "plumbing"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "SB4",
+        "title": "Remove baseboard heater",
+        "note": "Disconnect, remove, make the wiring safe, touch up the wall.",
+        "detail": "Turn off the breaker, remove the electric baseboard heater and its thermostat, and terminate the wiring in a covered junction box or take the circuit out at the panel. Do it after the heat pump is running. There's no heat pump head in here, so if the room runs cold, the freed circuit could feed a heated towel rail or a floor-heating mat. Then patch and touch up the wall where it sat.",
+        "trades": [
+          "electrical"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "SB5",
+        "title": "Repaint",
+        "note": "Walls and ceiling, bathroom-grade paint.",
+        "detail": "Repaint the walls and ceiling with a mildew-resistant bathroom paint in satin or eggshell, after the vanity, toilet and heater work is done.",
+        "trades": [
+          "painting"
         ],
         "priority": "tbd"
       },
@@ -2012,7 +2042,7 @@
     },
     {
       "id": "shared-bath",
-      "label": "Shared bath trough sink",
+      "label": "Shared bath vanity upgrade",
       "default": true,
       "note": "Pedestal sink replaced by a 32\" x 18\" floating vanity with a long trough basin and two faucets, in the same spot so the plumbing stays put. 32\" is the most the wall allows while keeping 15\" from the toilet's centre.",
       "remove": {

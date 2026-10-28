@@ -1531,9 +1531,9 @@
       {
         "id": "PBA3",
         "change": "bath",
-        "title": "52\" double vanity",
-        "note": "Floating light oak, quartz top, two sinks; second drain and supply.",
-        "detail": "Floating light-oak flat-panel vanity with a drawer stack in the middle, a pale quartz top with a backsplash, two undermount sinks and single-hole deck-mounted faucets, as in the reference photo. Two sinks replace the single one, so a second drain and supply. Floating means solid blocking in the wall behind it.",
+        "title": "Double sink vanity",
+        "note": "Two sinks in place of one.",
+        "detail": "Replace the single vanity with a double sink vanity along the lines of the reference photo. The second sink needs its own drain and supply.",
         "ref": "refs/primary-vanity-oak.jpg",
         "trades": [
           "plumbing",
@@ -1870,7 +1870,7 @@
       "id": "bath",
       "label": "Primary bath",
       "default": true,
-      "note": "Tub replaced by a shower in the same 30\" x 58\" footprint, toilet with a bidet seat, and a 52\" double vanity with two sinks.",
+      "note": "Tub replaced by a shower in the same 30\" x 58\" footprint, toilet with a bidet seat, and a double sink vanity.",
       "remove": {
         "fixtures": [
           "tub",

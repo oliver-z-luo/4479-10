@@ -203,7 +203,7 @@ surface, not something standing on it.
   - **Heat pump** — ductless multi-zone: outdoor unit on the balcony's east
     wall, wall heads in the Office Bedroom, Living Room (fireplace wall) and
     Primary Bedroom, refrigerant lines dashed.
-  - **Pantry** — reach-in shelving: 14" across the back wall, 12" returns on
+  - **Entry Closet** — reach-in shelving: 14" across the back wall, 12" returns on
     either side of the door.
 - `archived/option-a-double-door.json`, `archived/option-b-folding-wall.json` —
   shelved options, still viewable under **Archive** on the page.

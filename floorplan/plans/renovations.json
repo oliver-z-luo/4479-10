@@ -1039,7 +1039,7 @@
     },
     {
       "id": "pantry",
-      "name": "PANTRY",
+      "name": "ENTRY CLOSET",
       "boundary": [
         [
           288,
@@ -1405,7 +1405,7 @@
         ]
       },
       "PT": {
-        "name": "Pantry",
+        "name": "Entry Closet",
         "rooms": [
           "pantry"
         ]
@@ -1787,7 +1787,7 @@
       {
         "id": "PT1",
         "change": "pantry",
-        "title": "Pantry shelving",
+        "title": "Entry closet shelving",
         "note": "14\" back shelves, 12\" returns.",
         "detail": "14\" shelves across the back wall with 12\" returns either side of the door.",
         "ref": [
@@ -2086,9 +2086,9 @@
     },
     {
       "id": "pantry",
-      "label": "Pantry",
+      "label": "Entry closet",
       "default": true,
-      "note": "Reach-in pantry: 14\" shelves across the back (east) wall with 12\" returns on the north and south walls either side of the door.",
+      "note": "Reach-in entry closet: 14\" shelves across the back (east) wall with 12\" returns on the north and south walls either side of the door.",
       "remove": {},
       "add": {
         "fixtures": [

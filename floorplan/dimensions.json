@@ -26,7 +26,7 @@
     "closetD":     { "value": 18.5,  "status": "derived",     "note": "Bedroom closet depth: Bedroom depth less 10'7\" 9/16 (glass wall to closet doors) and the closet wall." },
     "bath2W":      { "value": 61.9375,  "status": "measured",   "note": "Second Bath width, 5'1\" 15/16. The closet above it taped 5'2\" 15/16." },
     "bath2D":      { "value": 92.0625,  "status": "measured",   "note": "Second Bath / Foyer depth, 7'8\" 1/16." },
-    "pantryD":     { "value": 45.25,  "status": "measured",     "note": "Pantry depth, 3'9\" 1/4." },
+    "pantryD":     { "value": 45.25,  "status": "measured",     "note": "Entry Closet depth, 3'9\" 1/4." },
 
     "ceilingH":    { "value": 106, "status": "printed",   "note": "8'10\", printed on the listing plan." },
     "floorT":      { "value": 0.75,"status": "estimated", "note": "Finish floor thickness (drawing only)." },
@@ -63,7 +63,7 @@
       { "name": "X_PBR", "expr": "X_W + wallT + primaryW",     "drawnAt": 121.5, "note": "Primary Bedroom / Bath east wall" },
       { "name": "X_KIT", "expr": "X_LAU + wallT + kitchenW",   "drawnAt": 193.5, "note": "Kitchen east wall" },
       { "name": "X_LR",  "expr": "X_PBR + wallT + livingW",    "drawnAt": 271.5, "note": "Living Room east wall" },
-      { "name": "X_PAN", "expr": "X_KIT + wallT + foyerW",     "drawnAt": 284.5, "note": "Pantry west wall" },
+      { "name": "X_PAN", "expr": "X_KIT + wallT + foyerW",     "drawnAt": 284.5, "note": "Entry Closet west wall" },
       { "name": "X_BA2", "expr": "X_E - wallT - bath2W",       "drawnAt": 317.5, "note": "Second Bath / closet west wall" },
       { "name": "X_E",   "expr": "X_LR + wallT + officeW",     "drawnAt": 386.5, "note": "East exterior wall" }
     ],
@@ -78,7 +78,7 @@
       { "name": "Y_BEDS", "expr": "Y_PART + wallT + bedroomD", "drawnAt": 299.5, "note": "Bedroom south wall" },
       { "name": "Y_BA1S", "expr": "Y_BA1N + wallT + bath1D",   "drawnAt": 305.5, "note": "Primary Bath south wall" },
       { "name": "Y_LAU",  "expr": "Y_BA1S + wallT + laundryD", "drawnAt": 342.5, "note": "Laundry south wall" },
-      { "name": "Y_PAN",  "expr": "Y_S - wallT - pantryD",     "drawnAt": 347.5, "note": "Pantry north wall" },
+      { "name": "Y_PAN",  "expr": "Y_S - wallT - pantryD",     "drawnAt": 347.5, "note": "Entry Closet north wall" },
       { "name": "Y_HALL", "expr": "Y_LAU + wallT + hallD",     "drawnAt": 384.5, "note": "Lower hall south wall" },
       { "name": "Y_S",    "expr": "Y_BEDS + wallT + bath2D",   "drawnAt": 399.5, "note": "South exterior wall (entry)" },
       { "name": "Y_STO",  "expr": "Y_HALL + wallT + storageD", "drawnAt": 445.5, "note": "Storage south wall" },

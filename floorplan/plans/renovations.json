@@ -1595,6 +1595,18 @@
         "priority": "tbd"
       },
       {
+        "id": "LR8",
+        "title": "Colours",
+        "note": "Greige oak floor, off-white fireplace, white marble wall.",
+        "detail": "Flooring: greige oak, close to the Primary Bedroom floor. Fireplace: off-white. Fireplace back wall: white marble with grey veining.",
+        "trades": [
+          "flooring",
+          "tile",
+          "painting"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "LR1",
         "change": "heat-pump",
         "title": "Heat pump head",
@@ -1621,8 +1633,8 @@
       {
         "id": "LR5",
         "title": "New flooring, Living and Dining",
-        "note": "Long light grey-washed planks, one continuous floor through Dining.",
-        "detail": "Take up the existing floor and lay long, light grey-washed oak-look planks with a matte finish, as in the reference photo. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered plank over an acoustic underlay that meets the strata's sound rating. Lay it after the heater comes out (WH2).",
+        "note": "Long planks, one continuous floor through Dining.",
+        "detail": "Take up the existing floor and lay long oak-look planks with a matte finish, in the colour set in LR8. Run it as one continuous floor through the Living Room and Dining Room (DR1), with no threshold between them, planks running the length of the room. Use engineered plank over an acoustic underlay that meets the strata's sound rating. Lay it after the heater comes out (WH2).",
         "ref": "refs/living-marble-fireplace.jpg",
         "trades": [
           "flooring",
@@ -1695,8 +1707,8 @@
       {
         "id": "OB5",
         "title": "New flooring",
-        "note": "Light grey-washed planks, same as the Living Room.",
-        "detail": "Take up the existing floor and lay the same light grey-washed planks as LR5, over the same acoustic underlay. Lay it after the heater comes out (WH2).",
+        "note": "Same planks as the Living Room.",
+        "detail": "Take up the existing floor and lay the same planks as LR5, over the same acoustic underlay. Lay it after the heater comes out (WH2).",
         "ref": "refs/living-marble-fireplace.jpg",
         "trades": [
           "flooring",

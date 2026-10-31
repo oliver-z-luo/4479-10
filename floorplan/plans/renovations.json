@@ -1496,6 +1496,9 @@
         "title": "Colours",
         "note": "Oak cabinets, warm white counter, brushed nickel.",
         "detail": "Cabinets: natural oak. Countertop: warm white. Pulls, faucets, shower trim and accessories: brushed nickel.",
+        "ref": [
+          {"src": "refs/shared-bath-oak.jpg", "caption": "Oak cabinets, warm white counter, brushed nickel"}
+        ],
         "trades": [
           "millwork",
           "plumbing"
@@ -1599,6 +1602,10 @@
         "title": "Colours",
         "note": "Floor like the Primary Bedroom, off-white fireplace, white marble wall.",
         "detail": "Flooring: close to the Primary Bedroom colour. Fireplace: off-white. Fireplace back wall: white marble with grey veining.",
+        "ref": [
+          {"src": "refs/rooms/primary-bath-floor.jpg", "caption": "Flooring: close to the Primary Bedroom floor (left)"},
+          {"src": "refs/living-marble-fireplace.jpg", "caption": "Off-white fireplace, white marble back wall"}
+        ],
         "trades": [
           "flooring",
           "tile",
@@ -1776,6 +1783,9 @@
         "title": "Colours",
         "note": "Oak cabinets, warm white counter, brushed nickel.",
         "detail": "Cabinets: natural oak. Countertop: warm white. Pulls, faucets, shower trim and accessories: brushed nickel.",
+        "ref": [
+          {"src": "refs/shared-bath-oak.jpg", "caption": "Oak cabinets, warm white counter, brushed nickel"}
+        ],
         "trades": [
           "millwork",
           "plumbing"

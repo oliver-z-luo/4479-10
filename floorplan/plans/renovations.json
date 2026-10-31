@@ -1571,6 +1571,17 @@
         "priority": "tbd"
       },
       {
+        "id": "PBA9",
+        "title": "Colours",
+        "note": "Oak cabinets, warm white counter, brushed nickel.",
+        "detail": "Cabinets: natural oak. Countertop: warm white. Pulls, faucets, shower trim and accessories: brushed nickel.",
+        "trades": [
+          "millwork",
+          "plumbing"
+        ],
+        "priority": "tbd"
+      },
+      {
         "id": "BC1",
         "change": "heat-pump",
         "title": "Heat pump outdoor unit",
@@ -1768,6 +1779,17 @@
         "note": "New toilet on the existing flange.",
         "detail": "Remove the old toilet and set a new one on the existing drain, with a new wax ring and supply line.",
         "trades": [
+          "plumbing"
+        ],
+        "priority": "tbd"
+      },
+      {
+        "id": "SB6",
+        "title": "Colours",
+        "note": "Oak cabinets, warm white counter, brushed nickel.",
+        "detail": "Cabinets: natural oak. Countertop: warm white. Pulls, faucets, shower trim and accessories: brushed nickel.",
+        "trades": [
+          "millwork",
           "plumbing"
         ],
         "priority": "tbd"
